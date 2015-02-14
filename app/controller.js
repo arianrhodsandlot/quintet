@@ -73,9 +73,10 @@ var controller = {
             .then(function(html) {
                 var $html = cheerio(html);
                 var $results = $html.find('.rg_di.rg_el');
-                var results = _.map($results, function(el) {
-                    var $link = cheerio(el).children('.rg_l');
-                    var $meta = cheerio(el).children('.rg_meta');
+                var results = _.map($results, function(result) {
+                    var $result = cheerio(result);
+                    var $link = $result.children('.rg_l');
+                    var $meta = $result.children('.rg_meta');
 
                     var href = $link.attr('href');
                     var query = url.parse(href).query;
