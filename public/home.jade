@@ -1,0 +1,62 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+        meta(name='theme-color' content='#000')
+
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(name='renderer' content='webkit')
+
+        link(rel='Shortcut Icon' href='/favicon.ico' type='image/x-icon')
+        link(rel='bookmark' href='/favicon.ico' type='image/x-icon')
+
+        link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css')
+        link(rel='stylesheet' href='/style.css')
+
+        title hollyquintet
+    body.notinited
+        form.search-form.empty(autocomplete='off')
+            a.logo(href='/')
+                for character in characters
+                    .dot(class=character.name style={'background': character.color})
+            input.query(type='text' name='query' autofocus='autofocus')
+            select.scope#scope(name='scope')
+                optgroup(label='iTunes')
+                    option(value='itunes-hk') itunes.apple.com/hk
+                    option(value='itunes-jp') itunes.apple.com/jp
+                    option(value='itunes-kr') itunes.apple.com/kr
+                    option(value='itunes-tw') itunes.apple.com/tw
+                    option(value='itunes-us') itunes.apple.com/us
+                    option(value='itunes-uk') itunes.apple.com/uk
+                optgroup(label='Amazon')
+                    option(value='amazon-com') amazon.com
+                    option(value='amazon-jp') amazon.co.jp
+                optgroup(label='其他')
+                    option(value='orpheus') music.163.com/album
+                    option(value='qq') y.qq.com/y/static
+
+            input.submit(type='submit' value='搜索封面')
+        .search-results
+
+        .templates
+            script#result-template(type='text/html')
+                | <% if (loaded === false) { %>
+                .no-results 请稍候……
+                | <% } else if (query && results.length === 0) { %>
+                .no-results 未搜到与“<%= query %>”相关的图片。
+                | <% } else { %>
+                | <% _.each(results, function(result, index) { %>
+                .result(class!='<%= index === 0 ? "first-result" : "" %>')
+                    a.cover-link(href!='<%= result.cover.originSrc %>' target='_blank' title!='<%= result.cover.originSrc === result.cover.src ? "查看图片" : "查看原图" %>')
+                        img.cover-img(src!='<%= index === 0 ? result.cover.originSrc : result.cover.src %>')
+                    a(href!='<%= result.refer %>' target='_blank' title='访问网页').title <%= result.title ? result.title : '-' %>
+                | <% }); %>
+                | <% } %>
+
+        a.contact-me(href='https://twitter.com/phantasmalblaze') i
+
+        script(src='//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.1.0/lodash.min.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js')
+        script(src='/script.js')

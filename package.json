@@ -1,25 +1,25 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "~4.9.x"
-  },
-  "engines": {
-    "node": "0.10.x"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+    "name": "hollyquintet",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Search for covers from iTunes Store.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "lodash": "*",
+        "jade": "*",
+        "cheerio": "*",
+        "request-promise": "*",
+        "express": "*",
+        "morgan": "*",
+        "harp": "*",
+        "nib": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://git.heroku.com/hollyquintet.git"
+    },
+    "license": "MIT"
 }
