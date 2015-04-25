@@ -62,7 +62,7 @@ var controller = {
                 break;
         }
 
-        target = _.template('http://google.qdan.me/search?tbm=isch&q=<%= encodeURIComponent(query) %>+site%3A<%= scope %>')({
+        target = _.template('http://www.google.com/search?tbm=isch&q=<%= encodeURIComponent(query) %>+site%3A<%= scope %>')({
             query: query,
             scope: scope
         });
