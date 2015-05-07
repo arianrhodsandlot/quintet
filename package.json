@@ -1,25 +1,25 @@
 {
-    "name": "hollyquintet",
-    "version": "0.0.1",
-    "private": true,
-    "description": "Search for covers from iTunes Store.",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "lodash": "*",
-        "jade": "*",
-        "cheerio": "*",
-        "request-promise": "*",
-        "express": "*",
-        "morgan": "*",
-        "harp": "*",
-        "nib": "*"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://git.heroku.com/hollyquintet.git"
-    },
-    "license": "MIT"
+	"name": "hollyquintet",
+	"version": "0.0.1",
+	"private": true,
+	"description": "Search for covers from iTunes Store.",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"lodash": "*",
+		"jade": "*",
+		"cheerio": "*",
+		"request-promise": "*",
+		"express": "*",
+		"morgan": "*",
+		"harp": "*",
+		"nib": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://git.heroku.com/hollyquintet.git"
+	},
+	"license": "MIT"
 }
