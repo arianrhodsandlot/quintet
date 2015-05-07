@@ -82,7 +82,7 @@ var controller = {
 					var query = url.parse(href).query
 					var resultData = querystring.parse(query)
 
-					var meta = window.JSON.parse(_.unescape($meta.html()))
+					var meta = JSON.parse(_.unescape($meta.html()))
 
 					return {
 						title: _.first(meta.s.split(',')),
