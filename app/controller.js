@@ -1,12 +1,76 @@
 var url = require('url')
 var querystring = require('querystring')
 var _ = require('lodash')
-var rp = require('request-promise')
+var Q = require('q')
 var cheerio = require('cheerio')
 
+var request = function(url) {
+  return Q.denodeify(require('request'))(url)
+    .then(function(results) {
+      return results[0];
+    });
+}
+
+var searchResults2json = function(html) {
+  var $html = cheerio(html)
+  var $results = $html.find('.rg_di.rg_el')
+  console.log($results.length)
+  return _.map($results, function(result) {
+    var $result = cheerio(result)
+    var $link = $result.children('.rg_l')
+    var $meta = $result.children('.rg_meta')
+
+    var href = $link.attr('href')
+    var query = url.parse(href).query
+    var resultData = querystring.parse(query)
+
+    var meta = JSON.parse(_.unescape($meta.html()))
+
+    return {
+      title: _.first(meta.s.split(',')),
+      refer: decodeURIComponent(resultData.imgrefurl),
+      cover: {
+        src: decodeURIComponent(resultData.imgurl),
+        originSrc: (function(src) {
+          var getOriginSrc
+
+          src = decodeURIComponent(src)
+
+          if (_.contains(scope, 'itunes')) {
+            getOriginSrc = function(src) {
+              var falseReg = /\d{3}x\d{3}/
+              var trueReg = /1200x1200/
+              if (falseReg.test(src) && !trueReg.test(src)) {
+                src = src.replace(falseReg, '1200x1200')
+                return src
+              }
+            }
+          } else if (_.contains(scope, 'music.163.com')) {
+            getOriginSrc = function(src) {
+              src = url.parse(src)
+              src.search = ''
+              src = url.format(src)
+              return src
+            }
+          } else {
+            getOriginSrc = function(src) {
+              return src
+            }
+          }
+
+          src = getOriginSrc(src)
+
+          return src
+        })(resultData.imgurl)
+      }
+    }
+  }).slice(0, 12)
+}
+
 var controller = {
-  home: function(req, res) {
-    res.locals.characters = [{
+  home: function*() {
+    var body
+    this.state.characters = [{
       color: '#5F5A5C',
       name: 'homura'
     }, {
@@ -22,18 +86,14 @@ var controller = {
       color: '#BE6F81',
       name: 'kyoko'
     }]
-    res.render('home')
-  },
-  search: function(req, res) {
-    var scope = req.query.scope
-    var query = req.params.query
 
-    var requestOptions = {
-      headers: {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0'
-      }
-    }
-    var target
+    this.body = yield this.render('home', this.state)
+  },
+  search: function*() {
+    var scope = this.query.scope
+    var query = this.params.query
+
+    var searchResults
 
     switch (scope) {
       case 'itunes-hk':
@@ -62,78 +122,26 @@ var controller = {
         break
     }
 
-    target = _.template('http://www.google.com/search?tbm=isch&q=<%= encodeURIComponent(query) %>+site%3A<%= scope %>')({
-      query: query,
-      scope: scope
-    })
-
-    rp(_.extend(requestOptions, {
-        url: target
-      }))
-      .then(function(html) {
-        var $html = cheerio(html)
-        var $results = $html.find('.rg_di.rg_el')
-        var results = _.map($results, function(result) {
-          var $result = cheerio(result)
-          var $link = $result.children('.rg_l')
-          var $meta = $result.children('.rg_meta')
-
-          var href = $link.attr('href')
-          var query = url.parse(href).query
-          var resultData = querystring.parse(query)
-
-          var meta = JSON.parse(_.unescape($meta.html()))
-
-          return {
-            title: _.first(meta.s.split(',')),
-            refer: decodeURIComponent(resultData.imgrefurl),
-            cover: {
-              src: decodeURIComponent(resultData.imgurl),
-              originSrc: (function(src) {
-                var getOriginSrc
-
-                src = decodeURIComponent(src)
-
-                if (_.contains(scope, 'itunes')) {
-                  getOriginSrc = function(src) {
-                    var falseReg = /\d{3}x\d{3}/
-                    var trueReg = /1200x1200/
-                    if (falseReg.test(src) && !trueReg.test(src)) {
-                      src = src.replace(falseReg, '1200x1200')
-                      return src
-                    }
-                  }
-                } else if (_.contains(scope, 'music.163.com')) {
-                  getOriginSrc = function(src) {
-                    src = url.parse(src)
-                    src.search = ''
-                    src = url.format(src)
-                    return src
-                  }
-                } else {
-                  getOriginSrc = function(src) {
-                    return src
-                  }
-                }
-
-                src = getOriginSrc(src)
-
-                return src
-              })(resultData.imgurl)
-            }
-          }
-        })
-
-        res.json({
-          results: results.slice(0, 12)
-        })
-      }, function(error) {
-        console.error(error)
-        console.error('load ' + target + ' failed')
-        res
-          .status(500)
-          .json({})
+    try {
+      searchResults = yield request({
+        baseUrl: 'https://www.google.com',
+        url: '/search',
+        qs: {
+          tbm: 'isch',
+          q: encodeURIComponent(query) + '+site%3A' + scope
+        }
+        headers: {
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+        }
       })
+      this.body = searchResults2json(searchResults)
+    } catch (err) {
+      console.error(err);
+      this.status = 500;
+      this.body = {
+        err: err
+      };
+    }
   }
 }
 

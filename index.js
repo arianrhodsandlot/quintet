@@ -1,19 +1,21 @@
-var express = require('express')
-var app = express()
-var logger = require('morgan')
+var koa = require('koa')
+var views =  require('koa-render')
+var logger = require('koa-logger')
+var favicon = require('koa-favicon')
+var c2k = require('koa-connect');
+var serve = require('koa-static');
+var json = require('koa-json');
+var harp = require('harp')
+
+var app = koa()
+var router = require('./app/router')
 
 app
-  .set('port', process.env.PORT || 5000)
-  .set('trust proxy', 'loopback')
-  .set('views', __dirname + '/public')
-  .set('view engine', 'jade')
-  .use(express['static'](__dirname + '/public'))
-  .use(require('harp').mount(__dirname + '/public'))
-  .use(logger('combined'))
-  .use(require('./app/router'))
-  .use(function(req, res) {
-      res.send('404 not found')
-  })
-  .listen(app.get('port'), function() {
-      console.log('Node app is running at localhost:' + app.get('port'))
-  })
+  .use(favicon('./public/favicon.ico'))
+  .use(views('./public', 'jade'))
+  .use(serve('./public'))
+  .use(c2k(harp.mount('./public')))
+  .use(logger())
+  .use(json())
+  .use(router.routes())
+  .listen(process.env.PORT || 5000)
