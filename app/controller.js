@@ -4,11 +4,13 @@ var _ = require('lodash')
 var Q = require('q')
 var cheerio = require('cheerio')
 
-var request = function(url) {
-  return Q.denodeify(require('request'))(url)
+var request = function(options) {
+  var request = require('request');
+  request.debug = true;
+  return Q.denodeify(request)(options)
     .then(function(results) {
-      return results[0];
-    });
+      return results[0]
+    })
 }
 
 var searchResults2json = function(html) {
@@ -102,7 +104,7 @@ var controller = {
       case 'itunes-us':
       case 'itunes-uk':
         scope = _.template('itunes.apple.com/<%= region %>/album')({
-          region: scope.replace('itunes-', '')
+          region: _.trimLeft(scope, 'itunes-')
         })
         break
       case 'amazon-com':
@@ -128,7 +130,7 @@ var controller = {
         url: '/search',
         qs: {
           tbm: 'isch',
-          q: encodeURIComponent(query) + '+site%3A' + scope
+          q: query + ' site ' + scope
         },
         headers: {
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
@@ -136,11 +138,11 @@ var controller = {
       })
       this.body = searchResults2json(searchResults)
     } catch (err) {
-      console.error(err);
-      this.status = 500;
+      console.error(err)
+      this.status = 500
       this.body = {
         err: err
-      };
+      }
     }
   }
 }
