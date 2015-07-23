@@ -130,6 +130,7 @@ var controller = {
         url: '/search',
         qs: {
           tbm: 'isch',
+          gws_rd: 'cr', //get rid of our request being redirected by country
           q: query + ' site ' + scope
         },
         headers: {
