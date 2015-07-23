@@ -16,7 +16,7 @@ var request = function(options) {
 var searchResults2json = function(html) {
   var $html = cheerio(html)
   var $results = $html.find('.rg_di.rg_el')
-  console.log($results.length)
+
   return _.map($results, function(result) {
     var $result = cheerio(result)
     var $link = $result.children('.rg_l')
@@ -125,7 +125,7 @@ var controller = {
     }
 
     try {
-      searchResults = yield request({
+      searchResponse = yield request({
         baseUrl: 'https://www.google.com',
         url: '/search',
         qs: {
@@ -137,7 +137,7 @@ var controller = {
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
         }
       })
-      this.body = searchResults2json(searchResults)
+      this.body = searchResults2json(searchResponse.body)
     } catch (err) {
       console.error(err)
       this.status = 500
