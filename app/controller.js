@@ -6,18 +6,17 @@ var cheerio = require('cheerio')
 
 var request = function(options) {
   var request = require('request');
-  request.debug = true;
   return Q.denodeify(request)(options)
     .then(function(results) {
       return results[0]
     })
 }
 
-var searchResults2json = function(html) {
+var searchResults2json = function(html, scope) {
   var $html = cheerio(html)
   var $results = $html.find('.rg_di.rg_el')
 
-  return _.map($results, function(result) {
+  var results = _.map($results, function(result) {
     var $result = cheerio(result)
     var $link = $result.children('.rg_l')
     var $meta = $result.children('.rg_meta')
@@ -67,11 +66,14 @@ var searchResults2json = function(html) {
       }
     }
   }).slice(0, 12)
+
+  return {
+    results: results
+  }
 }
 
 var controller = {
   home: function*() {
-    var body
     this.state.characters = [{
       color: '#5F5A5C',
       name: 'homura'
@@ -95,7 +97,7 @@ var controller = {
     var scope = this.query.scope
     var query = this.params.query
 
-    var searchResults
+    var searchResponse
 
     switch (scope) {
       case 'itunes-hk':
@@ -137,7 +139,7 @@ var controller = {
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
         }
       })
-      this.body = searchResults2json(searchResponse.body)
+      this.body = searchResults2json(searchResponse.body, scope)
     } catch (err) {
       console.error(err)
       this.status = 500
