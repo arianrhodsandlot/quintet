@@ -110,7 +110,6 @@ $(function() {
     render: function() {
       var data = _.extend(hollyquintet.searchResultsModel.attributes, hollyquintet.searchFormModel.attributes)
       var html = this.template(data)
-      console.log(data)
       this.$el.html(html)
       return this
     }
