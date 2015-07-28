@@ -1,8 +1,9 @@
 var url = require('url')
 var querystring = require('querystring')
 var _ = require('lodash')
+var cheerio = require('cheerio')
 
-var getOriginSrcFromItunes = function() {
+var getOriginSrcFromItunes = function(src) {
   var falseReg = /\d{3}x\d{3}/
   var trueReg = /1200x1200/
   if (falseReg.test(src) && !trueReg.test(src)) {
@@ -11,14 +12,14 @@ var getOriginSrcFromItunes = function() {
   }
 }
 
-var getOriginSrcFrom163 = function() {
+var getOriginSrcFrom163 = function(src) {
   src = url.parse(src)
   src.search = ''
   src = url.format(src)
   return src
 }
 
-var getOriginSrc = function(src) {
+var getOriginSrc = function(src, scope) {
   var getOriginSrc;
 
   if (_.contains(scope, 'itunes')) {
@@ -32,7 +33,7 @@ var getOriginSrc = function(src) {
   return getOriginSrc(src);
 }
 
-var convertResultHtml2Json = function(resultHtml) {
+var convertResultHtml2Json = function(resultHtml, scope) {
   var $result = cheerio(resultHtml)
   var $link = $result.children('.rg_l')
   var $meta = $result.children('.rg_meta')
@@ -49,7 +50,7 @@ var convertResultHtml2Json = function(resultHtml) {
     refer: decodeURIComponent(resultData.imgrefurl),
     cover: {
       src: decodeURIComponent(resultData.imgurl),
-      originSrc: getOriginSrc(this.src)
+      originSrc: getOriginSrc(this.src, scope)
     }
   }
 }
@@ -59,8 +60,9 @@ var searchResults2json = function(html, scope) {
   var $results = $html.find('.rg_di.rg_el')
 
   var results = _($results)
-    .map(convertResultHtml2Json)
+    .map(_.partial(convertResultHtml2Json, scope))
     .initial(12)
+    .value()
 
   return {
     results: results
