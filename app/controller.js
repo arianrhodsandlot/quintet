@@ -1,8 +1,5 @@
-var url = require('url')
-var querystring = require('querystring')
 var _ = require('lodash')
 var Q = require('q')
-var cheerio = require('cheerio')
 
 var searchResults2json = require('./utils/search-results2json')
 

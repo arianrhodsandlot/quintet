@@ -60,10 +60,10 @@ var searchResults2json = function(html, scope) {
   var $results = $html.find('.rg_di.rg_el')
 
   var results = _($results)
-    .map(_.partial(convertResultHtml2Json, scope))
-    .initial(12)
+    .map(_.partial(convertResultHtml2Json, _, scope))
+    .take(12)
     .value()
-
+console.log(results.length)
   return {
     results: results
   }
