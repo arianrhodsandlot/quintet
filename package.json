@@ -5,7 +5,7 @@
   "author": "Arianrhod <theguidanceofawhitetower@gmail.com>",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "iojs index"
   },
   "repository": "arianrhodsandlot/Holly-Quintet",
   "license": "MIT",
@@ -28,7 +28,6 @@
     "request": "^2.60.0"
   },
   "engines": {
-    "node": ">=0.10.0",
     "iojs": ">=1.2.0"
   }
 }
