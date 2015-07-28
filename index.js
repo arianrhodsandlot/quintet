@@ -10,6 +10,8 @@ var harp = require('harp')
 var app = koa()
 var router = require('./app/router')
 
+var port = process.env.PORT || 5000
+
 app
   .use(favicon('./public/favicon.ico'))
   .use(views('./public', 'jade'))
@@ -18,4 +20,6 @@ app
   .use(logger())
   .use(json())
   .use(router.routes())
-  .listen(process.env.PORT || 5000)
+  .listen(port, function () {
+  	console.log('Koa is listening to port ' + port + '...')
+  })
