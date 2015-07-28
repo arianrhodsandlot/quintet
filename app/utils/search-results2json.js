@@ -8,8 +8,8 @@ var getOriginSrcFromItunes = function(src) {
   var trueReg = /1200x1200/
   if (falseReg.test(src) && !trueReg.test(src)) {
     src = src.replace(falseReg, '1200x1200')
-    return src
   }
+  return src
 }
 
 var getOriginSrcFrom163 = function(src) {
@@ -63,7 +63,7 @@ var searchResults2json = function(html, scope) {
     .map(_.partial(convertResultHtml2Json, _, scope))
     .take(12)
     .value()
-console.log(results.length)
+
   return {
     results: results
   }
