@@ -44,13 +44,15 @@ var convertResultHtml2Json = function(resultHtml, scope) {
 
   var meta = JSON.parse(_.unescape($meta.html()))
 
+  var src = decodeURIComponent(resultData.imgurl)
+
   var result = {
     originTitle: meta.s,
     title: _.first(meta.s.split(',')),
     refer: decodeURIComponent(resultData.imgrefurl),
     cover: {
-      src: decodeURIComponent(resultData.imgurl),
-      originSrc: getOriginSrc(result.cover.src, scope)
+      src: src,
+      originSrc: getOriginSrc(src, scope)
     }
   }
 
