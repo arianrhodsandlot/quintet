@@ -27,7 +27,7 @@ var getOriginSrc = function(src, scope) {
   } else if (_.contains(scope, 'music.163.com')) {
     getOriginSrc = getOriginSrcFrom163;
   } else {
-    getOriginSrc = _.constant(src);
+    getOriginSrc = _.identity;
   }
 
   return getOriginSrc(src);
