@@ -20,17 +20,17 @@ var getOriginSrcFrom163 = function(src) {
 }
 
 var getOriginSrc = function(src, scope) {
-  var getOriginSrc;
+  var getOriginSrc
 
   if (_.contains(scope, 'itunes')) {
-    getOriginSrc = getOriginSrcFromItunes;
+    getOriginSrc = getOriginSrcFromItunes
   } else if (_.contains(scope, 'music.163.com')) {
-    getOriginSrc = getOriginSrcFrom163;
+    getOriginSrc = getOriginSrcFrom163
   } else {
-    getOriginSrc = _.identity;
+    getOriginSrc = _.identity
   }
 
-  return getOriginSrc(src);
+  return getOriginSrc(src)
 }
 
 var convertResultHtml2Json = function(resultHtml, scope) {

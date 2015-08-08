@@ -4,7 +4,7 @@ var Q = require('q')
 var searchResults2json = require('./utils/search-results2json')
 
 var request = function(options) {
-  var request = require('request');
+  var request = require('request')
   return Q.denodeify(request)(options)
     .then(function(results) {
       return results[0]

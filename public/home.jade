@@ -57,7 +57,7 @@ html(lang='zh-CN')
           a.cover-link(href!='<%= result.cover.originSrc %>' target='_blank' title!='<%= result.cover.originSrc === result.cover.src ? "查看图片" : "查看原图" %>')
             img.cover-img(src!='<%= index === 0 ? result.cover.originSrc : result.cover.src %>')
           a(href!='<%= result.refer %>' target='_blank' title='访问网页').title <%= result.title ? result.title : '-' %>
-        | <% }); %>
+        | <% }) %>
         | <% } %>
 
     .info
