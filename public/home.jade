@@ -54,8 +54,15 @@ html(lang='zh-CN')
         | <% } else { %>
         | <% _.each(results, function(result, index) { %>
         .result(class!='<%= index === 0 ? "first-result" : "" %>')
-          a.cover-link(href!='<%= result.cover.originSrc %>' target='_blank' title!='<%= result.cover.originSrc === result.cover.src ? "查看图片" : "查看原图" %>')
-            img.cover-img(src!='<%= index === 0 ? result.cover.originSrc : result.cover.src %>')
+          a.cover-link(
+            href!='<%= result.cover.originSrc %>'
+            target='_blank'
+            title!='<%= result.cover.originSrc === result.cover.src ? "查看图片" : "查看原图" %>'
+          )
+            img.cover-img(
+              src!='<%= result.cover.src %>'
+              data-origin-src!='<%= result.cover.originSrc %>'
+            )
           a(href!='<%= result.refer %>' target='_blank' title='访问网页').title <%= result.title ? result.title : '-' %>
         | <% }) %>
         | <% } %>
