@@ -11,7 +11,8 @@ html(lang='zh-CN')
     link(rel='Shortcut Icon' href='/favicon.ico' type='image/x-icon')
     link(rel='bookmark' href='/favicon.ico' type='image/x-icon')
 
-    link(rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css')
+    link(rel='stylesheet' href='https://necolas.github.io/normalize.css/3.0.2/normalize.css')
+    link(rel='stylesheet' href='http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css')
     link(rel='stylesheet' href='/style.css')
 
     meta(name='twitter:card' content='summary' )
@@ -42,7 +43,7 @@ html(lang='zh-CN')
           option(value='orpheus') music.163.com/album
           option(value='qq') y.qq.com/y/static
 
-      input.submit(type='submit' value='搜索封面')
+      button.submit(type='submit'): i.fa.fa-search
     .search-results
 
     .templates
@@ -70,7 +71,7 @@ html(lang='zh-CN')
     .info
       a.contact-me(href='https://twitter.com/gnosis1988') i
 
-    a(href='https://github.com/arianrhodsandlot/Holly-Quintet')
+    a.github(href='https://github.com/arianrhodsandlot/Holly-Quintet')
       img(
         style={
           position: 'absolute',
