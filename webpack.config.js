@@ -1,4 +1,12 @@
 var webpack = require('webpack')
+var env = process.env.NODE_ENV
+
+var webpackPlugins = []
+
+if (env === 'production') {
+  webpackPlugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
 module.exports = {
   entry: './public/entry/app.js',
   output: {
@@ -35,5 +43,5 @@ module.exports = {
       loader: 'url?mimetype=image/svg+xml'
     }]
   },
-  plugins: [new webpack.optimize.UglifyJsPlugin()]
+  plugins: webpackPlugins
 };
