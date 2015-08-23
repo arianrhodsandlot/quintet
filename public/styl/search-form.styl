@@ -1,0 +1,89 @@
+body.notinited
+  .search-form
+    transition none
+    .logo
+      transition none
+
+.search-form
+  text-align center
+  font-size 16px
+  padding 40px 0 20px 0
+  transition margin .4s
+  .logo
+    size 100px 65px
+    absolute top 20px left 50%
+    line-height 0
+    margin 0 0 0 -500px
+    padding 20px 0 0 0
+    transition all .4s
+    transform rotate(360deg * 2)
+    .dot
+      size 30px
+      display block
+      border-radius 50%
+      display inline-block
+      position relative
+    .madoka
+      top -20px
+    .homura
+      left 5px
+    .mami
+      right 5px
+  @media (max-width: 1000px)
+    padding 0 10px
+  .query, .scope, .submit
+    border none
+    outline none
+    padding 10px
+    box-shadow 0 0 2px #ddd
+    vertical-align middle
+    transition box-shadow .2s
+    max-width 100%
+    display inline-block
+    height 40px
+    @media (max-width: 1000px)
+      width 100%
+      display block
+      margin 5px 0 0 0
+      float left
+    &:focus
+      box-shadow 0 0 4px #ccc
+  .query
+    width 380px
+    @media (max-width: 1000px)
+      width 80%
+      margin 0
+  .scope
+    width auto
+    margin 0 0 0 20px
+    @media (max-width: 1000px)
+      size 0
+      absolute top -9999px left -9999px
+  .submit
+    font-family 'Helvetica Neue', Helvetica, Roboto, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Source Han Sans CN', 'WenQuanYi Micro Hei', sans-serif
+    width 100px
+    font-size 12px
+    background #2B7BB9
+    color #fff
+    margin 0 0 0 20px
+    outline none
+    border 1px solid transparent
+    transition all .1s
+    &:active
+      border 1px solid lighten(blue, 60%)
+      transform scale(.98)
+    @media (max-width: 1000px)
+      width 18%
+      margin 0 0 0 2%
+
+  &.empty
+    margin 240px 0 0 0
+    .logo
+      top 140px
+      margin 0 0 0 -50px
+      transform rotate(0)
+
+    @media (max-width: 1000px)
+      margin 130px 0 0 0
+      .logo
+        top 20px
