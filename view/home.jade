@@ -17,6 +17,8 @@ html(lang='zh-CN')
     meta(name='twitter:description' content='这个网站可以方便地搜索专辑封面。' )
     meta(name='twitter:url' content='http://hollyquintet.tomaketheendofbattle.com' )
 
+    script(src='/dist/bundle.js')
+
     title Holly Quintet
   body.notinited
     form.search-form.empty(autocomplete='off')
@@ -79,7 +81,6 @@ html(lang='zh-CN')
         alt='Fork me on GitHub'
         data-canonical-src='//s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png'
       )
-    script(src='/dist/bundle.js')
 
     if process.env.NODE_ENV === 'production'
       script.
