@@ -140,9 +140,13 @@ $(function() {
       hollyquintet.searchResultsModel
         .trigger('loaded')
 
-      $(document.body).removeClass('notinited')
+      _.defer(function() {
+        $(document.body).removeClass('notinited')
+      });
     },
     search: function(query, scope) {
+      var formAnimateTransition = 400
+
       scope = scope ?
         scope :
         localStorage.scope ?
@@ -164,7 +168,7 @@ $(function() {
 
       _.delay(function() {
         $(document.body).removeClass('notinited')
-      }, 400)
+      }, formAnimateTransition)
     }
   })
 
