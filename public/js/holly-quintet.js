@@ -1,4 +1,4 @@
-/* global _, Backbone */
+ /* global _, Backbone */
 var $ = require('jquery')
 var _ = require('lodash')
 var Backbone = require('backbone')

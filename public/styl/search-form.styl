@@ -51,14 +51,23 @@ body.notinited
   .query
     width 380px
     @media (max-width: 1000px)
-      width 80%
-      margin 0
+      width calc(80% - 90px)
+      margin 0 0 0 90px
   .scope
     width auto
     margin 0 0 0 20px
     @media (max-width: 1000px)
-      size 0
-      absolute top -9999px left -9999px
+      background transparent
+      box-shadow none
+      color #bbb
+      font-size 12px
+      margin 40px 0 0
+      absolute right 0
+      text-align right
+      &:focus
+        box-shadow none
+      optgroup
+        text-align left
   .submit
     font-family 'Helvetica Neue', Helvetica, Roboto, Arial, 'Hiragino Sans GB', 'Heiti SC', 'Source Han Sans CN', 'WenQuanYi Micro Hei', sans-serif
     width 100px
@@ -76,6 +85,7 @@ body.notinited
       width 18%
       margin 0 0 0 2%
 
+
   &.empty
     margin 240px 0 0 0
     .logo
@@ -87,3 +97,20 @@ body.notinited
       margin 130px 0 0 0
       .logo
         top 20px
+        left 50%
+        display block
+      .query
+        width 80%
+        margin 0
+
+  @media (max-width: 1000px)
+    margin 38px 0 0 0
+    .logo
+      top 10px
+      left 50px
+      margin 0 0 0 -50px
+
+    .scope
+      display none
+    &.empty .scope
+      display block
