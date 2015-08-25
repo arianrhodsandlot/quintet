@@ -9,6 +9,8 @@ body.notinited
   font-size 16px
   padding 40px 0 20px 0
   transition margin .4s
+  @media (max-width: 1000px)
+    margin 38px 0 0 0
   .logo
     size 100px 65px
     absolute top 20px left 50%
@@ -17,6 +19,10 @@ body.notinited
     padding 20px 0 0 0
     transition all .4s
     transform rotate(360deg * 2)
+    @media (max-width: 1000px)
+      top 10px
+      left 50px
+      margin 0 0 0 -50px
     .dot
       size 30px
       display block
@@ -64,6 +70,7 @@ body.notinited
       margin 40px 0 0
       absolute right 0
       text-align right
+      display none
       &:focus
         box-shadow none
       optgroup
@@ -85,7 +92,6 @@ body.notinited
       width 18%
       margin 0 0 0 2%
 
-
   &.empty
     margin 240px 0 0 0
     .logo
@@ -102,15 +108,5 @@ body.notinited
       .query
         width 80%
         margin 0
-
-  @media (max-width: 1000px)
-    margin 38px 0 0 0
-    .logo
-      top 10px
-      left 50px
-      margin 0 0 0 -50px
-
-    .scope
-      display none
-    &.empty .scope
-      display block
+      .scope
+        display block
