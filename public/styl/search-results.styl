@@ -2,6 +2,10 @@
   max-width 1000px
   margin auto
   padding 20px 0 40px 0
+  @media (max-width: 1000px)
+    padding 80px 10px 40px 10px
+    text-align center
+    line-height 0
 .no-results
   text-align center
   margin 50px 0 0 0
@@ -11,6 +15,9 @@
   text-align center
   float left
   transition all .2s
+  @media (max-width: 1000px)
+    float none
+    margin 6px
   &:hover
     position relative
     z-index 1
@@ -43,7 +50,15 @@
     .cover-link
       size @width
     .cover-img
-      size 200px * 2
+      size @width
+
+  @media (max-width: 1000px)
+    &, &.first-result
+      size 100px
+      .cover-link
+        size 100px
+      .cover-img
+        size 100px
 .templates
   clear both
   padding 40px 0 0 0
