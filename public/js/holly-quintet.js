@@ -1,15 +1,11 @@
- /* global _, Backbone */
-var $ = require('jquery')
-var _ = require('lodash')
-var Backbone = require('backbone')
-
+/* global _, Backbone*/
 $(function() {
   var hollyquintet = {} //Backbone objects container
 
   var SearchFormModel = Backbone.Model.extend({
     defaults: {
-      'query': null,
-      'scope': null
+      query: null,
+      scope: null
     }
   })
   var SearchResultsModel = Backbone.Model.extend({
@@ -38,7 +34,7 @@ $(function() {
     model: hollyquintet.searchFormModel,
     events: {
       'click .logo': 'home',
-      'submit': 'search',
+      submit: 'search',
       'change .scope': 'saveScope'
     },
     initialize: function() {
@@ -142,7 +138,7 @@ $(function() {
 
       _.defer(function() {
         $(document.body).removeClass('notinited')
-      });
+      })
     },
     search: function(query, scope) {
       var formAnimateTransition = 400
