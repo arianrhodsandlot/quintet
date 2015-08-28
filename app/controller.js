@@ -34,7 +34,7 @@ var controller = {
   },
   search: function*() {
     var scope = this.query.scope
-    var query = this.params.query
+    var query = this.query.query
 
     var searchResponse
 
@@ -67,8 +67,10 @@ var controller = {
 
     try {
       searchResponse = yield request({
-        baseUrl: 'https://www.google.com',
-        url: '/search',
+        // baseUrl: 'https://www.google.com',
+        // url: '/search',
+        baseUrl: 'http://localhost:5000',
+        url: '/search.htm',
         qs: {
           tbm: 'isch',
           gws_rd: 'cr', //get rid of our request being redirected by country
