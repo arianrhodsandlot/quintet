@@ -21,11 +21,13 @@ html(lang='zh-CN')
     script(src='//cdn.bootcss.com/lodash.js/3.10.1/lodash.min.js')
     script(src='//cdn.bootcss.com/backbone.js/1.2.2/backbone-min.js')
     script(src='//cdn.bootcss.com/backbone.marionette/2.4.2/backbone.marionette.min.js')
-    script(src='/dist/bundle.js')
+    script(src='/js/holly-quintet.js')
+    //- script(src='/dist/bundle.js')
 
     title Holly Quintet
   body.notinited
-    form.search-form.empty(autocomplete='off')
+    a(href="/#hi") aaa
+    form.search-form.empty(action='/covers/' autocomplete='off')
       a.logo(href='/')
         for character in characters
           .dot(class=character.name style={'background': character.color})
