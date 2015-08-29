@@ -29,7 +29,13 @@ var Cover = Backbone.Model.extend({
 })
 
 var SearchResultsCovers = Backbone.Collection.extend({
-  model: Cover
+  url: '/api/covers',
+
+  initialize: function(data) {
+    console.log(data)
+    console.log(1)
+    this.fetch({data:data})
+  }
 })
 
 var StarredCovers = Backbone.Collection.extend({

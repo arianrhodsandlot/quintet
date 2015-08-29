@@ -22,57 +22,52 @@ html(lang='zh-CN')
     script(src='//cdn.bootcss.com/backbone.js/1.2.2/backbone-min.js')
     script(src='//cdn.bootcss.com/backbone.marionette/2.4.2/backbone.marionette.min.js')
 
-    script(src='/js/models.js')
-    script(src='/js/holly-quintet.js')
-    //- script(src='/dist/bundle.js')
+    //- script(src='/js/holly-quintet.js')
+    script(src='/dist/bundle.js')
 
     title Holly Quintet
   body.notinited
-    a(href="/#hi") aaa
-    form#search-form.empty(action='/covers' autocomplete='off')
-      a.logo(href='/')
-        for character in characters
-          .dot(class=character.name style={'background': character.color})
-      input.query(type='text' name='query' autofocus='autofocus')
-      select.scope#scope(name='scope')
-        optgroup(label='iTunes')
-          option(value='itunes-hk') itunes.apple.com/hk
-          option(value='itunes-jp') itunes.apple.com/jp
-          option(value='itunes-kr') itunes.apple.com/kr
-          option(value='itunes-tw') itunes.apple.com/tw
-          option(value='itunes-us') itunes.apple.com/us
-          option(value='itunes-uk') itunes.apple.com/uk
-        optgroup(label='Amazon')
-          option(value='amazon-com') amazon.com
-          option(value='amazon-jp') amazon.co.jp
-        optgroup(label='其他')
-          option(value='orpheus') music.163.com/album
-          option(value='qq') y.qq.com/y/static
-
-      button.submit(type='submit'): i.fa.fa-search
-    #search-results
+    #search-form
+    #search-results-covers
+    #starred-covers
 
     .templates
-      script#search-results-template(type='text/html')
-        | <% if (loaded === false) { %>
-        .no-results 请稍候……
-        | <% } else if (query && results.length === 0) { %>
-        .no-results 未搜到与“<%= query %>”相关的图片。
-        | <% } else { %>
-        | <% _.each(results, function(result, index) { %>
-        .result(class!='<%= index === 0 ? "first-result" : "" %>')
+      script#search-form-template(type='text/html')
+        form.empty(action='/covers' autocomplete='off')
+          a.logo(href='/')
+            for character in characters
+              .dot(class=character.name style={'background': character.color})
+          input.query(type='text' name='query' autofocus='autofocus')
+          select.scope#scope(name='scope')
+            optgroup(label='iTunes')
+              option(value='itunes-hk') itunes.apple.com/hk
+              option(value='itunes-jp') itunes.apple.com/jp
+              option(value='itunes-kr') itunes.apple.com/kr
+              option(value='itunes-tw') itunes.apple.com/tw
+              option(value='itunes-us') itunes.apple.com/us
+              option(value='itunes-uk') itunes.apple.com/uk
+            optgroup(label='Amazon')
+              option(value='amazon-com') amazon.com
+              option(value='amazon-jp') amazon.co.jp
+            optgroup(label='其他')
+              option(value='orpheus') music.163.com/album
+              option(value='qq') y.qq.com/y/static
+          button.submit(type='submit'): i.fa.fa-search
+
+      script#search-results-covers-template(type='text/html')
+        | <% _.each(items, function(cover, index) { %>
+        .cover(class!='<%= index === 0 ? "first-result" : "" %>')
           a.cover-link(
-            href!='<%= result.cover.originSrc %>'
+            href!='<%= cover.originSrc %>'
             target='_blank'
-            title!='<%= result.cover.originSrc === result.cover.src ? "查看图片" : "查看原图" %>'
+            title!='<%= cover.originSrc === cover.src ? "查看图片" : "查看原图" %>'
           )
-            img
-              src!='<%= result.cover.src %>'
-              data-origin-src!='<%= result.cover.originSrc %>'
+            img.cover-img(
+              src!='<%= cover.src %>'
+              data-origin-src!='<%= cover.originSrc %>'
             )
-          a(href!='<%= result.refer %>' target='_blank' title='访问网页').title <%= result.title ? result.title : '-' %>
+          a(href!='<%= cover.refer %>' target='_blank' title='访问网页').title <%= cover.title ? cover.title : '-' %>
         | <% }) %>
-        | <% } %>
 
     .info
       a.contact-me(href='https://twitter.com/gnosis1988') i
