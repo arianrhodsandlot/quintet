@@ -46,31 +46,27 @@ var convertResultHtml2Json = function(resultHtml, scope) {
 
   var src = decodeURIComponent(resultData.imgurl)
 
-  var result = {
+  var cover = {
     originTitle: meta.s,
     title: _.first(meta.s.split(',')),
     refer: decodeURIComponent(resultData.imgrefurl),
-    cover: {
-      src: src,
-      originSrc: getOriginSrc(src, scope)
-    }
+    src: src,
+    originSrc: getOriginSrc(src, scope)
   }
 
-  return result
+  return cover
 }
 
 var searchResults2json = function(html, scope) {
   var $html = cheerio(html)
   var $results = $html.find('.rg_di.rg_el')
 
-  var results = _($results)
+  var covers = _($results)
     .map(_.partial(convertResultHtml2Json, _, scope))
     .take(12)
     .value()
 
-  return {
-    results: results
-  }
+  return covers
 }
 
 module.exports = searchResults2json
