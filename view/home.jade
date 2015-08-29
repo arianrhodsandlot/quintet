@@ -21,13 +21,15 @@ html(lang='zh-CN')
     script(src='//cdn.bootcss.com/lodash.js/3.10.1/lodash.min.js')
     script(src='//cdn.bootcss.com/backbone.js/1.2.2/backbone-min.js')
     script(src='//cdn.bootcss.com/backbone.marionette/2.4.2/backbone.marionette.min.js')
+
+    script(src='/js/models.js')
     script(src='/js/holly-quintet.js')
     //- script(src='/dist/bundle.js')
 
     title Holly Quintet
   body.notinited
     a(href="/#hi") aaa
-    form.search-form.empty(action='/covers/' autocomplete='off')
+    form#search-form.empty(action='/covers' autocomplete='off')
       a.logo(href='/')
         for character in characters
           .dot(class=character.name style={'background': character.color})
@@ -48,10 +50,10 @@ html(lang='zh-CN')
           option(value='qq') y.qq.com/y/static
 
       button.submit(type='submit'): i.fa.fa-search
-    .search-results
+    #search-results
 
     .templates
-      script#result-template(type='text/html')
+      script#search-results-template(type='text/html')
         | <% if (loaded === false) { %>
         .no-results 请稍候……
         | <% } else if (query && results.length === 0) { %>
@@ -64,7 +66,45 @@ html(lang='zh-CN')
             target='_blank'
             title!='<%= result.cover.originSrc === result.cover.src ? "查看图片" : "查看原图" %>'
           )
-            img.cover-img(
+            img
+  var SearchHistory = Backbone.Model.extend({
+    defaults: {
+      query: '',
+      scope: '',
+      bestResult: null
+    }
+  })
+
+  var SearchHistories = Backbone.Model.extend({
+    model: SearchHistory
+  })
+
+  var Cover = Backbone.Model.extend({
+    defaults: {
+      originTitle: '',
+      title: '',
+      refer: '',
+      cover: {},
+      starred: false
+    },
+
+    hasFullSize: function() {
+      return this.cover.originSrc && this.cover.originSrc !== this.cover.src
+    },
+
+    star: function() {
+      return this.set('starred', _.now());
+    }
+  })
+
+  var SearchResultsCovers = Backbone.Collection.extend({
+    model: Cover
+  })
+
+  var StarredCovers = Backbone.Collection.extend({
+    model: Cover,
+    comparator: 'starred'
+  })(
               src!='<%= result.cover.src %>'
               data-origin-src!='<%= result.cover.originSrc %>'
             )
