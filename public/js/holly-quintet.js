@@ -1,221 +1,190 @@
-/* global _, Backbone*/
+/*global _, Backbone, Mn */
+
+var app = new Mn.Application()
+
+var Cover = Backbone.Model.extend({
+  defaults: {
+    originTitle: '',
+    title: '',
+    refer: '',
+    cover: {},
+    starred: false
+  },
+
+  hasFullSize: function() {
+    return this.cover.originSrc && this.cover.originSrc !== this.cover.src
+  },
+
+  star: function() {
+    return this.set('starred', _.now());
+  }
+})
+
+var SearchResultsCovers = Backbone.Collection.extend({
+  model: Cover,
+  url: '/api/covers',
+
+  initialize: function(models, options) {
+    this.fetch = _.bind(this.fetch, this, options)
+  }
+})
+
 $(function() {
-  var hollyquintet = {} //Backbone objects container
 
-  var SearchFormModel = Backbone.Model.extend({
-    defaults: {
-      query: null,
-      scope: null
+  var RootLayout = Mn.LayoutView.extend({
+    el: 'body',
+    regions: {
+      searchForm: '#search-form',
+      searchResultsCovers: '#search-results-covers',
+      starredCovers: '#starred-covers'
     }
   })
-  var SearchResultsModel = Backbone.Model.extend({
-    defaults: {
-      loaded: false,
-      results: null
+
+  var SearchFormItem = Mn.ItemView.extend({
+    template: '#search-form-template',
+    ui: {
+      logo: '.logo',
+      form: 'form',
+      query: '.query'
     },
-    url: function() {
-      var url = '/api/search/<%= query %><%= scope ? "?scope=" + scope : "" %>'
-      var query = _.trim(hollyquintet.searchFormModel.get('query'))
-      var scope = hollyquintet.searchFormModel.get('scope')
-      return _.template(url)({
-        query: query,
-        scope: scope
-      })
-    }
-  })
-
-  _.extend(hollyquintet, {
-    searchFormModel: new SearchFormModel(),
-    searchResultsModel: new SearchResultsModel()
-  })
-
-  var SearchFormView = Backbone.View.extend({
-    el: '.search-form',
-    model: hollyquintet.searchFormModel,
     events: {
-      'click .logo': 'home',
-      submit: 'search',
-      'change .scope': 'saveScope'
+      'click @ui.logo': 'home',
+      'submit @ui.form': 'search'
     },
-    initialize: function() {
-      this.listenTo(this.model, 'change:query change:scope', this.render)
-      this.listenTo(hollyquintet.searchResultsModel, 'loading loaded', this.render)
-    },
-    render: function() {
-      var query = _.trim(this.model.get('query'))
-      var scope = this.model.get('scope')
 
-      this.$el
-        .find('.query')
-        .val(query)
-
-      this.$el
-        .find('.scope')
-        .val(scope)
-
-      if (query === '') {
-        this.$el.addClass('empty')
-      } else {
-        this.$el.removeClass('empty')
-      }
-
-      if (hollyquintet.searchResultsModel.get('loaded')) {
-        this.$el
-          .find('.submit')
-          .val('搜索封面')
-      } else {
-        this.$el
-          .find('.submit')
-          .val('请稍候……')
-      }
-    },
-    home: function(e){
+    home: function(e) {
       e.preventDefault()
-      hollyquintet.router.navigate('', {
-        trigger: true
-      })
-      this.$el.find('.query').focus()
+      app.trigger('navigate', this.ui.logo.attr('href'))
     },
+
     search: function(e) {
-      var query = _.trim(this.$el.find('.query').val())
-      var scope = this.$el.find('.scope').val()
-      var target = query === '' ?
-        '' :
-        'search/' + query
+      this.ui.query.val(_.trim(this.ui.query.val().replace(/\s+/g, ' ')))
 
-      if (query && scope) {
-        target += '?scope=' + scope
+      if (this.ui.query.val()) {
+        e.preventDefault();
+
+        var fragment = this.ui.form.attr('action') +
+          '?' +
+          this.ui.form.serialize()
+
+        app.trigger('navigate', fragment)
+      } else {
+        this.home(e)
       }
-
-      hollyquintet.router.navigate(target, {
-        trigger: true
-      })
-
-      e.preventDefault()
-    },
-    saveScope: function() {
-      this.$el.find('.query').focus()
-      localStorage.scope = this.$el
-        .find('.scope')
-        .val()
-    }
-  })
-  var SearchResultsView = Backbone.View.extend({
-    el: '.search-results',
-    model: hollyquintet.searchResultsModel,
-    template: _.template($('#result-template').html()),
-    initialize: function() {
-      this.listenTo(this.model, 'loading loaded', this.render)
-    },
-    render: function() {
-      var data = _.extend(hollyquintet.searchResultsModel.attributes, hollyquintet.searchFormModel.attributes)
-      var html = this.template(data)
-      this.$el.html(html)
-      return this
     }
   })
 
-  var Router = Backbone.Router.extend({
-    routes: {
+  var SearchResultsCoversItem = Mn.ItemView.extend({
+    template: '#search-results-covers-template',
+    ui: {
+      cover: '.cover-link',
+    },
+    events: {
+      'click @ui.cover': 'preview'
+    },
+    collectionEvents: {
+      request: 'loading',
+      sync: 'render'
+    },
+
+    initialize: function(){
+      this.collection.fetch()
+    },
+
+    loading: function(){
+      console.log('loading')
+    }
+  })
+
+  var StarredCoversItem = Mn.ItemView.extend({
+    el: '#starred-results-covers',
+    template: '#search-results-covers-template',
+    ui: {
+      cover: '.cover-link',
+    },
+    events: {
+      'click @ui.cover': 'preview'
+    }
+  })
+
+  var Router = Mn.AppRouter.extend({
+    appRoutes: {
       '': 'home',
-      'search/:query(?scope=:scope)': 'search'
-    },
-    home: function() {
-      hollyquintet.searchFormModel.set({
-        'query': '',
-        'scope': localStorage.scope ?
-          localStorage.scope : hollyquintet.searchFormView.$el.find('option').val()
-      })
-
-      hollyquintet.searchResultsModel
-        .set({
-          'results': [],
-          'loaded': true
-        })
-
-      hollyquintet.searchResultsModel
-        .trigger('loaded')
-
-      _.defer(function() {
-        $(document.body).removeClass('notinited')
-      })
-    },
-    search: function(query, scope) {
-      var formAnimateTransition = 400
-
-      scope = scope ?
-        scope :
-        localStorage.scope ?
-        localStorage.scope :
-        hollyquintet.searchFormView.$el.find('option').val()
-
-
-      hollyquintet.searchFormModel
-        .set({
-          'query': _.trim(query),
-          'scope': scope
-        })
-
-      hollyquintet.searchResultsModel
-        .set({
-          loaded: false
-        })
-        .trigger('loading')
-
-      _.delay(function() {
-        $(document.body).removeClass('notinited')
-      }, formAnimateTransition)
+      'covers(?query=:query&scope=:scope)': 'search',
+      'covers(?filter=:filter)': 'starred'
     }
   })
 
-  _.extend(hollyquintet, {
-
-    searchFormView: new SearchFormView(),
-    searchResultsView: new SearchResultsView(),
-
-    router: new Router()
-  })
-
-  hollyquintet.searchResultsModel
-    .on('loading loaded', function() {
-      var query = hollyquintet.searchFormModel.get('query')
-      var loaded = this.get('loaded')
-
-      query = _.trim(query)
-
-      hollyquintet.searchFormModel
-        .trigger('loaded')
-
-      if (loaded) {
-        return false
-      }
-
-      this.set({
-        'loaded': false,
-        'results': []
-      })
-
-      if (query) {
-        hollyquintet.searchResultsModel.fetch({
-          success: function() {
-            hollyquintet.searchResultsModel.set({
-              loaded: true
-            }).trigger('loaded')
-          },
-          error: function() {
-            hollyquintet.searchResultsModel.set({
-              loaded: true,
-              results: []
-            }).trigger('loaded')
-          }
-        })
-      }
+  app
+    .on('navigate', _.bind(
+      _.partial(
+        Backbone.history.navigate, _, {
+          trigger: true
+        }
+      ),
+      Backbone.history
+    ))
+    .on('before:start', function() {
+      app.layout = new RootLayout();
     })
+    .on('start', function() {
+      app.router = new Router({
+        controller: {
+          _showSearchForm: function() {
+            var searchFormItem = app.layout
+              .getRegion('searchForm')
+              .currentView
 
-  Backbone.history.start({
-    pushState: true
-  })
+            if (_.isUndefined(searchFormItem)) {
+              app.layout
+                .getRegion('searchForm')
+                .show(new SearchFormItem())
+            }
 
-  //exports hollyquintet to global for debug use
-  window.hollyquintet = hollyquintet
+            return this;
+          },
+
+          home: function() {
+            this._showSearchForm()
+
+            app.layout
+              .getRegion('searchResultsCovers')
+              .empty()
+          },
+
+          search: function(query, scope) {
+            this._showSearchForm()
+
+            app.layout
+              .getRegion('searchResultsCovers')
+              .show(new SearchResultsCoversItem({
+                collection: new SearchResultsCovers([], {
+                  data: {
+                    query: query,
+                    scope: scope
+                  }
+                })
+              }));
+          },
+
+          starred: function(filter) {
+            if (filter !== 'starred') {
+              return;
+            }
+
+            app.layout
+              .getRegion('starredCovers')
+              .show(new StarredCoversItem());
+          }
+        }
+      })
+    })
+    .on('start', _.bind(
+      Backbone.history.start,
+      Backbone.history, {
+        pushState: true
+      }
+    ))
+    .start()
+  window.app = app
 })
