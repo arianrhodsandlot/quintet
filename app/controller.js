@@ -13,7 +13,7 @@ var request = function(options) {
 
 var controller = {
   home: function*() {
-    this.body = yield this.render('home', this.state)
+    this.body = yield this.render('home/index', this.state)
   },
   search: function*() {
     var scope = this.query.scope

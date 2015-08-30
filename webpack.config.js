@@ -1,29 +1,25 @@
 var webpack = require('webpack')
-var env = process.env.NODE_ENV
-
-var webpackPlugins = []
-
-if (env === 'production') {
-  webpackPlugins.push(new webpack.optimize.UglifyJsPlugin())
-}
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  entry: './public/entry/app.js',
+  entry: {
+    'holly-quintet': './public/entry/holly-quintet.js'
+  },
   output: {
     path: './public/dist/',
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [{
-      test: /\.css/,
-      loader: 'style!css'
-    }, {
       test: /\.styl$/,
-      loader: 'style!css!stylus'
+      loader: ExtractTextPlugin.extract('style', 'css!stylus')
     }, {
       test: /\.js$/,
       loader: 'uglify!babel'
     }]
   },
-  plugins: webpackPlugins
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({}),
+    new ExtractTextPlugin('[name].css')
+  ]
 }
