@@ -13,23 +13,6 @@ var request = function(options) {
 
 var controller = {
   home: function*() {
-    this.state.characters = [{
-      color: '#5F5A5C',
-      name: 'homura'
-    }, {
-      color: '#FED4D7',
-      name: 'madoka'
-    }, {
-      color: '#F9E797',
-      name: 'mami'
-    }, {
-      color: '#89BBCB',
-      name: 'sayaka'
-    }, {
-      color: '#BE6F81',
-      name: 'kyoko'
-    }]
-
     this.body = yield this.render('home', this.state)
   },
   search: function*() {

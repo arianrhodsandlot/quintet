@@ -1,0 +1,21 @@
+<a
+  href="<%= originSrc %>"
+  target="_blank"
+  title="<%= originSrc === src ? "查看图片" : "查看原图" %>"
+  class="cover-link"
+>
+  <img
+    src="<%= src %>"
+    data-origin-src="<%= originSrc %>"
+    class="cover-img"
+  />
+</a>
+
+<a
+  href="<%= refer %>"
+  target="_blank"
+  title="访问网页"
+  class="title"
+>
+  <%= title ? title : '-' %>
+</a>

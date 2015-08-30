@@ -1,3 +1,5 @@
+import SearchForm from '../model/search-form'
+
 const SearchFormItem = Mn.ItemView.extend({
   tagName: 'form',
   className: 'search-form',
@@ -5,6 +7,7 @@ const SearchFormItem = Mn.ItemView.extend({
     action: '/covers',
     autocomplete: 'off'
   },
+  model: new SearchForm(),
   template: '#search-form-template',
   ui: {
     logo: '.logo',

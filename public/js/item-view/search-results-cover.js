@@ -1,6 +1,6 @@
 const SearchResultsCoverView = Mn.ItemView.extend({
   className: 'cover',
-  template: '#search-results-cover-template',
+  template: '#cover-template',
   ui: {
     cover: '.cover-link',
   },

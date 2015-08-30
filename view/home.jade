@@ -47,40 +47,8 @@ html(lang='zh-CN')
         alt='Fork me on GitHub'
         data-canonical-src='//s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png'
       )
-    script#loading-template(type='text/html') loading...
 
-    script#search-form-template(type='text/html')
-      a.logo(href='/')
-        for character in characters
-          .dot(class=character.name style={'background': character.color})
-      input.query(type='text' name='query' autofocus='autofocus')
-      select.scope#scope(name='scope')
-        optgroup(label='iTunes')
-          option(value='itunes-hk') itunes.apple.com/hk
-          option(value='itunes-jp') itunes.apple.com/jp
-          option(value='itunes-kr') itunes.apple.com/kr
-          option(value='itunes-tw') itunes.apple.com/tw
-          option(value='itunes-us') itunes.apple.com/us
-          option(value='itunes-uk') itunes.apple.com/uk
-        optgroup(label='Amazon')
-          option(value='amazon-com') amazon.com
-          option(value='amazon-jp') amazon.co.jp
-        optgroup(label='其他')
-          option(value='orpheus') music.163.com/album
-          option(value='qq') y.qq.com/y/static
-      button.submit(type='submit'): i.fa.fa-search
-
-    script#search-results-cover-template(type='text/html')
-      a.cover-link(
-        href!='<%= originSrc %>'
-        target='_blank'
-        title!='<%= originSrc === src ? "查看图片" : "查看原图" %>'
-      )
-        img.cover-img(
-          src!='<%= src %>'
-          data-origin-src!='<%= originSrc %>'
-        )
-      a(href!='<%= refer %>' target='_blank' title='访问网页').title <%= title ? title : '-' %>
+    include ./template/index
 
     if process.env.NODE_ENV === 'production'
       script.
