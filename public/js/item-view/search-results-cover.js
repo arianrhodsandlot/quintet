@@ -1,4 +1,4 @@
-let SearchResultsCoverView = Mn.ItemView.extend({
+const SearchResultsCoverView = Mn.ItemView.extend({
   className: 'cover',
   template: '#search-results-cover-template',
   ui: {
@@ -9,8 +9,7 @@ let SearchResultsCoverView = Mn.ItemView.extend({
   },
 
   preview(e) {
-    e.preventDefault()
-    alert('clicked!')
+    //to do
   }
 })
 

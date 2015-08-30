@@ -1,1 +1,1 @@
-module.exports = new Mn.Application()
+export default new Mn.Application()

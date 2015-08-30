@@ -1,4 +1,4 @@
-let RootLayout = Mn.LayoutView.extend({
+const RootLayout = Mn.LayoutView.extend({
   el: 'body',
   regions: {
     searchForm: '#search-form-region',

@@ -4,9 +4,9 @@ import SearchFormView from './item-view/search-form'
 import SearchResultsCoversView from './collection-view/search-results-covers'
 import LoadingView from './item-view/loading'
 
-let controller = {
+const controller = {
   _showSearchForm() {
-    var searchFormView = app.layout
+    const searchFormView = app.layout
       .getRegion('searchForm')
       .currentView
 
@@ -35,8 +35,8 @@ let controller = {
   search(query, scope) {
     this._showSearchForm()
 
-    let searchFormRegion = app.layout.getRegion('searchForm')
-    let isSleeping = searchFormRegion.currentView.isSleeping()
+    const searchFormRegion = app.layout.getRegion('searchForm')
+    const isSleeping = searchFormRegion.currentView.isSleeping()
 
     searchFormRegion
       .currentView
@@ -45,19 +45,19 @@ let controller = {
       })
       .wake()
 
-    let searchResultsCovers = new SearchResultsCovers()
-    let searchResultsCoversRegion = app.layout.getRegion('searchResultsCovers')
+    const searchResultsCovers = new SearchResultsCovers()
+    const searchResultsCoversRegion = app.layout.getRegion('searchResultsCovers')
 
     searchResultsCovers
       .on('request', function() {
         searchResultsCoversRegion.show(new LoadingView());
       })
       .on('sync', function() {
-        let searchResultsCoversView = new SearchResultsCoversView({
+        const searchResultsCoversView = new SearchResultsCoversView({
           collection: searchResultsCovers
         })
 
-        let show = _.bind(
+        const show = _.bind(
           searchResultsCoversRegion.show,
           searchResultsCoversRegion,
           searchResultsCoversView
@@ -73,12 +73,12 @@ let controller = {
   }
 }
 
-let appRoutes = {
+const appRoutes = {
   '': 'home',
   'covers(?query=:query&scope=:scope)': 'search'
 }
 
-let Router = Mn.AppRouter.extend({
+const Router = Mn.AppRouter.extend({
   controller, appRoutes
 })
 

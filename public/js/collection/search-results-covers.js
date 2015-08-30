@@ -1,6 +1,6 @@
 import Cover from '../model/cover'
 
-let SearchResultsCovers = Backbone.Collection.extend({
+const SearchResultsCovers = Backbone.Collection.extend({
   model: Cover,
   url: '/api/covers'
 })

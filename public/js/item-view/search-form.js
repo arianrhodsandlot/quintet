@@ -1,4 +1,4 @@
-let SearchFormItem = Mn.ItemView.extend({
+const SearchFormItem = Mn.ItemView.extend({
   tagName: 'form',
   className: 'search-form',
   attributes: {
@@ -38,7 +38,7 @@ let SearchFormItem = Mn.ItemView.extend({
       return this.home(e)
     }
 
-    let fragment = this.$el.attr('action') +
+    const fragment = this.$el.attr('action') +
       '?' +
       this.$el.serialize()
 
