@@ -8,7 +8,8 @@ let SearchFormItem = Mn.ItemView.extend({
   template: '#search-form-template',
   ui: {
     logo: '.logo',
-    query: '.query'
+    query: '.query',
+    scope: '.scope'
   },
   events: {
     'submit': 'search',
@@ -18,23 +19,68 @@ let SearchFormItem = Mn.ItemView.extend({
   home(e) {
     e.preventDefault()
     app.trigger('navigate', this.ui.logo.attr('href'))
+
+    return this
   },
 
   search(e) {
-    this.ui.query.val(_.trim(this.ui.query.val().replace(/\s+/g, ' ')))
+    this.ui.query.val(
+      _.trim(
+        this.ui.query
+        .val()
+        .replace(/\s+/g, ' ')
+      )
+    )
 
-    if (this.ui.query.val()) {
-      e.preventDefault();
+    e.preventDefault();
 
-      var fragment = this.$el.attr('action') +
-        '?' +
-        this.$el.serialize()
-
-      app.trigger('navigate', fragment)
-    } else {
-      this.home(e)
+    if (this.ui.query.val() === '') {
+      return this.home(e)
     }
+
+    let fragment = this.$el.attr('action') +
+      '?' +
+      this.$el.serialize()
+
+    app.trigger('navigate', fragment)
+
+    return this
+  },
+
+  reset() {
+    this.ui.query.val('')
+
+    return this
+  },
+
+  focus() {
+    this.ui.query.focus()
+
+    return this
+  },
+
+  set(data) {
+    this.ui.query.val(data.query)
+    this.ui.scope.val(data.scope)
+
+    return this
+  },
+
+  wake() {
+    this.$el.removeClass('sleeping')
+
+    return this
+  },
+
+  sleep() {
+    this.$el.addClass('sleeping')
+
+    return this
+  },
+
+  isSleeping() {
+    return this.$el.hasClass('sleeping')
   }
 })
 
-module.exports = SearchFormItem
+export default SearchFormItem
