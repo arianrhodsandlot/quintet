@@ -1,8 +1,8 @@
 <a href="/" class="logo">
   <% _.forEach(characters, function(character) { %>
     <span
-    	class="dot <%= character.name %>"
-    	style="background: <%= character.color %>"
+      class="dot <%= character.name %>"
+      style="background: <%= character.color %>"
     >
     </span>
   <% }) %>
@@ -11,13 +11,18 @@
 <input type="text" name="query" autofocus="autofocus" class="query"/>
 
 <select id="scope" name="scope" class="scope">
-	<% _.forEach(scopes, function(scope) { %>
-	<optgroup label="<%= scope.label %>">
-		<% _.forEach(scope.scopes, function(scope) { %>
-			<option value="<%= scope.value %>"><%= scope.path %></option>
-		<% }) %>
-	</optgroup>
-	<% }) %>
+  <% _.forEach(availableScopesGroups, function(availableScopesGroup) { %>
+  <optgroup label="<%= availableScopesGroup.label %>">
+    <% _.forEach(availableScopesGroup.scopes, function(availableScope) { %>
+      <option
+        value="<%= availableScope.value %>"
+        <%= availableScope.value === scope ? 'selected' : null %>
+      >
+        <%= availableScope.path %>
+      </option>
+    <% }) %>
+  </optgroup>
+  <% }) %>
 </select>
 
 <button type="submit" class="submit"><i class="fa fa-search"></i></button>

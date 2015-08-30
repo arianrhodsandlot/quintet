@@ -7,7 +7,7 @@ const searchForm = Backbone.Model.extend({
     histroy: [],
 
     // used for colors in logo
-    characters:[{
+    characters: [{
       color: '#5F5A5C',
       name: 'homura'
     }, {
@@ -25,7 +25,7 @@ const searchForm = Backbone.Model.extend({
     }],
 
     // all available scopes, grouped by sites
-    scopes: [{
+    availableScopesGroups: [{
       label: 'iTunes',
       scopes: [{
         value: 'itunes-hk',
@@ -65,6 +65,22 @@ const searchForm = Backbone.Model.extend({
         path: 'y.qq.com/y/static'
       }]
     }]
+  },
+
+  initialize() {
+    const scope = localStorage.getItem('scope')
+    const scopes = _.compose(
+      _.partial(_.pluck, _, 'value'),
+      _.flatten,
+      _.partial(_.pluck, _, 'scopes'),
+      _.bind(this.get, this)
+    )('availableScopesGroups')
+
+    if (_.includes(scopes, scope)) {
+      this.set({
+        scope
+      })
+    }
   }
 })
 

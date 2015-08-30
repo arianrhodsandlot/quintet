@@ -16,14 +16,8 @@ const SearchFormItem = Mn.ItemView.extend({
   },
   events: {
     'submit': 'search',
-    'click @ui.logo': 'home'
-  },
-
-  home(e) {
-    e.preventDefault()
-    app.trigger('navigate', this.ui.logo.attr('href'))
-
-    return this
+    'click @ui.logo': 'home',
+    'change @ui.scope': 'saveScope'
   },
 
   search(e) {
@@ -48,6 +42,17 @@ const SearchFormItem = Mn.ItemView.extend({
     app.trigger('navigate', fragment)
 
     return this
+  },
+
+  home(e) {
+    e.preventDefault()
+    app.trigger('navigate', this.ui.logo.attr('href'))
+
+    return this
+  },
+
+  saveScope() {
+    localStorage.setItem('scope', this.ui.scope.val())
   },
 
   reset() {
