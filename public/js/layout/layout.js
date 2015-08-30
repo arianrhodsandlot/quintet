@@ -1,4 +1,4 @@
-const RootLayout = Mn.LayoutView.extend({
+const Layout = Mn.LayoutView.extend({
   el: 'body',
   regions: {
     searchForm: '#search-form-region',
@@ -6,4 +6,4 @@ const RootLayout = Mn.LayoutView.extend({
   }
 })
 
-module.exports = RootLayout
+export default Layout

@@ -1,5 +1,5 @@
 import app from './app'
-import RootLayout from './layout/root-layout'
+import Layout from './layout/layout'
 import Router from './router'
 
 window.app = app
@@ -13,7 +13,7 @@ window.app = app
   ))
   .on('before:start', function() {
     _.assign(app, {
-      layout: new RootLayout(),
+      layout: new Layout(),
       router: new Router()
     })
   })
