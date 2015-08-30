@@ -1,29 +1,34 @@
 let SearchFormItem = Mn.ItemView.extend({
+  tagName: 'form',
+  className: 'search-form',
+  attributes: {
+    action: '/covers',
+    autocomplete: 'off'
+  },
   template: '#search-form-template',
   ui: {
     logo: '.logo',
-    form: 'form',
     query: '.query'
   },
   events: {
-    'click @ui.logo': 'home',
-    'submit @ui.form': 'search'
+    'submit': 'search',
+    'click @ui.logo': 'home'
   },
 
-  home (e) {
+  home(e) {
     e.preventDefault()
     app.trigger('navigate', this.ui.logo.attr('href'))
   },
 
-  search (e) {
+  search(e) {
     this.ui.query.val(_.trim(this.ui.query.val().replace(/\s+/g, ' ')))
 
     if (this.ui.query.val()) {
       e.preventDefault();
 
-      var fragment = this.ui.form.attr('action') +
+      var fragment = this.$el.attr('action') +
         '?' +
-        this.ui.form.serialize()
+        this.$el.serialize()
 
       app.trigger('navigate', fragment)
     } else {

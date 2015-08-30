@@ -1,17 +1,18 @@
 import app from './app'
 import SearchResultsCovers from './collection/search-results-covers'
-import SearchFormItem from './item-view/search-form'
-import SearchResultsCoversItem from './item-view/search-results-covers'
+import SearchFormView from './item-view/search-form'
+import SearchResultsCoversView from './collection-view/search-results-covers'
+import LoadingView from './item-view/loading'
 
 let controller = {
   _showSearchForm: function() {
-    var searchFormItem = app.layout
+    var searchFormView = app.layout
       .getRegion('searchForm')
       .currentView
 
-    if (_.isUndefined(searchFormItem)) {
+    if (_.isUndefined(searchFormView)) {
       app.layout.getRegion('searchForm')
-        .show(new SearchFormItem())
+        .show(new SearchFormView())
     }
 
     return this;
@@ -28,16 +29,24 @@ let controller = {
   search: function(query, scope) {
     this._showSearchForm()
 
-    app.layout
-      .getRegion('searchResultsCovers')
-      .show(new SearchResultsCoversItem({
-        collection: new SearchResultsCovers([], {
-          data: {
-            query: query,
-            scope: scope
-          }
-        })
-      }));
+    let searchResultsCoversRegion = app.layout.getRegion('searchResultsCovers')
+    let searchResultsCovers = new SearchResultsCovers()
+
+    searchResultsCovers
+      .on('request', function() {
+        searchResultsCoversRegion.show(new LoadingView());
+      })
+      .on('sync', function() {
+        searchResultsCoversRegion.show(new SearchResultsCoversView({
+          collection: searchResultsCovers
+        }));
+      })
+      .fetch({
+        data: {
+          query, scope
+        }
+      })
+
   }
 }
 
@@ -50,4 +59,4 @@ let Router = Mn.AppRouter.extend({
   controller, appRoutes
 })
 
-module.exports = Router
+export default Router
