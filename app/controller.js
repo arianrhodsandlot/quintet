@@ -50,10 +50,13 @@ var controller = {
 
     try {
       searchResponse = yield request({
-        // baseUrl: 'https://www.google.com',
-        // url: '/search',
-        baseUrl: 'http://localhost:5000',
-        url: '/search.htm',
+        baseUrl: 'https://www.google.com',
+        url: '/search',
+
+        /* for local dev use */
+        // baseUrl: 'http://localhost:5000',
+        // url: '/search.htm',
+
         qs: {
           tbm: 'isch',
           gws_rd: 'cr', //get rid of our request being redirected by country

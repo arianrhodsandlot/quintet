@@ -1,6 +1,6 @@
-const SearchFormItem = Mn.ItemView.extend({
+const LoadingView = Mn.ItemView.extend({
   className: 'loading',
   template: '#loading-template'
 })
 
-export default SearchFormItem
+export default LoadingView
