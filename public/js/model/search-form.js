@@ -84,4 +84,4 @@ const searchForm = Backbone.Model.extend({
   }
 })
 
-module.exports = searchForm
+export default searchForm

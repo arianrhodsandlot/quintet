@@ -5,4 +5,4 @@ const SearchResultsCovers = Backbone.Collection.extend({
   url: '/api/covers'
 })
 
-module.exports = SearchResultsCovers
+export default SearchResultsCovers

@@ -1,8 +1,16 @@
 import app from './app'
 import SearchResultsCovers from './collection/search-results-covers'
+import QueryCache from './model/query-cache'
+import QueryCaches from './collection/query-caches'
 import SearchFormView from './item-view/search-form'
 import SearchResultsCoversView from './collection-view/search-results-covers'
 import LoadingView from './item-view/loading'
+
+
+const queryCaches = new QueryCaches(
+  JSON.parse(localStorage.getItem('queryCaches')) ||
+  []
+)
 
 const controller = {
   _showSearchForm() {
@@ -48,28 +56,49 @@ const controller = {
     const searchResultsCovers = new SearchResultsCovers()
     const searchResultsCoversRegion = app.layout.getRegion('searchResultsCovers')
 
-    searchResultsCovers
-      .on('request', function() {
-        searchResultsCoversRegion.show(new LoadingView());
+    const queryCache = queryCaches.findWhere({query,scope})
+
+    const showCovers2Region = () => {
+      const searchResultsCoversView = new SearchResultsCoversView({
+        collection: searchResultsCovers
       })
-      .on('sync', function() {
-        const searchResultsCoversView = new SearchResultsCoversView({
-          collection: searchResultsCovers
+
+      const show = _.bind(
+        searchResultsCoversRegion.show,
+        searchResultsCoversRegion,
+        searchResultsCoversView
+      )
+
+      _.identity(isSleeping ? _.defer : _.attempt)(show)
+    }
+
+    if (!_.isEmpty(queryCache)) {
+      searchResultsCovers.add(queryCache.get('covers'))
+      showCovers2Region()
+      alert('from cache')
+      return
+    } else {
+      searchResultsCovers
+        .on('request', () => {
+          searchResultsCoversRegion.show(new LoadingView());
         })
+        .on('sync', showCovers2Region)
+        .fetch({
+          data: {
+            query, scope
+          }
+        })
+        .done((covers) => {
+          const queryCache = new QueryCache({
+            query, scope, covers
+          })
 
-        const show = _.bind(
-          searchResultsCoversRegion.show,
-          searchResultsCoversRegion,
-          searchResultsCoversView
-        )
+          queryCaches.add([queryCache])
 
-        _.identity(isSleeping ? _.defer : _.attempt)(show)
-      })
-      .fetch({
-        data: {
-          query, scope
-        }
-      })
+          localStorage.setItem('queryCaches', JSON.stringify(queryCaches))
+          alert('no res')
+        })
+    }
   }
 }
 

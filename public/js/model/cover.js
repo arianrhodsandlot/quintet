@@ -16,5 +16,4 @@ const Cover = Backbone.Model.extend({
   }
 })
 
-module.exports = Cover
-
+export default Cover
