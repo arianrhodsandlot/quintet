@@ -12,10 +12,8 @@ window.app = app
     Backbone.history
   ))
   .on('before:start', function() {
-    _.assign(app, {
-      layout: new Layout(),
-      router: new Router()
-    })
+    app.layout = new Layout()
+    app.router = new Router()
   })
   .on('start', _.bind(
     Backbone.history.start,
