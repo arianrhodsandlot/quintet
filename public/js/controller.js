@@ -82,6 +82,10 @@ controller.search = (query, scope) => {
 
   // detect if search result can be found in our cache
   if (queryCache) {
+    const messageView = new MessageView({
+      model: queryCache,
+      collection: queryCaches
+    })
 
     // if user click 'clear cache', do search once more.
     queryCaches.once('sync', _.partial(controller.search, query, scope))
@@ -89,10 +93,14 @@ controller.search = (query, scope) => {
     searchResultsCovers.add(queryCache.get('covers'))
     searchResultsCovers.trigger('sync')
 
-    messageRegion.show(new MessageView({
-      model: queryCache,
-      collection: queryCaches
-    }))
+    return _.delay(_.bind(messageRegion.show, messageRegion, messageView), 500)
+    _.delay(
+      () => messageRegion.currentView === messageView &&
+      messageView
+        .fade()
+        .then(_.bind(messageRegion.empty, messageRegion)),
+      10500
+    )
 
   } else {
 

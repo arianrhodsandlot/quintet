@@ -10,24 +10,20 @@
   display inline-block
   size 200px
   text-align center
+  padding 10px
   float left
   transition all .2s
   @media (max-width: 1000px)
     float none
     margin 6px
   &:hover
-    position relative
-    z-index 1
-    transform scale(1.01)
-    box-shadow 0 0 2px #000
+    background #fff
+    box-shadow 0 0 4px #aaa
   .cover-link
     display block
-    size @width
-    box-shadow 0 0 2px #222 inset
+    size 100%
   .cover-img
-    size 200px
-    position relative
-    z-index -1
+    size 100%
   .title
     box-sizing border-box
     display block
@@ -44,10 +40,6 @@
 
   &.first
     size @width * 2
-    .cover-link
-      size @width
-    .cover-img
-      size @width
 
   @media (max-width: 1000px)
     &, &.first
