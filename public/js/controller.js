@@ -5,6 +5,7 @@ import QueryCaches from './collection/query-caches'
 import SearchFormView from './item-view/search-form'
 import SearchResultsCoversView from './collection-view/search-results-covers'
 import LoadingView from './item-view/loading'
+import MessageView from './item-view/message'
 
 const showSearchForm = () => {
   const searchFormView = app.layout
@@ -31,6 +32,10 @@ controller.home = () => {
   app.layout
     .getRegion('searchResultsCovers')
     .empty()
+
+  app.layout
+    .getRegion('message')
+    .empty()
 };
 
 const showCovers2Region = (collection, region) => {
@@ -49,6 +54,7 @@ const showCovers2Region = (collection, region) => {
 
 controller.search = (query, scope) => {
   const searchFormRegion = app.layout.getRegion('searchForm')
+  const messageRegion = app.layout.getRegion('message')
   const searchResultsCovers = new SearchResultsCovers()
   const searchResultsCoversRegion = app.layout.getRegion('searchResultsCovers')
   const data = {query, scope}
@@ -61,6 +67,7 @@ controller.search = (query, scope) => {
     .currentView
     .set(data)
     .wake()
+    .blur()
 
   // bind sync callbacks to our covers collection
   searchResultsCovers
@@ -76,21 +83,30 @@ controller.search = (query, scope) => {
   // detect if search result can be found in our cache
   if (queryCache) {
 
+    // if user click 'clear cache', do search once more.
+    queryCaches.once('sync', _.partial(controller.search, query, scope))
+
     searchResultsCovers.add(queryCache.get('covers'))
     searchResultsCovers.trigger('sync')
+
+    messageRegion.show(new MessageView({
+      model: queryCache,
+      collection: queryCaches
+    }))
 
   } else {
 
     searchResultsCovers
       .fetch({data})
       .done((covers) => {
-        queryCaches.add([new QueryCache(_.assign(data, {covers}))])
+        queryCaches.add(new QueryCache(_.assign(data, {covers})))
         queryCaches.save()
       })
       .fail(() => {
         alert('遇到了一些问题……稍后再试试吧！')
       })
 
+    messageRegion.empty()
   }
 }
 

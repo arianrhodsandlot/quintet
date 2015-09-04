@@ -17,7 +17,7 @@ const QueryCaches = Backbone.Collection.extend({
   save() {
   	localStorage.setItem('queryCaches', JSON.stringify(this))
 
-  	return this
+  	return this.trigger('sync')
   }
 })
 

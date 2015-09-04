@@ -1,5 +1,5 @@
 import app from './app'
-import Layout from './layout/layout'
+import Layout from './layout'
 import Router from './router'
 
 window.app = app

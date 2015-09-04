@@ -67,6 +67,12 @@ const SearchFormItem = Mn.ItemView.extend({
     return this
   },
 
+  blur() {
+    this.ui.query.blur()
+
+    return this
+  },
+
   set(data) {
     this.ui.query.val(data.query)
     this.ui.scope.val(data.scope)
