@@ -93,14 +93,7 @@ controller.search = (query, scope) => {
     searchResultsCovers.add(queryCache.get('covers'))
     searchResultsCovers.trigger('sync')
 
-    return _.delay(_.bind(messageRegion.show, messageRegion, messageView), 500)
-    _.delay(
-      () => messageRegion.currentView === messageView &&
-      messageView
-        .fade()
-        .then(_.bind(messageRegion.empty, messageRegion)),
-      10500
-    )
+    _.delay(_.bind(messageRegion.show, messageRegion, messageView), 500)
 
   } else {
 
