@@ -2,19 +2,16 @@
   text-align center
   padding 50px 0 0 0
 .info
-  fixed right 10px bottom 10px
-  text-align right
-.contact-me
-  color #e8e8ea
-  font-weight bold
-  text-decoration none
-  background darken(@color, 6%)
-  font-size 12px
-  line-height @height
   text-align center
-  border-radius 4px
-  padding 2px 8px
-  margin 0 4px 0 0
+  color #aaa
+  font-size 12px
+  height 30px
+  margin -@height 0 0 0
+  line-height @height
+  & > span
+    margin 0 2px
+    & > a
+      color #aaa
 
 .ribbon
   display none
@@ -29,8 +26,9 @@
   size 100% auto
   text-align center
   font-size 12px
-  absolute top 90px
   padding 10px 30px
+  margin 0 0 -32px 0
+  relative top -8px
 
 .clear-cache
   color rgb(43, 123, 185)

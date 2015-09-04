@@ -17,12 +17,18 @@ block css
   link(rel='stylesheet' href='/dist/holly-quintet.css')
 
 block main
-  #search-form-region
-  #message-region
-  #search-results-covers-region
+  header
+    //- include include/ribbon
 
-  include include/info
-  //- include include/ribbon
+  .wrap
+    #search-form-region
+    #message-region
+    #search-results-covers-region
+
+    .push
+
+  footer
+    include include/info
 
 block js
   script(src='//cdn.bootcss.com/jquery/2.1.4/jquery.min.js')
