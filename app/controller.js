@@ -13,6 +13,13 @@ var request = function(options) {
 
 var controller = {
   home: function*() {
+    _.assign(this.state, {
+      title: 'Holly Quintet' + (
+        this.get('host') === 'localhost:5000' ?
+        ' (local)' :
+        ''
+      )
+    })
     this.body = yield this.render('home/index', this.state)
   },
   search: function*() {
