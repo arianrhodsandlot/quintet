@@ -35,9 +35,12 @@ const SearchFormItem = Mn.ItemView.extend({
       return this.home(e)
     }
 
-    const fragment = this.$el.attr('action') +
-      '?' +
-      this.$el.serialize()
+    // we didn't use $.fn.serialize because it will convert our spaces to "+"
+    const action = this.$el.attr('action')
+    const query = this.ui.query.val()
+    const scope = this.ui.scope.val()
+
+    const fragment = `${action}?query=${query}&scope=${scope}`
 
     app.trigger('navigate', fragment)
 
