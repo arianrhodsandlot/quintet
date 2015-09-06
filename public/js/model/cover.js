@@ -7,11 +7,7 @@ const Cover = Backbone.Model.extend({
     starred: false
   },
 
-  hasFullSize: function() {
-    return this.cover.originSrc && this.cover.originSrc !== this.cover.src
-  },
-
-  star: function() {
+  star() {
     return this.set('starred', _.now());
   }
 })

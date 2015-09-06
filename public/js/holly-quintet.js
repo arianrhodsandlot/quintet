@@ -11,7 +11,8 @@ window.app = app
     ),
     Backbone.history
   ))
-  .on('before:start', function() {
+  .on('navigate', () => _.attempt(() => ga('send', 'pageview')))
+  .on('before:start', () => {
     app.layout = new Layout()
     app.router = new Router()
   })
