@@ -68,7 +68,7 @@ controller.search = (query, scope) => {
     .set(data)
     .wake()
     .blur()
-
+return searchResultsCoversRegion.show(new LoadingView());
   // bind sync callbacks to our covers collection
   searchResultsCovers
     .on('request', () => {
