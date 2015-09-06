@@ -1,17 +1,16 @@
 .search-results-covers
   max-width 1000px
-  margin 0 auto
-  padding 20px 0
+  margin 30px auto 60px auto
+  line-height 0
   clearfix()
   @media (max-width: 1000px)
-    padding 80px 10px 40px 10px
+    margin 40px auto 60px auto
     text-align center
-    line-height 0
 .cover
   display inline-block
   size 200px
   text-align center
-  padding 10px
+  padding 6px
   float left
   transition all .2s
   @media (max-width: 1000px)
@@ -25,6 +24,8 @@
     size 100%
   .cover-img
     size 100%
+    background #ccc
+    outline 1px solid #bbb
   .title
     box-sizing border-box
     display block
@@ -45,10 +46,7 @@
   @media (max-width: 1000px)
     &, &.first
       size 100px
-      .cover-link
-        size 100px
-      .cover-img
-        size 100px
+      padding 0
 .templates
   clear both
   padding 40px 0 0 0

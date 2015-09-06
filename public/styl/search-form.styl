@@ -2,10 +2,15 @@
   text-align center
   font-size 16px
   padding 40px 0 20px 130px
-  transition margin .4s
+  margin auto
+  max-width 1000px
+  transition padding .4s
+  text-align right
+  clearfix()
   @media (max-width: 1000px)
-    margin 38px 0 0 0
+    padding 30px 10px 20px 10px
   .logo
+    text-align center
     size 100px 80px
     absolute top 20px left 50%
     line-height 0
@@ -29,32 +34,28 @@
       left 5px
     .mami
       right 5px
-  @media (max-width: 1000px)
-    padding 0 10px
   .query, .scope, .submit
     border none
     outline none
     padding 10px
     box-shadow 0 0 2px #ddd
     vertical-align middle
-    transition box-shadow .2s
+    transition box-shadow .2s, width .4s, margin .4s
     max-width 100%
     display inline-block
     height 40px
     @media (max-width: 1000px)
       width 100%
-      display block
       margin 5px 0 0 0
-      float left
     &:focus
       box-shadow 0 0 4px #ccc
   .query
-    width 520px
+    width 530px
     @media (max-width: 1000px)
       width calc(80% - 90px)
       margin 0 0 0 90px
   .scope
-    width auto
+    width 200px
     margin 0 0 0 20px
     @media (max-width: 1000px)
       background transparent
@@ -92,9 +93,11 @@
       top 140px
       margin 0 0 0 -50px
       transform rotate(0)
+    .query
+      width 660px
 
     @media (max-width: 1000px)
-      margin 130px 0 0 0
+      padding 130px 10px 0 10px
       .logo
         top 20px
         left 50%

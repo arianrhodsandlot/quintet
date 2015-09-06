@@ -6,11 +6,8 @@
     >
     </span>
   <% }) %>
-</a>
-
-<input type="text" name="query" class="query"/>
-
-<select id="scope" name="scope" class="scope">
+</a><input type="text" name="query" class="query"
+/><select id="scope" name="scope" class="scope">
   <% _.forEach(availableScopesGroups, function(availableScopesGroup) { %>
   <optgroup label="<%= availableScopesGroup.label %>">
     <% _.forEach(availableScopesGroup.scopes, function(availableScope) { %>
@@ -23,6 +20,4 @@
     <% }) %>
   </optgroup>
   <% }) %>
-</select>
-
-<button type="submit" class="submit"><i class="fa fa-search"></i></button>
+</select><button type="submit" class="submit"><i class="fa fa-search"></i></button>
