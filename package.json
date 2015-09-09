@@ -29,8 +29,7 @@
     "request": "^2.61.0"
   },
   "engines": {
-    "node": ">=0.12.7",
-    "iojs": ">=3.2.0"
+    "node": ">=4.0.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.23",
