@@ -1,3 +1,4 @@
+var _ = require('lodash')
 var koa = require('koa')
 var views =  require('koa-render')
 var logger = require('koa-logger')
@@ -21,6 +22,4 @@ app
   .use(logger())
   .use(json())
   .use(router.routes())
-  .listen(port, function () {
-  	console.log('Koa is listening to port ' + port + '...')
-  })
+  .listen(port, _.partial(console.log, `Koa is listening to port ${port} ...`))
