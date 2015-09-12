@@ -42,9 +42,6 @@ const searchForm = Backbone.Model.extend({
       }, {
         value: 'itunes-us',
         path: 'itunes.apple.com/us'
-      }, {
-        value: 'itunes-uk',
-        path: 'itunes.apple.com/uk'
       }]
     }, {
       label: 'Amazon',

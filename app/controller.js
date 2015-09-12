@@ -33,7 +33,6 @@ var controller = {
       case 'itunes-jp':
       case 'itunes-tw':
       case 'itunes-us':
-      case 'itunes-uk':
         scope = `itunes.apple.com/${scope.slice('itunes-'.length)}/album`
         break
       case 'amazon-com':
