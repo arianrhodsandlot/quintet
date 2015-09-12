@@ -34,9 +34,7 @@ var controller = {
       case 'itunes-tw':
       case 'itunes-us':
       case 'itunes-uk':
-        scope = _.template('itunes.apple.com/<%= region %>/album')({
-          region: _.trimLeft(scope, 'itunes-')
-        })
+        scope = `itunes.apple.com/${scope.slice('itunes-'.length)}/album`
         break
       case 'amazon-com':
         scope = 'amazon.com'
