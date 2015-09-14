@@ -38,8 +38,6 @@ controller.home = () => {
     .empty()
 };
 
-const loadingView = new LoadingView()
-
 const showCovers2Region = (collection, region) => {
   const searchFormRegion = app.layout.getRegion('searchForm')
   const searchResultsCoversView = new SearchResultsCoversView({collection})
@@ -62,6 +60,7 @@ controller.search = (query, scope) => {
   const data = {query, scope}
   const queryCaches = new QueryCaches()
   const queryCache = queryCaches.findWhere(data)
+  const loadingView = new LoadingView()
 
   showSearchForm()
 
@@ -73,9 +72,7 @@ controller.search = (query, scope) => {
 
   // bind sync callbacks to our covers collection
   searchResultsCovers
-    .on('request', () => {
-      searchResultsCoversRegion.show(loadingView);
-    })
+    .on('request', () => searchResultsCoversRegion.show(loadingView))
     .on('sync', _.partial(
       showCovers2Region,
       searchResultsCovers,
@@ -99,21 +96,22 @@ controller.search = (query, scope) => {
 
   } else {
 
-    const normaltime = 5000
-    const timeout = 10000
+    const normalTime = 5000
+    const warnTime = 10000
+    const timeout = 15000
 
-    const warnTimer = _.delay(() => loadingView.warn('载入时间比平时要长……'), normaltime)
+    const normalTimer = _.delay(() => loadingView.warn('仍在搜索……'), normalTime)
+    const warnTimer = _.delay(() => loadingView.warn('载入时间比平时要长……'), warnTime)
 
     searchResultsCovers
       .fetch({data, timeout})
-      .done((covers) => {
+      .done(covers => {
         queryCaches.add(new QueryCache(_.assign(data, {covers})))
         queryCaches.save()
+        clearTimeout(normalTimer)
         clearTimeout(warnTimer)
       })
-      .fail(() => {
-        loadingView.error('遇到了一些问题……稍后再试试吧！')
-      })
+      .fail(() => loadingView.error())
 
     messageRegion.empty()
   }
