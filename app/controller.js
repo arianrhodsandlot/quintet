@@ -54,8 +54,7 @@ var controller = {
 
     try {
       // for dev use
-      // this.body = require('./utils/search-results2json/scheme')
-      // return
+      // return this.body = require('./utils/search-results2json/scheme')
 
       searchResponse = yield request({
         baseUrl: 'https://www.google.com',

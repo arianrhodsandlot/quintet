@@ -38,6 +38,8 @@ controller.home = () => {
     .empty()
 };
 
+const loadingView = new LoadingView()
+
 const showCovers2Region = (collection, region) => {
   const searchFormRegion = app.layout.getRegion('searchForm')
   const searchResultsCoversView = new SearchResultsCoversView({collection})
@@ -72,7 +74,7 @@ controller.search = (query, scope) => {
   // bind sync callbacks to our covers collection
   searchResultsCovers
     .on('request', () => {
-      searchResultsCoversRegion.show(new LoadingView());
+      searchResultsCoversRegion.show(loadingView);
     })
     .on('sync', _.partial(
       showCovers2Region,
@@ -97,14 +99,20 @@ controller.search = (query, scope) => {
 
   } else {
 
+    const normaltime = 5000
+    const timeout = 10000
+
+    const warnTimer = _.delay(() => loadingView.warn('载入时间比平时要长……'), normaltime)
+
     searchResultsCovers
-      .fetch({data})
+      .fetch({data, timeout})
       .done((covers) => {
         queryCaches.add(new QueryCache(_.assign(data, {covers})))
         queryCaches.save()
+        clearTimeout(warnTimer)
       })
       .fail(() => {
-        alert('遇到了一些问题……稍后再试试吧！')
+        loadingView.error('遇到了一些问题……稍后再试试吧！')
       })
 
     messageRegion.empty()
