@@ -40,7 +40,9 @@ controller.home = () => {
 
 const showCovers2Region = (collection, region) => {
   const searchFormRegion = app.layout.getRegion('searchForm')
-  const searchResultsCoversView = new SearchResultsCoversView({collection})
+  const searchResultsCoversView = new SearchResultsCoversView({
+    collection
+  })
   const isSleeping = searchFormRegion.currentView.isSleeping()
 
   const show = _.bind(
@@ -57,7 +59,9 @@ controller.search = (query, scope) => {
   const messageRegion = app.layout.getRegion('message')
   const searchResultsCovers = new SearchResultsCovers()
   const searchResultsCoversRegion = app.layout.getRegion('searchResultsCovers')
-  const data = {query, scope}
+  const data = {
+    query, scope
+  }
   const queryCaches = new QueryCaches()
   const queryCache = queryCaches.findWhere(data)
   const loadingView = new LoadingView()
@@ -104,12 +108,17 @@ controller.search = (query, scope) => {
     const warnTimer = _.delay(() => loadingView.warn('载入时间比平时要长……'), warnTime)
 
     searchResultsCovers
-      .fetch({data, timeout})
+      .fetch({
+        data, timeout
+      })
       .done(covers => {
-        queryCaches.add(new QueryCache(_.assign(data, {covers})))
-        queryCaches.save()
-        clearTimeout(normalTimer)
-        clearTimeout(warnTimer)
+        if (!_.isEmpty(covers)) {
+          queryCaches.add(new QueryCache(_.assign(data, {
+            covers
+          })))
+          queryCaches.save()
+          _.map([normalTimer, warnTimer], clearTimeout)
+        }
       })
       .fail(() => loadingView.error())
 
