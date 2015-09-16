@@ -1,4 +1,5 @@
 import SearchForm from '../model/search-form'
+import app from '../app'
 
 const SearchFormItem = Mn.ItemView.extend({
   tagName: 'form',
