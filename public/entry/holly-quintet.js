@@ -1,2 +1,2 @@
-require('../styl/holly-quintet.styl')
-require('../js/holly-quintet.js')
+import '../styl/holly-quintet.styl'
+import '../js/holly-quintet'

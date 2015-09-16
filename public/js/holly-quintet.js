@@ -2,7 +2,7 @@ import app from './app'
 import Layout from './layout'
 import Router from './router'
 
-window.app = app
+app
   .on('navigate', _.bind(
     _.partial(
       Backbone.history.navigate, _, {

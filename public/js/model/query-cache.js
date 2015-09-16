@@ -7,7 +7,7 @@ const QueryCache = Backbone.Model.extend({
     used: 0
   },
 
-  initialize () {
+  initialize() {
     this.set('add', _.now())
   }
 })
