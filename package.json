@@ -6,7 +6,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "prestart": "webpack -v",
+    "prestart": "./node_modules/webpack/bin/webpack.js -v",
     "start": "node index"
   },
   "repository": "arianrhodsandlot/Holly-Quintet",
