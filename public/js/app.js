@@ -1,1 +1,1 @@
-export default new Mn.Application()
+export default window.app = new Mn.Application()

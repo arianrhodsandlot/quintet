@@ -100,9 +100,9 @@ controller.search = (query, scope) => {
 
   } else {
 
-    const normalTime = 5000
-    const warnTime = 10000
-    const timeout = 15000
+    const normalTime = 4000
+    const warnTime = 8000
+    const timeout = 12000
 
     const normalTimer = _.delay(() => loadingView.warn('仍在搜索……'), normalTime)
     const warnTimer = _.delay(() => loadingView.warn('载入时间比平时要长……'), warnTime)
@@ -112,12 +112,13 @@ controller.search = (query, scope) => {
         data, timeout
       })
       .done(covers => {
+        _.map([normalTimer, warnTimer], clearTimeout)
+
         if (!_.isEmpty(covers)) {
           queryCaches.add(new QueryCache(_.assign(data, {
             covers
           })))
           queryCaches.save()
-          _.map([normalTimer, warnTimer], clearTimeout)
         }
       })
       .fail(() => loadingView.error())
