@@ -1,5 +1,7 @@
-var router = require('koa-router')()
-var controller = require('./controller')
+'use strict'
+
+const router = require('koa-router')()
+const controller = require('./controller')
 
 router
   .get('/', controller.home)

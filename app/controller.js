@@ -1,17 +1,18 @@
-var _ = require('lodash')
-var Q = require('q')
+'use strict'
 
-var searchResults2json = require('./utils/search-results2json')
+const _ = require('lodash')
+const Q = require('q')
 
-var request = function(options) {
-  var request = require('request')
-  return Q.denodeify(request)(options)
+const searchResults2json = require('./utils/search-results2json')
+
+const request = function(options) {
+  return Q.denodeify(require('request'))(options)
     .then(function(results) {
       return results[0]
     })
 }
 
-var controller = {
+const controller = {
   home: function*() {
     _.assign(this.state, {
       title: 'Holly Quintet' + (
@@ -23,10 +24,9 @@ var controller = {
     this.body = yield this.render('home/index', this.state)
   },
   search: function*() {
-    var scope = this.query.scope
-    var query = this.query.query
+    const query = this.query.query
 
-    var searchResponse
+    let scope = this.query.scope
 
     switch (scope) {
       case 'itunes-hk':
@@ -56,13 +56,13 @@ var controller = {
       // for dev use
       // return this.body = require('./utils/search-results2json/scheme')
 
-      searchResponse = yield request({
+      const searchResponse = yield request({
         baseUrl: 'https://www.google.com',
         url: '/search',
         qs: {
           tbm: 'isch',
           gws_rd: 'cr', //get rid of our request being redirected by country
-          q: query + ' site:' + scope
+          q: `${query} site:${scope}`
         },
         headers: {
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
@@ -73,7 +73,7 @@ var controller = {
       console.error(err)
       this.status = 500
       this.body = {
-        err: err
+        err
       }
     }
   }

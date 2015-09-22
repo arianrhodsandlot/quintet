@@ -1,26 +1,29 @@
-var url = require('url')
-var querystring = require('querystring')
-var _ = require('lodash')
-var cheerio = require('cheerio')
+'use strict'
 
-var getOriginSrcFromItunes = function(src) {
-  var falseReg = /\d{3}x\d{3}/
-  var trueReg = /1200x1200/
+const url = require('url')
+const querystring = require('querystring')
+const _ = require('lodash')
+const cheerio = require('cheerio')
+
+const getOriginSrcFromItunes = function(src) {
+  const falseReg = /\d{3}x\d{3}/
+  const trueReg = /1200x1200/
+
   if (falseReg.test(src) && !trueReg.test(src)) {
     src = src.replace(falseReg, '1200x1200')
   }
   return src
 }
 
-var getOriginSrcFrom163 = function(src) {
-  src = url.parse(src)
-  src.search = ''
-  src = url.format(src)
-  return src
+const getOriginSrcFrom163 = function(src) {
+  return _.assign(
+    url.parse(src), {
+      search: ''
+    }).format(src)
 }
 
-var getOriginSrc = function(src, scope) {
-  var getOriginSrc
+const getOriginSrc = function(src, scope) {
+  let getOriginSrc
 
   if (_.contains(scope, 'itunes')) {
     getOriginSrc = getOriginSrcFromItunes
@@ -33,40 +36,38 @@ var getOriginSrc = function(src, scope) {
   return getOriginSrc(src)
 }
 
-var convertResultHtml2Json = function(resultHtml, scope) {
-  var $result = cheerio(resultHtml)
-  var $link = $result.children('.rg_l')
-  var $meta = $result.children('.rg_meta')
+const convertResultHtml2Json = function(resultHtml, scope) {
+  const $result = cheerio(resultHtml)
+  const $link = $result.children('.rg_l')
+  const $meta = $result.children('.rg_meta')
 
-  var href = $link.attr('href')
-  var query = url.parse(href).query
-  var resultData = querystring.parse(query)
+  const href = $link.attr('href')
+  const query = url.parse(href).query
+  const resultData = querystring.parse(query)
 
-  var meta = JSON.parse(_.unescape($meta.html()))
+  const meta = JSON.parse(_.unescape($meta.html()))
 
-  var src = decodeURIComponent(resultData.imgurl)
+  const src = decodeURIComponent(resultData.imgurl)
 
-  var cover = {
+  const cover = {
     originTitle: meta.s,
     title: _.first(meta.s.split(',')),
     refer: decodeURIComponent(resultData.imgrefurl),
-    src: src,
+    src,
     originSrc: getOriginSrc(src, scope)
   }
 
   return cover
 }
 
-var searchResults2json = function(html, scope) {
-  var $html = cheerio(html)
-  var $results = $html.find('.rg_di.rg_el')
+const searchResults2json = function(html, scope) {
+  const $html = cheerio(html)
+  const $results = $html.find('.rg_di.rg_el')
 
-  var covers = _($results)
+  return _($results)
     .map(_.partial(convertResultHtml2Json, _, scope))
     .take(12)
     .value()
-
-  return covers
 }
 
 module.exports = searchResults2json
