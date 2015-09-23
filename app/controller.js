@@ -76,6 +76,25 @@ const controller = {
         err
       }
     }
+  },
+  download: function*() {
+    var res = yield request({
+      url: this.query.url,
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+      },
+      encoding: null
+    }).catch(e => {
+      this.body = e + ''
+    })
+
+    if (!res) {
+      return
+    }
+
+    this.set(res.headers)
+    this.body = res.body
+    this.attachment(res.request.uri.pathname)
   }
 }
 
