@@ -12,7 +12,7 @@ All results are picked from [Google Images](https://images.google.com). In fact,
 
 ## Screenshot
 
-![](http://i.imgur.com/wEhpxoy.gif)
+![Screenshot](http://i.imgur.com/H4jNVHR.gif)
 
 ## License
 
