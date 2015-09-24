@@ -1,22 +1,25 @@
-<a
-  href="<%= originSrc %>"
-  target="_blank"
-  download="cover"
-  title="<%= originSrc === src ? "查看图片" : "查看原图" %>"
-  class="cover-link"
->
-  <img
-    src="<%= src %>"
-    data-origin-src="<%= originSrc %>"
-    class="cover-img"
-  />
-</a>
+<div class="cover-containter">
+  <a
+    href="<%= originSrc %>"
+    target="_blank"
+    title="<%= originSrc === src ? "查看图片" : "查看原图" %>"
+    class="cover-link"
+  >
+    <img
+      src="<%= src %>"
+      data-origin-src="<%= originSrc %>"
+      class="cover-img"
+    />
+  </a>
 
-<a
-  href="<%= refer %>"
-  target="_blank"
-  title="访问网页"
-  class="title"
->
-  <%= title ? title : '-' %>
-</a>
+  <a
+    href="<%= refer %>"
+    target="_blank"
+    title="访问网页"
+    class="title"
+  >
+    <%= title ? title : '-' %>
+  </a>
+
+  <a class="fa fa-download" href="/file?url=<%= originSrc %>" title="下载原图"></a>
+</div>

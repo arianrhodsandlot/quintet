@@ -54,7 +54,7 @@ const controller = {
 
     try {
       // for dev use
-      // return this.body = require('./utils/search-results2json/scheme')
+      return this.body = require('./utils/search-results2json/scheme')
 
       const searchResponse = yield request({
         baseUrl: 'https://www.google.com',
@@ -94,7 +94,7 @@ const controller = {
 
     this.set(res.headers)
     this.body = res.body
-    this.attachment(res.request.uri.pathname)
+    this.attachment(this.query.filename || res.request.uri.pathname)
   }
 }
 

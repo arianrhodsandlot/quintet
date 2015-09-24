@@ -9,16 +9,25 @@
 .cover
   display inline-block
   size 200px
-  text-align center
   padding 6px
   float left
   transition all .2s
+  overflow hidden
   @media (max-width: 1000px)
     float none
     margin 6px
+
   &:hover
     background #fff
     box-shadow 0 0 4px #aaa
+    .title
+      size calc(100% - 40px) 40px
+    .fa-download
+      right 0
+
+  .cover-containter
+    overflow hidden
+    position relative
   .cover-link
     display block
     size 100%
@@ -39,6 +48,17 @@
     position relative
     padding 0 10px
     text-decoration none
+    transition width .2s
+  .fa-download
+    position absolute
+    size 40px
+    text-align center
+    absolute bottom 0 right -40px
+    line-height @height
+    background #000
+    color #fff
+    transition right .2s
+    z-index 1
 
   &.first
     size @width * 2
