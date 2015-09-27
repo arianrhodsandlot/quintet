@@ -112,16 +112,17 @@ controller.search = (query, scope) => {
         data, timeout
       })
       .done(covers => {
-        _.map([normalTimer, warnTimer], clearTimeout)
-
-        if (!_.isEmpty(covers)) {
-          queryCaches.add(new QueryCache(_.assign(data, {
-            covers
-          })))
-          queryCaches.save()
+        if (_.isEmpty(covers)) {
+          return;
         }
+
+        queryCaches.add(new QueryCache(_.assign(data, {
+          covers
+        })))
+        queryCaches.save()
       })
       .fail(() => loadingView.error())
+      .always(() => _.map([normalTimer, warnTimer], clearTimeout))
 
     messageRegion.empty()
   }
