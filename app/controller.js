@@ -58,7 +58,7 @@ const controller = {
       qs: {
         tbm: 'isch',
         gws_rd: 'cr', //get rid of our request being redirected by country
-        q: decodeURIComponent(encodeURIComponent(`${query} site:${scope}`))
+        q: `${query} site:${scope}`
       },
       headers: {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
@@ -71,7 +71,7 @@ const controller = {
 
       const searchResponse = yield request(requestOption)
 
-      this.set('x-google-url', searchResponse.request.uri.href)
+      this.set('X-Proxy-URL', searchResponse.request.uri.href)
       this.body = searchResults2json(searchResponse.body, scope)
     } catch (err) {
       console.error('Error when connect to Google:')
