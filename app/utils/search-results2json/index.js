@@ -6,11 +6,11 @@ const _ = require('lodash')
 const cheerio = require('cheerio')
 
 const getOriginSrcFromItunes = function(src) {
-  const falseReg = /\d{3}x\d{3}/
+  const falseReg = /cover\d{3}x\d{3}/
   const trueReg = /1200x1200/
 
   if (falseReg.test(src) && !trueReg.test(src)) {
-    src = src.replace(falseReg, '1200x1200')
+    src = src.replace(falseReg, 'cover1200x1200')
   }
   return src
 }
