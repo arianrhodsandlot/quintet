@@ -52,25 +52,31 @@ const controller = {
         break
     }
 
+    const requestOption = {
+      baseUrl: 'https://www.google.com',
+      url: '/search',
+      qs: {
+        tbm: 'isch',
+        gws_rd: 'cr', //get rid of our request being redirected by country
+        q: decodeURIComponent(encodeURIComponent(`${query} site:${scope}`))
+      },
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+      }
+    }
+
     try {
       // for dev use
       // return this.body = require('./utils/search-results2json/scheme')
 
-      const searchResponse = yield request({
-        baseUrl: 'https://www.google.com',
-        url: '/search',
-        qs: {
-          tbm: 'isch',
-          gws_rd: 'cr', //get rid of our request being redirected by country
-          q: `${encodeURI(query)} site:${encodeURI(scope)}`
-        },
-        headers: {
-          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
-        }
-      })
+      const searchResponse = yield request(requestOption)
+
+      this.set('x-google-url', searchResponse.request.uri.href)
       this.body = searchResults2json(searchResponse.body, scope)
     } catch (err) {
-      console.error(err)
+      console.error('Error when connect to Google:')
+      console.error({err, requestOption})
+
       this.status = 500
       this.body = {
         err
@@ -85,6 +91,7 @@ const controller = {
       },
       encoding: null
     }).catch(e => {
+      this.status = 500
       this.body = e + ''
     })
 
