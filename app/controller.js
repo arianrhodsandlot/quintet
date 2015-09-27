@@ -62,7 +62,7 @@ const controller = {
         qs: {
           tbm: 'isch',
           gws_rd: 'cr', //get rid of our request being redirected by country
-          q: `${query} site:${scope}`
+          q: `${encodeURI(query)} site:${encodeURI(scope)}`
         },
         headers: {
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
