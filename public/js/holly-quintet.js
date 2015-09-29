@@ -3,14 +3,9 @@ import Layout from './layout'
 import Router from './router'
 
 app
-  .on('navigate', _.bind(
-    _.partial(
-      Backbone.history.navigate, _, {
-        trigger: true
-      }
-    ),
-    Backbone.history
-  ))
+  .on('navigate', fragment => Backbone.history.navigate(fragment, {
+    trigger: true
+  }))
   .on('navigate', () => _.attempt(() => ga('send', 'pageview')))
   .on('before:start', () => {
     app.layout = new Layout()
