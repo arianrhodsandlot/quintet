@@ -75,7 +75,9 @@ const controller = {
       this.body = searchResults2json(searchResponse.body, scope)
     } catch (err) {
       console.error('Error when connect to Google:')
-      console.error({err, requestOption})
+      console.error({
+        err, requestOption
+      })
 
       this.status = 500
       this.body = {
@@ -84,7 +86,7 @@ const controller = {
     }
   },
   download: function*() {
-    var res = yield request({
+    let res = yield request({
       url: this.query.url,
       headers: {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
@@ -97,6 +99,26 @@ const controller = {
 
     if (!res) {
       return
+    }
+
+    // in case some covers from itunes only have a 600x600 one
+    if (res.statusCode === 404) {
+      const keyword = '/cover1200x1200.'
+      const index = this.query.url.lastIndexOf(keyword)
+      const count = _.size(this.query.url) - index - keyword.length
+
+      if (index > 0 && count < 5) {
+        res = yield request({
+          url: this.query.url.replace(keyword, '/cover600x600.'),
+          headers: {
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+          },
+          encoding: null
+        }).catch(e => {
+          this.status = 500
+          this.body = e + ''
+        })
+      }
     }
 
     this.set(res.headers)
