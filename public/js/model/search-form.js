@@ -55,11 +55,17 @@ const searchForm = Backbone.Model.extend({
     }, {
       label: '其他',
       scopes: [{
+        value: 'vgmdb',
+        path: 'vgmdb.net'
+      }, {
         value: 'orpheus',
-        path: 'music.163.com/album'
+        path: 'music.163.com'
       }, {
         value: 'qq',
-        path: 'y.qq.com/y/static'
+        path: 'y.qq.com'
+      }, {
+        value: 'musicbrainz',
+        path: 'musicbrainz.org'
       }]
     }]
   },
