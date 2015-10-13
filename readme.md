@@ -1,4 +1,4 @@
-# Holly Quintet
+# Holly Quintet [![Build Status](https://travis-ci.org/arianrhodsandlot/Holly-Quintet.svg?branch=dev)](https://travis-ci.org/arianrhodsandlot/Holly-Quintet)
 
 ## Website
 
