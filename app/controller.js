@@ -71,7 +71,7 @@ const controller = {
 
     try {
       // for dev use
-      return this.body = require('./utils/search-results2json/scheme')
+      // return this.body = require('./utils/search-results2json/scheme')
 
       const searchResponse = yield request(requestOption)
 
