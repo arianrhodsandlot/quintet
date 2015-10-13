@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "prestart": "./node_modules/webpack/bin/webpack.js -v",
-    "start": "node index"
+    "start": "node index",
+    "test": "echo 'no test now'"
   },
   "repository": "arianrhodsandlot/Holly-Quintet",
   "license": "MIT",
