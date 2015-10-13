@@ -43,6 +43,7 @@ const controller = {
         break
       case 'vgmdb':
         scope = 'vgmdb.net/album'
+        break
       case 'orpheus':
         scope = 'music.163.com/album'
         break
@@ -51,6 +52,7 @@ const controller = {
         break
       case 'musicbrainz':
         scope = 'musicbrainz.org'
+        break
       default:
         scope = ''
         break
