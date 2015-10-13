@@ -6,7 +6,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "prestart": "./node_modules/webpack/bin/webpack.js -v",
+    "prestart": "node ./node_modules/webpack/bin/webpack.js -v",
     "start": "node index",
     "test": "echo 'no test now'"
   },
@@ -15,7 +15,7 @@
   "dependencies": {
     "cheerio": "^0.19.0",
     "jade": "^1.11.0",
-    "koa": "^0.21.0",
+    "koa": "^1.1.0",
     "koa-connect": "^1.0.0",
     "koa-favicon": "^1.2.0",
     "koa-fresh": "0.0.3",
@@ -30,7 +30,7 @@
     "request": "^2.65.0"
   },
   "engines": {
-    "node": ">=4.1.1"
+    "node": ">=4.2.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.25",
