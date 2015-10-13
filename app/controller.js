@@ -41,7 +41,7 @@ const controller = {
       case 'amazon-jp':
         scope = 'amazon.co.jp'
         break
-      case 'vgmdb-net':
+      case 'vgmdb':
         scope = 'vgmdb.net/album'
       case 'orpheus':
         scope = 'music.163.com/album'
@@ -49,7 +49,7 @@ const controller = {
       case 'qq':
         scope = 'y.qq.com/y/static'
         break
-      case 'musicbrainz-org':
+      case 'musicbrainz':
         scope = 'musicbrainz.org'
       default:
         scope = ''
