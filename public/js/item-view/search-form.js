@@ -41,7 +41,7 @@ const SearchFormItem = Mn.ItemView.extend({
     const query = this.ui.query.val()
     const scope = this.ui.scope.val()
 
-    const fragment = `${action}?query=${query}&scope=${scope}`
+    const fragment = `${action}?query=${encodeURIComponent(query)}&scope=${scope}`
 
     app.trigger('navigate', fragment)
 
