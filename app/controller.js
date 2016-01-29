@@ -5,12 +5,7 @@ const Q = require('q')
 
 const searchResults2json = require('./utils/search-results2json')
 
-const request = function(options) {
-  return Q.denodeify(require('request'))(options)
-    .then(function(results) {
-      return results[0]
-    })
-}
+const request = options => Q.denodeify(require('request'))(options).then(_.first)
 
 const controller = {
   home: function*() {
@@ -23,6 +18,7 @@ const controller = {
     })
     this.body = yield this.render('home/index', this.state)
   },
+
   search: function*() {
     const query = this.query.query
 
@@ -76,16 +72,25 @@ const controller = {
       // return this.body = require('./utils/search-results2json/scheme')
       const searchResponse = yield request(requestOption)
       this.set('X-Proxy-URL', searchResponse.request.uri.href)
-      this.body = searchResults2json(searchResponse.body, scope)
     } catch (err) {
       console.error('Error when connect to Google:')
       console.error(err.stack)
+
       this.status = 500
-      this.body = {
-        err
-      }
+      this.body = {err.message}
+    }
+
+    try {
+      this.body = searchResults2json(searchResponse.body, scope)
+    } catch (err) {
+      console.error('Error when parsing results from Google:')
+      console.error(err.stack)
+
+      this.status = 500
+      this.body = {err.message}
     }
   },
+
   download: function*() {
     let res = yield request({
       url: this.query.url,
@@ -95,12 +100,10 @@ const controller = {
       encoding: null
     }).catch(e => {
       this.status = 500
-      this.body = e + ''
+      this.body = `${e}`
     })
 
-    if (!res) {
-      return
-    }
+    if (!res) return
 
     // in case some covers from itunes only have a 600x600 one
     if (res.statusCode === 404) {
