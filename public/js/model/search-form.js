@@ -73,9 +73,9 @@ const searchForm = Backbone.Model.extend({
   initialize() {
     const scope = localStorage.getItem('scope')
     const scopes = _.compose(
-      _.partial(_.pluck, _, 'value'),
+      _.partial(_.map, _, 'value'),
       _.flatten,
-      _.partial(_.pluck, _, 'scopes'),
+      _.partial(_.map, _, 'scopes'),
       _.bind(this.get, this)
     )('availableScopesGroups')
 
