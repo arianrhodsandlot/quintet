@@ -15,7 +15,11 @@ module.exports = {
       loader: ExtractTextPlugin.extract('style', 'css!stylus')
     }, {
       test: /\.js$/,
-      loader: 'uglify!babel'
+      loader: 'babel',
+      query: {
+        cacheDirectory: true,
+        presets: ['es2015']
+      }
     }]
   },
   plugins: [
