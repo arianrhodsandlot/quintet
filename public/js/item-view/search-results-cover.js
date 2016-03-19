@@ -11,20 +11,22 @@ const SearchResultsCoverView = Mn.ItemView.extend({
     'load @ui.image': 'onload'
   },
 
-  onRender() {
+  onRender () {
     this.ui.image.on('load', _.bind(this.onload, this))
   },
 
-  download(e) {
+  download (e) {
     this.ui.download.addClass('downloading')
   },
 
-  reset() {
+  reset () {
     this.ui.download.removeClass('downloading')
   },
 
-  onload() {
-    _.delay(() => this.$el.addClass('loaded'), _.random(200, 600))
+  onload () {
+    _.delay(function () {
+      this.$el.addClass('loaded')
+    }, _.random(200, 600))
   }
 })
 

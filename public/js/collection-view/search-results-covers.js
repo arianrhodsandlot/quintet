@@ -6,7 +6,7 @@ const SearchResultsCoversView = Mn.CollectionView.extend({
   childView: SearchResultsCoverView,
   emptyView: NoResultsCoverView,
 
-  onRender() {
+  onRender () {
     const firstCoverView = this.children.first()
     if (firstCoverView) {
       firstCoverView.$el.addClass('first')

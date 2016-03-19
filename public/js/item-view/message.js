@@ -8,7 +8,7 @@ const MessageView = Mn.ItemView.extend({
     'click @ui.clearCache': 'clearCache'
   },
 
-  clearCache(e) {
+  clearCache (e) {
     e.preventDefault()
     this.collection.remove(this.model)
     this.collection.save()

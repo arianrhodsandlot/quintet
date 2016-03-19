@@ -7,8 +7,8 @@ const Cover = Backbone.Model.extend({
     starred: false
   },
 
-  star() {
-    return this.set('starred', _.now());
+  star () {
+    return this.set('starred', _.now())
   }
 })
 

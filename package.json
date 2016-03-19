@@ -51,6 +51,7 @@
     },
     "globals": {
       "_": false,
+      "Backbone": false,
       "Mn": false
     },
     "extends": [

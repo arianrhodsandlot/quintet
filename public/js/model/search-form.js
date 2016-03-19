@@ -70,7 +70,7 @@ const searchForm = Backbone.Model.extend({
     }]
   },
 
-  initialize() {
+  initialize () {
     const scope = localStorage.getItem('scope')
     const scopes = _.compose(
       _.partial(_.map, _, 'value'),
@@ -80,9 +80,7 @@ const searchForm = Backbone.Model.extend({
     )('availableScopesGroups')
 
     if (_.includes(scopes, scope)) {
-      this.set({
-        scope
-      })
+      this.set({scope})
     }
   }
 })

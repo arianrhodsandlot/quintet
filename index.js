@@ -1,5 +1,5 @@
 const koa = require('koa')
-const views =  require('koa-render')
+const views = require('koa-render')
 const logger = require('koa-logger')
 const favicon = require('koa-favicon')
 const serve = require('koa-static')
@@ -21,4 +21,4 @@ app
   .use(logger())
   .use(json())
   .use(router.routes())
-  .listen(port, function () {console.log(`Koa is listening to port ${port} ...`)})
+  .listen(port, function () { console.log(`Koa is listening to port ${port} ...`) })

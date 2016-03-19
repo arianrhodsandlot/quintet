@@ -5,21 +5,17 @@ const Q = require('q')
 
 const searchResults2json = require('./utils/search-results2json')
 
-const request = options => Q.denodeify(require('request'))(options).then(_.first)
+const request = (options) => Q.denodeify(require('request'))(options).then(_.first)
 
 const controller = {
-  home: function*() {
+  home: function * () {
     _.assign(this.state, {
-      title: 'Holly Quintet' + (
-        this.get('host') === 'localhost:5000' ?
-        ' (local)' :
-        ''
-      )
+      title: `Holly Quintet${this.get('host') === 'localhost:5000' ? ' (local)' : ''}`
     })
     this.body = yield this.render('home/index', this.state)
   },
 
-  search: function*() {
+  search: function * () {
     const query = this.query.query
 
     let scope = this.query.scope
@@ -59,7 +55,7 @@ const controller = {
       url: '/search',
       qs: {
         tbm: 'isch',
-        gws_rd: 'cr', //get rid of our request being redirected by country
+        gws_rd: 'cr', // get rid of our request being redirected by country
         q: `${query} site:${scope}`
       },
       headers: {
@@ -91,17 +87,18 @@ const controller = {
     }
   },
 
-  download: function*() {
+  download: function * () {
     let res = yield request({
       url: this.query.url,
       headers: {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
       },
       encoding: null
-    }).catch(e => {
-      this.status = 500
-      this.body = `${e}`
     })
+      .catch((e) => {
+        this.status = 500
+        this.body = `${e}`
+      })
 
     if (!res) return
 
@@ -118,9 +115,9 @@ const controller = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
           },
           encoding: null
-        }).catch(e => {
+        }).catch((e) => {
           this.status = 500
-          this.body = e + ''
+          this.body = `${e}`
         })
       }
     }

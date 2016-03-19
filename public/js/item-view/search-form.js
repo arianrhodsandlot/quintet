@@ -21,7 +21,7 @@ const SearchFormItem = Mn.ItemView.extend({
     'change @ui.scope': 'saveScope'
   },
 
-  search(e) {
+  search (e) {
     this.ui.query.val(
       _.trim(
         this.ui.query
@@ -30,7 +30,7 @@ const SearchFormItem = Mn.ItemView.extend({
       )
     )
 
-    e.preventDefault();
+    e.preventDefault()
 
     if (this.ui.query.val() === '') {
       return this.home(e)
@@ -48,55 +48,55 @@ const SearchFormItem = Mn.ItemView.extend({
     return this
   },
 
-  home(e) {
+  home (e) {
     e.preventDefault()
     app.trigger('navigate', this.ui.logo.attr('href'))
 
     return this
   },
 
-  saveScope() {
+  saveScope () {
     localStorage.setItem('scope', this.ui.scope.val())
   },
 
-  reset() {
+  reset () {
     this.ui.query.val('')
 
     return this
   },
 
-  focus() {
+  focus () {
     this.ui.query.focus()
 
     return this
   },
 
-  blur() {
+  blur () {
     this.ui.query.blur()
 
     return this
   },
 
-  set(data) {
+  set (data) {
     this.ui.query.val(data.query)
     this.ui.scope.val(data.scope)
 
     return this
   },
 
-  wake() {
+  wake () {
     this.$el.removeClass('sleeping')
 
     return this
   },
 
-  sleep() {
+  sleep () {
     this.$el.addClass('sleeping')
 
     return this
   },
 
-  isSleeping() {
+  isSleeping () {
     return this.$el.hasClass('sleeping')
   }
 })

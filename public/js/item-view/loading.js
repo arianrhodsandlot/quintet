@@ -7,16 +7,16 @@ const LoadingView = Mn.ItemView.extend({
     error: '.error'
   },
 
-  warn(msg) {
+  warn (msg) {
     this.ui.spinner.removeClass('hidden')
     this.ui.error.addClass('hidden')
-  	this.ui.warn.removeClass('hidden').html(msg)
+    this.ui.warn.removeClass('hidden').html(msg)
   },
 
-  error() {
+  error () {
     this.ui.spinner.addClass('hidden')
-  	this.ui.warn.addClass('hidden')
-  	this.ui.error.removeClass('hidden')
+    this.ui.warn.addClass('hidden')
+    this.ui.error.removeClass('hidden')
   }
 })
 
