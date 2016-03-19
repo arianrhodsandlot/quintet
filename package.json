@@ -41,5 +41,24 @@
     "stylus-loader": "^1.5.1",
     "uglify-loader": "^1.3.0",
     "webpack": "^1.12.14"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "builtin": true,
+      "jquery": true,
+      "node": true
+    },
+    "globals": {
+      "_": false,
+      "Mn": false
+    },
+    "extends": [
+      "standard"
+    ],
+    "plugins": [
+      "html",
+      "standard"
+    ]
   }
 }
