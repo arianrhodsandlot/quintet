@@ -74,17 +74,12 @@ const controller = {
     try {
       // for dev use
       // return this.body = require('./utils/search-results2json/scheme')
-
       const searchResponse = yield request(requestOption)
-
       this.set('X-Proxy-URL', searchResponse.request.uri.href)
       this.body = searchResults2json(searchResponse.body, scope)
     } catch (err) {
       console.error('Error when connect to Google:')
-      console.error({
-        err, requestOption
-      })
-
+      console.error(err.stack)
       this.status = 500
       this.body = {
         err

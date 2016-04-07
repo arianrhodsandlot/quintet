@@ -1,11 +1,9 @@
-'use strict'
-
 const url = require('url')
 const querystring = require('querystring')
 const _ = require('lodash')
 const cheerio = require('cheerio')
 
-const getOriginSrcFromItunes = function(src) {
+const getOriginSrcFromItunes = function (src) {
   const falseReg = /cover\d{3}x\d{3}/
   const trueReg = /1200x1200/
 
@@ -15,15 +13,15 @@ const getOriginSrcFromItunes = function(src) {
   return src
 }
 
-const getOriginSrcFrom163 = function(src) {
+const getOriginSrcFrom163 = function (src) {
   return _.assign(
     url.parse(src), {
       search: ''
     }).format(src)
 }
 
-const getOriginSrc = function(src, scope) {
-  let getOriginSrc
+const getOriginSrc = function (src, scope) {
+  var getOriginSrc
 
   if (_.contains(scope, 'itunes')) {
     getOriginSrc = getOriginSrcFromItunes
@@ -36,31 +34,24 @@ const getOriginSrc = function(src, scope) {
   return getOriginSrc(src)
 }
 
-const convertResultHtml2Json = function(resultHtml, scope) {
+const convertResultHtml2Json = function (resultHtml, scope) {
   const $result = cheerio(resultHtml)
-  const $link = $result.children('.rg_l')
   const $meta = $result.children('.rg_meta')
-
-  const href = $link.attr('href')
-  const query = url.parse(href).query
-  const resultData = querystring.parse(query)
 
   const meta = JSON.parse(_.unescape($meta.html()))
 
-  const src = decodeURIComponent(resultData.imgurl)
-
   const cover = {
-    originTitle: meta.s,
-    title: _.first(meta.s.split(',')),
-    refer: decodeURIComponent(resultData.imgrefurl),
-    src,
-    originSrc: getOriginSrc(src, scope)
+    originTitle: meta.pt,
+    title: meta.pt,
+    refer: meta.ru,
+    src: meta.ou,
+    originSrc: getOriginSrc(meta.ou, scope)
   }
 
   return cover
 }
 
-const searchResults2json = function(html, scope) {
+const searchResults2json = function (html, scope) {
   const $html = cheerio(html)
   const $results = $html.find('.rg_di.rg_el')
 
