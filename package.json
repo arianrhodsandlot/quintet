@@ -6,9 +6,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "node index",
+    "deploy": "node_modules/.bin/webpack-dev-server -p",
+    "dev": "node_modules/.bin/webpack -dw",
     "prestart": "node_modules/.bin/webpack",
-    "dev": "node_modules/.bin/webpack-dev-server --hot --inline"
+    "start": "node index",
+    "test": "node_modules/.bin/eslint ."
   },
   "repository": "arianrhodsandlot/Holly-Quintet",
   "license": "MIT",

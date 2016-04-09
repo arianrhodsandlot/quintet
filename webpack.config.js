@@ -1,8 +1,6 @@
-const webpack = require('webpack')
-
 module.exports = {
   entry: {
-    'holly-quintet': './public/entry/holly-quintet.js'
+    'app': './public/app'
   },
   output: {
     path: './public/dist/',
@@ -19,8 +17,5 @@ module.exports = {
         presets: ['es2015']
       }
     }]
-  },
-  devtool: 'eval',
-  plugins: [
-  ]
+  }
 }

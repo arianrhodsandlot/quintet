@@ -1,5 +1,4 @@
 const url = require('url')
-const querystring = require('querystring')
 const _ = require('lodash')
 const cheerio = require('cheerio')
 
