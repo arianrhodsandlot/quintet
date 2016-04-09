@@ -1,5 +1,6 @@
 import SearchForm from '../model/search-form'
 import app from '../app'
+import searchFormTemplate from '../../template/search-form.html'
 
 const SearchFormItem = Mn.ItemView.extend({
   tagName: 'form',
@@ -9,7 +10,7 @@ const SearchFormItem = Mn.ItemView.extend({
     autocomplete: 'off'
   },
   model: new SearchForm(),
-  template: '#search-form-template',
+  template: _.template(searchFormTemplate),
   ui: {
     logo: '.logo',
     query: '.query',

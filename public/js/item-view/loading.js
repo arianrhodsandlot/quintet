@@ -1,6 +1,8 @@
+import loadingTemplate from '../../template/loading.html'
+
 const LoadingView = Mn.ItemView.extend({
   className: 'loading',
-  template: '#loading-template',
+  template: _.template(loadingTemplate),
   ui: {
     spinner: '.spinner',
     warn: '.warn',

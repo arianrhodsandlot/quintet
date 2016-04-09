@@ -1,6 +1,8 @@
+import coverTemplate from '../../template/cover.html'
+
 const SearchResultsCoverView = Mn.ItemView.extend({
   className: 'cover',
-  template: '#cover-template',
+  template: _.template(coverTemplate),
   ui: {
     download: '.fa-download',
     image: '.cover-img'

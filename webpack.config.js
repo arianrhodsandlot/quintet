@@ -8,6 +8,9 @@ module.exports = {
   },
   module: {
     loaders: [{
+      test: /\.html$/,
+      loader: 'html'
+    }, {
       test: /\.styl$/,
       loaders: ['style', 'css', 'stylus']
     }, {

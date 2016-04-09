@@ -1,6 +1,8 @@
+import messageTemplate from '../../template/message.html'
+
 const MessageView = Mn.ItemView.extend({
   className: 'message animated fadeIn',
-  template: '#message-template',
+  template: _.template(messageTemplate),
   ui: {
     clearCache: '.clear-cache'
   },
