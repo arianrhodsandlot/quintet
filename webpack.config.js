@@ -12,18 +12,16 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.styl$/,
-      loader: ExtractTextPlugin.extract('style', 'css!stylus')
+      loaders: ['style', 'css', 'stylus']
     }, {
       test: /\.js$/,
       loader: 'babel',
       query: {
-        cacheDirectory: true,
         presets: ['es2015']
       }
     }]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({}),
-    new ExtractTextPlugin('[name].css')
+    new webpack.optimize.UglifyJsPlugin({})
   ]
 }

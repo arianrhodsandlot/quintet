@@ -6,7 +6,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "prestart": "node_modules/.bin/webpack",
+    "dev": "node_modules/.bin/webpack-dev-server --hot --inline"
   },
   "repository": "arianrhodsandlot/Holly-Quintet",
   "license": "MIT",
