@@ -23,9 +23,9 @@ const getOriginSrcFrom163 = function (src) {
 const getOriginSrc = function (src, scope) {
   var getOriginSrc
 
-  if (_.contains(scope, 'itunes')) {
+  if (_.includes(scope, 'itunes')) {
     getOriginSrc = getOriginSrcFromItunes
-  } else if (_.contains(scope, 'music.163.com')) {
+  } else if (_.includes(scope, 'music.163.com')) {
     getOriginSrc = getOriginSrcFrom163
   } else {
     getOriginSrc = _.identity

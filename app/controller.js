@@ -1,5 +1,3 @@
-'use strict'
-
 const _ = require('lodash')
 const Q = require('q')
 
@@ -16,9 +14,12 @@ const controller = {
   },
 
   search: function * () {
+    // for dev use
+    // return this.body = require('./utils/search-results2json/scheme')
+
     const query = this.query.query
 
-    let scope = this.query.scope
+    var scope = this.query.scope
 
     switch (scope) {
       case 'itunes-hk':
@@ -63,32 +64,33 @@ const controller = {
       }
     }
 
+    var searchResponse
+    var error
+
     try {
-      // for dev use
-      // return this.body = require('./utils/search-results2json/scheme')
-      const searchResponse = yield request(requestOption)
+      searchResponse = yield request(requestOption)
       this.set('X-Proxy-URL', searchResponse.request.uri.href)
-    } catch (err) {
+
+      try {
+        this.body = searchResults2json(searchResponse.body, scope)
+      } catch (e) {
+        console.error('Error when parsing results from Google:')
+        error = e
+      }
+    } catch (e) {
       console.error('Error when connect to Google:')
-      console.error(err.stack)
-
-      this.status = 500
-      this.body = {err.message}
+      error = e
     }
 
-    try {
-      this.body = searchResults2json(searchResponse.body, scope)
-    } catch (err) {
-      console.error('Error when parsing results from Google:')
-      console.error(err.stack)
+    if (!error) return
 
-      this.status = 500
-      this.body = {err.message}
-    }
+    this.status = 500
+    this.body = {error: _.pick(error, 'message')}
+    console.error(error.stack)
   },
 
   download: function * () {
-    let res = yield request({
+    var res = yield request({
       url: this.query.url,
       headers: {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
