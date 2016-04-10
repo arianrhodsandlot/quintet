@@ -79,9 +79,7 @@ const searchForm = Backbone.Model.extend({
       _.bind(this.get, this)
     )('availableScopesGroups')
 
-    if (_.includes(scopes, scope)) {
-      this.set({scope})
-    }
+    if (_.includes(scopes, scope)) this.set({scope})
   }
 })
 

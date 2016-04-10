@@ -8,7 +8,7 @@
   "scripts": {
     "deploy": "node_modules/.bin/webpack-dev-server -p",
     "dev": "node_modules/.bin/webpack -dw",
-    "prestart": "node_modules/.bin/webpack",
+    "prestart": "npm run deploy",
     "start": "node index",
     "test": "node_modules/.bin/eslint ."
   },

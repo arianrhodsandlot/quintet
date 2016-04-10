@@ -13,11 +13,8 @@ app
     app.layout = new Layout()
     app.router = new Router()
   })
-  .on('start', _.bind(
-    Backbone.history.start,
-    Backbone.history, {
-      pushState: true
-    }
-  ))
+  .on('start', function () {
+    Backbone.history.start({pushState: true})
+  })
 
 $(_.bind(app.start, app))
