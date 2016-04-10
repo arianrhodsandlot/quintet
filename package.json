@@ -6,7 +6,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "deploy": "node_modules/.bin/webpack-dev-server -p",
+    "deploy": "node_modules/.bin/webpack -p",
     "dev": "node_modules/.bin/webpack -dw",
     "prestart": "npm run deploy",
     "start": "node index",
