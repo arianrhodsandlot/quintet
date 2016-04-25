@@ -1,6 +1,6 @@
 const koa = require('koa')
 const views = require('koa-render')
-const logger = require('koa-logger')
+const morgan = require('koa-morgan')
 const favicon = require('koa-favicon')
 const serve = require('koa-static')
 const json = require('koa-json')
@@ -18,7 +18,7 @@ app
   .use(favicon('./public/favicon.ico'))
   .use(views('./view', 'jade'))
   .use(serve('./public'))
-  .use(logger())
+  .use(morgan.middleware('combined'))
   .use(json())
   .use(router.routes())
   .listen(port, function () {
