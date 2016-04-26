@@ -1,7 +1,6 @@
 {
   "name": "Holly-Quintet",
   "description": "A web app to search discs' cover from iTunes, Amazon, Netease Music, etc.",
-  "version": "1.2.0",
   "author": "Arianrhod <theguidanceofawhitetower@gmail.com>",
   "main": "index.js",
   "private": true,
