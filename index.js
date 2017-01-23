@@ -5,7 +5,8 @@ const webpackConfig = require('./webpack.config')
 const manifest = {
   server: {},
   connections: [{
-    port: process.env.PORT || 5000
+    host: 'localhost',
+    port: process.env.HOLLY_QUINTET_PORT || process.env.npm_package_config_port
   }],
   registrations: [{
     plugin: {

@@ -53,6 +53,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './client/src/pages/home/index.pug',
       filename: '[chunkhash].html',
+      favicon: './client/src/images/favicon.ico',
       inject: 'head'
     })
   ])

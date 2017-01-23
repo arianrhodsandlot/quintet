@@ -2,7 +2,7 @@ const path = require('path')
 const Joi = require('joi')
 const webpackConfig = require('../webpack.config')
 
-const allClientViewshandler = function (request, reply) {
+const allClientViewsHandler = function (request, reply) {
   const {assets} = request.server.app.webpack.stats
   const htmlAsset = assets.find((asset) => path.parse(asset.name).ext === '.html')
   const htmlFilePath = path.join(webpackConfig.output.path, htmlAsset.name)
@@ -12,11 +12,11 @@ const allClientViewshandler = function (request, reply) {
 module.exports = [{
   method: 'GET',
   path: '/',
-  handler: allClientViewshandler
+  handler: allClientViewsHandler
 }, {
   method: 'GET',
   path: '/covers',
-  handler: allClientViewshandler
+  handler: allClientViewsHandler
 }, {
   method: 'GET',
   path: '/file',
