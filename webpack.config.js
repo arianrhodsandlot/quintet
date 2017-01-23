@@ -1,3 +1,4 @@
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -6,8 +7,9 @@ module.exports = {
     js: './client/src/scripts/index.js'
   },
   output: {
-    path: './client/dist/',
-    filename: '[name].js'
+    path: path.resolve('./client/dist/'),
+    filename: '[chunkhash].js',
+    publicPath: '/'
   },
   module: {
     rules: [{
@@ -40,7 +42,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/src/pages/home/index.pug',
-      filename: 'index.html'
+      filename: '[chunkhash].html'
     })
   ]
 }
