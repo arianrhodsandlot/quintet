@@ -1,4 +1,4 @@
-import noResultsCoverTemplate from '../../template/no-results-cover.html'
+import noResultsCoverTemplate from '../template/no-results-cover.html'
 
 const NoResultsCoverView = Mn.ItemView.extend({
   className: 'no-results-cover',

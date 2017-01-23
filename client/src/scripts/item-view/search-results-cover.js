@@ -1,4 +1,4 @@
-import coverTemplate from '../../template/cover.html'
+import coverTemplate from '../template/cover.html'
 
 const SearchResultsCoverView = Mn.ItemView.extend({
   className: 'cover',

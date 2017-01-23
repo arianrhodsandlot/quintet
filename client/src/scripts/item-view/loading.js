@@ -1,4 +1,4 @@
-import loadingTemplate from '../../template/loading.html'
+import loadingTemplate from '../template/loading.html'
 
 const LoadingView = Mn.ItemView.extend({
   className: 'loading',

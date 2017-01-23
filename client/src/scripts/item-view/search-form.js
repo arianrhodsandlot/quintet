@@ -1,6 +1,6 @@
 import SearchForm from '../model/search-form'
 import app from '../app'
-import searchFormTemplate from '../../template/search-form.html'
+import searchFormTemplate from '../template/search-form.html'
 
 const SearchFormItem = Mn.ItemView.extend({
   tagName: 'form',
