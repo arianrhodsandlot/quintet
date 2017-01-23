@@ -1,9 +1,7 @@
-const server = require('../server')
-
-server.route({
+module.exports = {
   method: 'GET',
   path: '/{covers?}',
   handler: {
-    file: 'client/public/dist/index.html'
+    file: 'client/dist/index.html'
   }
-})
+}

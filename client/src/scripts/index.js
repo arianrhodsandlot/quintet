@@ -1,7 +1,7 @@
 import app from './app'
 import Layout from './layout'
 import Router from './router'
-
+console.log(app)
 app
   .on('navigate', function (fragment) {
     Backbone.history.navigate(fragment, {trigger: true})

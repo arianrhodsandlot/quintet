@@ -1,9 +1,8 @@
 const Joi = require('joi')
-const server = require('../server')
 const scope2site = require('./utils/scope2site')
 const searchCovers = require('./utils/search')
 
-server.route({
+module.exports = {
   method: 'GET',
   path: '/api/covers',
   config: {
@@ -19,4 +18,4 @@ server.route({
     const site = scope2site(scope)
     searchCovers(site, query).then(reply)
   }
-})
+}
