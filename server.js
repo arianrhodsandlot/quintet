@@ -17,13 +17,10 @@ const manifest = {
       register: 'good',
       options: {
         reporters: {
-          console: [{
-            module: 'good-squeeze',
-            name: 'Squeeze',
-            args: [{response: '*', log: '*'}]
-          }, {
-            module: 'good-console'
-          }]
+          console: [
+            {module: 'good-console'},
+            'stdout'
+          ]
         }
       }
     }

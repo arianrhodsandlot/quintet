@@ -3,36 +3,32 @@ const _ = require('lodash')
 const Q = require('q')
 const request = (options) => Q.denodeify(require('request'))(options).then(_.first)
 const cheerio = require('cheerio')
+const path = require('path')
 
-const getOriginSrcFromItunes = function (src) {
-  const falseReg = /cover\d{3}x\d{3}/
-  const trueReg = /1200x1200/
-
-  if (falseReg.test(src) && !trueReg.test(src)) {
-    src = src.replace(falseReg, 'cover1200x1200')
-  }
-  return src
+const getCoverOriginSrcFromItunes = function (src) {
+  let parsedSrc = url.parse(src, true)
+  let parsedPath = path.parse(parsedSrc.pathname)
+  parsedPath.name = parsedPath.name.replace(/\d{3}x\d{3}/, '1200x1200')
+  parsedPath.base = `${parsedPath.name}${parsedPath.ext}`
+  parsedSrc.pathname = path.format(parsedPath)
+  return url.format(parsedSrc)
 }
 
-const getOriginSrcFrom163 = function (src) {
-  return _.assign(
-    url.parse(src), {
-      search: ''
-    }).format(src)
+const getCoverOriginSrcFrom163 = function (src) {
+  let parsedSrc = url.parse(src, true)
+  parsedSrc.search = ''
+  return url.format(parsedSrc)
 }
 
-const getOriginSrc = function (src, site) {
-  var getOriginSrc
-
-  if (_.includes(site, 'itunes')) {
-    getOriginSrc = getOriginSrcFromItunes
-  } else if (_.includes(site, 'music.163.com')) {
-    getOriginSrc = getOriginSrcFrom163
+const getCoverOriginSrc = function (src) {
+  const coverHost = url.parse(src, true).hostname
+  if (coverHost.endsWith('.mzstatic.com')) {
+    return getCoverOriginSrcFromItunes(src)
+  } else if (coverHost.endsWith('.music.126.net')) {
+    return getCoverOriginSrcFrom163(src)
   } else {
-    getOriginSrc = _.identity
+    return src
   }
-
-  return getOriginSrc(src)
 }
 
 const convertResultHtml2Json = function (resultHtml, site) {
@@ -40,24 +36,23 @@ const convertResultHtml2Json = function (resultHtml, site) {
   const $meta = $result.children('.rg_meta')
 
   const meta = JSON.parse(_.unescape($meta.html()))
-
   const cover = {
     originTitle: meta.pt,
     title: meta.pt,
     refer: meta.ru,
     src: meta.ou,
-    originSrc: getOriginSrc(meta.ou, site)
+    originSrc: getCoverOriginSrc(meta.ou)
   }
 
   return cover
 }
 
-const searchResults2json = function (html, site) {
+const searchResults2json = function (html) {
   const $html = cheerio(html)
   const $results = $html.find('.rg_di.rg_el')
 
   return _($results)
-    .map(_.partial(convertResultHtml2Json, _, site))
+    .map(convertResultHtml2Json)
     .take(12)
     .value()
 }
@@ -76,7 +71,7 @@ const searchCovers = function (site, query) {
     }
   }
   return request(requestOption).then(function (searchResponse) {
-    return searchResults2json(searchResponse.body, site)
+    return searchResults2json(searchResponse.body)
   })
 }
 
