@@ -2,7 +2,7 @@ const Joi = require('joi')
 const scope2site = require('./utils/scope2site')
 const searchCovers = require('./utils/search')
 
-module.exports = {
+module.exports = [{
   method: 'GET',
   path: '/api/covers',
   config: {
@@ -18,4 +18,4 @@ module.exports = {
     const site = scope2site(scope)
     searchCovers(site, query).then(reply)
   }
-}
+}]

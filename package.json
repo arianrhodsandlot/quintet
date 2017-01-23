@@ -14,10 +14,11 @@
   "license": "MIT",
   "dependencies": {
     "babel-loader": "6.2.10",
-    "babel-preset-env": "^1.1.8",
+    "babel-preset-env": "1.1.8",
     "cheerio": "0.22.0",
     "extract-text-webpack-plugin": "2.0.0-beta.5",
     "glue": "4.1.0",
+    "good": "^7.1.0",
     "hapi": "16.1.0",
     "hapi-webpack": "1.0.0",
     "html-webpack-plugin": "2.26.0",
@@ -25,8 +26,8 @@
     "jade": "1.11.0",
     "joi": "10.2.0",
     "lodash": "4.17.4",
-    "pug": "^2.0.0-beta6",
-    "pug-loader": "^2.3.0",
+    "pug": "2.0.0-beta6",
+    "pug-loader": "2.3.0",
     "q": "1.4.1",
     "request": "2.79.0",
     "webpack": "2.2.0"

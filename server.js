@@ -10,16 +10,19 @@ const manifest = {
   registrations: [{
     plugin: 'inert'
   }, {
+    plugin: 'good'
+  }, {
     plugin: {
-      register: 'hapi-webpack',
+      register: './lib/hapi-webpack2.js',
       options: webpackConfig
     }
   }]
 }
 
 const route = function (server) {
-  server.route(api)
-  server.route(client)
+  api.concat(client).forEach(function (router) {
+    server.route(router)
+  })
 }
 
 const serve = function (server) {
@@ -29,7 +32,9 @@ const serve = function (server) {
   })
 }
 
-Glue.compose(manifest, {}, function (err, server) {
+Glue.compose(manifest, {
+  relativeTo: __dirname
+}, function (err, server) {
   if (err) throw err
   route(server)
   serve(server)
