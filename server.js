@@ -4,13 +4,29 @@ const client = require('./client')
 const webpackConfig = require('./webpack.config')
 
 const manifest = {
+  server: {},
   connections: [{
     port: process.env.PORT || 5000
   }],
   registrations: [{
-    plugin: 'inert'
+    plugin: {
+      register: 'inert'
+    }
   }, {
-    plugin: 'good'
+    plugin: {
+      register: 'good',
+      options: {
+        reporters: {
+          console: [{
+            module: 'good-squeeze',
+            name: 'Squeeze',
+            args: [{response: '*', log: '*'}]
+          }, {
+            module: 'good-console'
+          }]
+        }
+      }
+    }
   }, {
     plugin: {
       register: './lib/hapi-webpack2.js',
