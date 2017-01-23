@@ -11,12 +11,13 @@
   },
   "dependencies": {
     "assets-webpack-plugin": "3.5.1",
-    "babel-core": "^6.22.1",
+    "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-preset-env": "1.1.8",
     "cheerio": "0.22.0",
     "css-loader": "0.26.1",
     "extract-text-webpack-plugin": "2.0.0-beta.5",
+    "file-loader": "0.9.0",
     "glue": "4.1.0",
     "good": "7.1.0",
     "good-console": "6.2.0",
@@ -35,6 +36,7 @@
     "request": "2.79.0",
     "style-loader": "0.13.1",
     "stylus-loader": "2.4.0",
+    "url-loader": "0.5.7",
     "webpack": "2.2.0"
   },
   "engines": {

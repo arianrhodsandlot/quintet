@@ -25,6 +25,14 @@ module.exports = {
       test: /\.styl$/,
       use: ['style-loader', 'css-loader', 'stylus-loader']
     }, {
+      test: /\.ico$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 1
+        }
+      }]
+    }, {
       test: /\.js$/,
       use: [{
         loader: 'babel-loader',
@@ -53,7 +61,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './client/src/pages/home/index.pug',
       filename: '[chunkhash].html',
-      favicon: './client/src/images/favicon.ico',
       inject: 'head'
     })
   ])
