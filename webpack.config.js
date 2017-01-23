@@ -1,5 +1,8 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const isDevelopment = process.env.NODE_ENV === 'development'
 
 module.exports = {
   entry: {
@@ -39,10 +42,17 @@ module.exports = {
       }]
     }]
   },
-  plugins: [
+  plugins: (isDevelopment ? [] : [
+    new webpack.optimize.UglifyJsPlugin({
+      comments: () => false,
+      sourceMap: false,
+      compress: false
+    })
+  ]).concat([
     new HtmlWebpackPlugin({
       template: './client/src/pages/home/index.pug',
-      filename: '[chunkhash].html'
+      filename: '[chunkhash].html',
+      inject: 'head'
     })
-  ]
+  ])
 }
