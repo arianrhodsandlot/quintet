@@ -28,7 +28,7 @@ const SearchResultsCoverView = Mn.ItemView.extend({
   onload () {
     _.delay(() => {
       this.$el.addClass('loaded')
-    }, _.random(200, 600))
+    }, _.random(200, 400))
   }
 })
 
