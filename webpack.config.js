@@ -42,6 +42,7 @@ module.exports = {
       }]
     }]
   },
+  watch: isDevelopment,
   plugins: (isDevelopment ? [] : [
     new webpack.optimize.UglifyJsPlugin({
       comments: () => false,

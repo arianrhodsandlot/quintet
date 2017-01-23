@@ -1,4 +1,5 @@
 const path = require('path')
+const Joi = require('joi')
 const webpackConfig = require('../webpack.config')
 
 const allClientViewshandler = function (request, reply) {
@@ -16,4 +17,20 @@ module.exports = [{
   method: 'GET',
   path: '/covers',
   handler: allClientViewshandler
+}, {
+  method: 'GET',
+  path: '/file',
+  config: {
+    validate: {
+      query: {
+        url: Joi.string().uri().required()
+      }
+    }
+  },
+  handler: function (request, reply) {
+    reply.proxy({
+      uri: request.query.url,
+      timeout: 5000
+    })
+  }
 }]

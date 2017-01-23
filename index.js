@@ -25,6 +25,10 @@ const manifest = {
     }
   }, {
     plugin: {
+      register: 'h2o2'
+    }
+  }, {
+    plugin: {
       register: './lib/hapi-webpack2.js',
       options: webpackConfig
     }
