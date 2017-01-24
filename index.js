@@ -1,12 +1,17 @@
+const Hoek = require('hoek')
+const {once} = require('lodash')
 const api = require('./api')
 const client = require('./client')
 const webpackConfig = require('./webpack.config')
+
+const port = parseInt(process.env.HOLLY_QUINTET_PORT || process.env.npm_package_config_port || process.argv[2])
+Hoek.assert(port, 'Port is not specified!')
 
 const manifest = {
   server: {},
   connections: [{
     host: 'localhost',
-    port: process.env.HOLLY_QUINTET_PORT || process.env.npm_package_config_port
+    port
   }],
   registrations: [{
     plugin: {
@@ -18,7 +23,13 @@ const manifest = {
       options: {
         reporters: {
           console: [
-            {module: 'good-console'},
+            {
+              module: 'good-squeeze',
+              name: 'Squeeze',
+              args: [{log: '*', response: '*'}]
+            }, {
+              module: 'good-console'
+            },
             'stdout'
           ]
         }
@@ -36,18 +47,18 @@ const manifest = {
   }]
 }
 
-const route = function (server) {
+const route = once(function (server) {
   api.concat(client).forEach(function (router) {
     server.route(router)
   })
-}
+})
 
-const serve = function (server) {
+const serve = once(function (server) {
   server.start(function (err) {
     if (err) throw err
     console.log('Server running at:', server.info.uri)
   })
-}
+})
 
 module.exports.manifest = manifest
 module.exports.route = route
