@@ -20,7 +20,7 @@ const scope2site = function (scope) {
       site = 'music.163.com/album'
       break
     case 'qq':
-      site = 'y.qq.com/y/static'
+      site = 'y.qq.com/n/yqq/album'
       break
     case 'musicbrainz':
       site = 'musicbrainz.org'
