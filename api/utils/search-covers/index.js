@@ -8,7 +8,7 @@ const path = require('path')
 const getCertainSizeSrcFromItunes = function (src, size) {
   let parsedSrc = url.parse(src, true)
   let parsedPath = path.parse(parsedSrc.pathname)
-  parsedPath.name = parsedPath.name.replace(/\d{3,}x\d{3,}/, `${size}x${size}`)
+  parsedPath.name = parsedPath.name.replace(/\d+x\d+/, `${size}x${size}`)
   parsedPath.base = `${parsedPath.name}${parsedPath.ext}`
   parsedSrc.pathname = path.format(parsedPath)
   return url.format(parsedSrc)
