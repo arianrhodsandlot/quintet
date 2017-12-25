@@ -1,0 +1,44 @@
+extends layout.pug
+
+block content
+  .wrap
+    #search-form-region
+      form.search-form.sleeping(action='/covers', autocomplete='off')
+        a.logo(href='/')
+          span.dot.homura(style='background: #5F5A5C')
+          span.dot.madoka(style='background: #FED4D7')
+          span.dot.mami(style='background: #F9E797')
+          span.dot.sayaka(style='background: #89BBCB')
+          span.dot.kyoko(style='background: #BE6F81')
+        input.query(type='text', name='query')
+        select#scope.scope(name='scope')
+          optgroup(label='iTunes')
+            option(value='itunes-hk', selected='')
+              | itunes.apple.com/hk
+            option(value='itunes-jp')
+              | itunes.apple.com/jp
+            option(value='itunes-kr')
+              | itunes.apple.com/kr
+            option(value='itunes-tw')
+              | itunes.apple.com/tw
+            option(value='itunes-us')
+              | itunes.apple.com/us
+          optgroup(label='Amazon')
+            option(value='amazon-com')
+              | amazon.com
+            option(value='amazon-jp')
+              | amazon.co.jp
+          optgroup(label='其他')
+            option(value='vgmdb')
+              | vgmdb.net
+            option(value='orpheus')
+              | music.163.com
+            option(value='qq')
+              | y.qq.com
+            option(value='musicbrainz')
+              | musicbrainz.org
+        button.submit(type='submit')
+          i.fa.fa-search
+    #message-region
+    #search-results-covers-region
+    .push

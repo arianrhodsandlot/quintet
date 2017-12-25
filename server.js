@@ -1,10 +1,16 @@
-const Glue = require('glue')
-const {manifest, route, serve} = require('.')
+const Hapi = require('hapi')
+const Vision = require('vision')
+const pug = require('pug')
+const routes = require('.')
 
-Glue.compose(manifest, {
-  relativeTo: __dirname
-}, function (err, server) {
-  if (err) throw err
-  route(server)
-  serve(server)
-})
+const server = new Hapi.Server({port: 3000, host: 'localhost'})
+
+const provision = async function () {
+  await server.register(Vision)
+  server.views({engines: {pug}, relativeTo: __dirname, path: 'src/templates/'})
+  server.route(routes)
+  await server.start()
+  console.log('Server running at:', server.info.uri)
+}
+
+provision()
