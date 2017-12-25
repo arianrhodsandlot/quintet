@@ -82,6 +82,9 @@ const searchCovers = function (site, query) {
       'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
     }
   }
+  return new Promise(function (resolve) {
+    resolve(require('./scheme'))
+  })
   return request(requestOption)
     .then(function (searchResponse) {
       return searchResults2json(searchResponse.body)

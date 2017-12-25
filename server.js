@@ -1,7 +1,7 @@
 const path = require('path')
 const Hapi = require('hapi')
-const Vision = require('vision')
 const Inert = require('inert')
+const Vision = require('vision')
 const pug = require('pug')
 const routes = require('.')
 
@@ -21,7 +21,7 @@ const provision = async function (server) {
   server.views({engines: {pug}, relativeTo: __dirname, path: 'src/templates/'})
   server.route(routes)
   await server.start()
-  console.log('Server running at:', server.info.uri)
+  console.log(`Server started at ${server.info.uri}`)
 }
 
 provision(server)

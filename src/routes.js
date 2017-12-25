@@ -13,8 +13,8 @@ module.exports = [{
   config: {
     validate: {
       query: {
-        scope: Joi.string().required(),
-        query: Joi.string().min(1).max(100).required()
+        s: Joi.string().required(),
+        q: Joi.string().min(1).max(100).required()
       }
     }
   },

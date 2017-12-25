@@ -2,6 +2,5 @@ extends home.pug
 
 block append content
   .covers
-    .cover aaa
-    .cover bbb
-    .cover ccc
+    for cover in covers
+      .cover= cover.refer
