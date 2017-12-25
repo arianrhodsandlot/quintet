@@ -30,4 +30,12 @@ module.exports = [{
     }
   },
   handler: file
+}, {
+  method: 'GET',
+  path: '/{filename}',
+  handler: {
+    file (request) {
+      return request.params.filename
+    }
+  }
 }]
