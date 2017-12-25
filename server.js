@@ -16,8 +16,7 @@ const server = new Hapi.Server({
 })
 
 const provision = async function (server) {
-  await server.register(Inert)
-  await server.register(Vision)
+  await server.register([Vision, Inert])
   server.views({engines: {pug}, relativeTo: __dirname, path: 'src/templates/'})
   server.route(routes)
   await server.start()

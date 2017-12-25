@@ -1,7 +1,8 @@
+const path = require('path')
 const Joi = require('joi')
 const home = require('./handlers/home')
 const search = require('./handlers/search')
-const file = require('./handlers/file')
+const download = require('./handlers/download')
 
 module.exports = [{
   method: 'GET',
@@ -21,21 +22,22 @@ module.exports = [{
   handler: search
 }, {
   method: 'GET',
-  path: '/file',
+  path: '/download',
   config: {
     validate: {
       query: {
-        url: Joi.string().uri().required()
+        u: Joi.string().uri().required(),
+        n: Joi.string()
       }
     }
   },
-  handler: file
+  handler: download
 }, {
   method: 'GET',
   path: '/{filename}',
   handler: {
-    file (request) {
-      return request.params.filename
+    directory: {
+      path: '.'
     }
   }
 }]
