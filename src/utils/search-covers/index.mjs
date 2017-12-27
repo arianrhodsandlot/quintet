@@ -1,9 +1,11 @@
-const url = require('url')
-const _ = require('lodash')
-const Q = require('q')
-const request = (options) => Q.denodeify(require('request'))(options).then(_.first)
-const cheerio = require('cheerio')
-const path = require('path')
+import url from 'url'
+import _ from 'lodash'
+import Q from 'q'
+import request from 'request'
+import cheerio from 'cheerio'
+import path from 'path'
+
+const request_ = (options) => Q.denodeify(request)(options).then(_.first)
 
 const getCertainSizeSrcFromItunes = function (src, size) {
   let parsedSrc = url.parse(src, true)
@@ -69,7 +71,7 @@ const searchResults2json = function (html) {
     .value()
 }
 
-const searchCovers = function (site, query) {
+export default function searchCovers (site, query) {
   const requestOption = {
     baseUrl: 'https://www.google.com',
     url: '/search',
@@ -82,13 +84,9 @@ const searchCovers = function (site, query) {
       'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
     }
   }
-  return new Promise(function (resolve) {
-    resolve(require('./scheme'))
-  })
-  return request(requestOption)
+  return import('./scheme').then(({default: scheme}) => scheme)
+  return request_(requestOption)
     .then(function (searchResponse) {
       return searchResults2json(searchResponse.body)
     })
 }
-
-module.exports = searchCovers

@@ -1,10 +1,10 @@
-const path = require('path')
-const Joi = require('joi')
-const home = require('./handlers/home')
-const search = require('./handlers/search')
-const download = require('./handlers/download')
+import path from 'path'
+import Joi from 'joi'
+import home from './handlers/home'
+import search from './handlers/search'
+import download from './handlers/download'
 
-module.exports = [{
+export default [{
   method: 'GET',
   path: '/',
   handler: home

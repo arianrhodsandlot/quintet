@@ -1,6 +1,7 @@
-const scope2site = require('../utils/scope2site')
-const searchCovers = require('../utils/search-covers')
-module.exports = async function (request, h) {
+import scope2site from '../utils/scope2site'
+import searchCovers from '../utils/search-covers'
+
+export default async function search (request, h) {
   const {q: query, s: scope} = request.params
   const site = scope2site(scope)
   const covers = await searchCovers(site, query)

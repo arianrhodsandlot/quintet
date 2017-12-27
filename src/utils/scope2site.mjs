@@ -1,4 +1,4 @@
-const scope2site = function (scope) {
+export default function scope2site (scope) {
   let site = ''
   switch (scope) {
     case 'itunes-hk':
@@ -28,5 +28,3 @@ const scope2site = function (scope) {
   }
   return site
 }
-
-module.exports = scope2site
