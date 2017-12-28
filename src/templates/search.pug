@@ -1,6 +1,9 @@
 extends home.pug
 
 block append content
-  .covers
-    for cover in covers
-      .cover= cover.refer
+  .results
+    for result in results
+      .result
+        a(href=result.originSrc)
+          img(src=result.src)
+        a(href=result.refer)= result.title || query

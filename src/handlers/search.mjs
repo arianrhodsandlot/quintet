@@ -19,6 +19,6 @@ export default async function search (request, h) {
     sites,
     matchedSite,
     query,
-    covers: await searchCovers(matchedSite, query)
+    results: await searchCovers(matchedSite, query)
   })
 }
