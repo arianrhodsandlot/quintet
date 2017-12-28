@@ -10,35 +10,12 @@ block content
           span.dot.mami(style='background: #F9E797')
           span.dot.sayaka(style='background: #89BBCB')
           span.dot.kyoko(style='background: #BE6F81')
-        input.query(type='text', name='q')
+        input.query(type='text' name='q' value=query)
         select#scope.scope(name='s')
-          optgroup(label='iTunes')
-            option(value='itunes-hk', selected='')
-              | itunes.apple.com/hk
-            option(value='itunes-jp')
-              | itunes.apple.com/jp
-            option(value='itunes-kr')
-              | itunes.apple.com/kr
-            option(value='itunes-tw')
-              | itunes.apple.com/tw
-            option(value='itunes-us')
-              | itunes.apple.com/us
-          optgroup(label='Amazon')
-            option(value='amazon-com')
-              | amazon.com
-            option(value='amazon-jp')
-              | amazon.co.jp
-          optgroup(label='其他')
-            option(value='vgmdb')
-              | vgmdb.net
-            option(value='orpheus')
-              | music.163.com
-            option(value='qq')
-              | y.qq.com
-            option(value='musicbrainz')
-              | musicbrainz.org
-        button.submit(type='submit')
-          i.fa.fa-search
+          each site in sites
+            option(value=site.id selected=matchedSite && site.id === matchedSite.id)= site.name
+        button(type='submit') 搜索
+        button(type='submit' name='l') 手气不错
     #message-region
     #search-results-covers-region
     .push

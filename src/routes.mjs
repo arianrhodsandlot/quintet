@@ -15,7 +15,8 @@ export default [{
     validate: {
       query: {
         s: Joi.string().required(),
-        q: Joi.string().min(1).max(100).required()
+        q: Joi.string().min(1).max(100).required(),
+        l: Joi.any()
       }
     }
   },

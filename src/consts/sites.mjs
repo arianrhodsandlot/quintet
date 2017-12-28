@@ -1,0 +1,56 @@
+export default [{
+  id: 'itunes-hk',
+  name: 'iTunes（香港）',
+  host: 'itunes.apple.com',
+  path: '/hk/album/'
+}, {
+  id: 'itunes-tw',
+  name: 'iTunes（台湾）',
+  host: 'itunes.apple.com',
+  path: '/tw/album/'
+}, {
+  id: 'itunes-jp',
+  name: 'iTunes（日本）',
+  host: 'itunes.apple.com',
+  path: '/jp/album/'
+}, {
+  id: 'itunes-kr',
+  name: 'iTunes（韩国）',
+  host: 'itunes.apple.com',
+  path: '/kr/album/'
+}, {
+  id: 'itunes-us',
+  name: 'iTunes（美国）',
+  host: 'itunes.apple.com',
+  path: '/us/album'
+}, {
+  id: 'amazon-com',
+  name: '亚马逊（美国）',
+  host: 'amazon.com',
+  path: '/'
+}, {
+  id: 'amazon-co-jp',
+  name: '亚马逊（日本）',
+  host: 'amazon.co.jp',
+  path: '/'
+}, {
+  id: 'vgmdb-net',
+  name: 'VGMdb',
+  host: 'vgmdb.net',
+  path: '/album/'
+}, {
+  id: 'musicbrainz-org',
+  name: 'MusicBrainz',
+  host: 'musicbrainz.org',
+  path: '/'
+}, {
+  id: 'music-163-com',
+  name: '网易云音乐',
+  host: 'music.163.com',
+  path: '/album/'
+}, {
+  id: 'y-qq-com',
+  name: 'QQ音乐',
+  host: 'y.qq.com',
+  path: '/n/yqq/album/'
+}]

@@ -9,8 +9,7 @@ import routes from '.'
 const dirname = path.parse(url.parse(import.meta.url).pathname).dir
 
 const server = new Hapi.Server({
-  port: 3000,
-  host: 'localhost',
+  port: process.env.npm_package_config_port,
   routes: {
     files: {
       relativeTo: path.join(dirname, 'src/public/')
