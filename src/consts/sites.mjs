@@ -1,56 +1,43 @@
 export default [{
-  id: 'itunes-hk',
-  name: 'iTunes（香港）',
-  host: 'itunes.apple.com',
-  path: '/hk/album/'
+  group: 'iTunes',
+  sites: [{
+    name: 'iTunes（香港）',
+    site: 'itunes.apple.com/hk/album'
+  }, {
+    name: 'iTunes（台湾）',
+    site: 'itunes.apple.com/tw/album'
+  }, {
+    name: 'iTunes（日本）',
+    site: 'itunes.apple.com/jp/album'
+  }, {
+    name: 'iTunes（韩国）',
+    site: 'itunes.apple.com/kr/album'
+  }, {
+    name: 'iTunes（美国）',
+    site: 'itunes.apple.com/us/album'
+  }]
 }, {
-  id: 'itunes-tw',
-  name: 'iTunes（台湾）',
-  host: 'itunes.apple.com',
-  path: '/tw/album/'
+  group: 'Amazon',
+  sites: [{
+    name: '亚马逊（美国）',
+    site: 'amazon.com'
+  }, {
+    name: '亚马逊（日本）',
+    site: 'amazon.co.jp'
+  }]
 }, {
-  id: 'itunes-jp',
-  name: 'iTunes（日本）',
-  host: 'itunes.apple.com',
-  path: '/jp/album/'
-}, {
-  id: 'itunes-kr',
-  name: 'iTunes（韩国）',
-  host: 'itunes.apple.com',
-  path: '/kr/album/'
-}, {
-  id: 'itunes-us',
-  name: 'iTunes（美国）',
-  host: 'itunes.apple.com',
-  path: '/us/album'
-}, {
-  id: 'amazon-com',
-  name: '亚马逊（美国）',
-  host: 'amazon.com',
-  path: '/'
-}, {
-  id: 'amazon-co-jp',
-  name: '亚马逊（日本）',
-  host: 'amazon.co.jp',
-  path: '/'
-}, {
-  id: 'vgmdb-net',
-  name: 'VGMdb',
-  host: 'vgmdb.net',
-  path: '/album/'
-}, {
-  id: 'musicbrainz-org',
-  name: 'MusicBrainz',
-  host: 'musicbrainz.org',
-  path: '/'
-}, {
-  id: 'music-163-com',
-  name: '网易云音乐',
-  host: 'music.163.com',
-  path: '/album/'
-}, {
-  id: 'y-qq-com',
-  name: 'QQ音乐',
-  host: 'y.qq.com',
-  path: '/n/yqq/album/'
+  group: '其它',
+  sites: [{
+    name: 'VGMdb',
+    site: 'vgmdb.net/album'
+  }, {
+    name: 'MusicBrainz',
+    site: 'musicbrainz.org'
+  }, {
+    name: '网易云音乐',
+    site: 'music.163.com/album'
+  }, {
+    name: 'QQ音乐',
+    site: 'y.qq.com/n/yqq/album'
+  }]
 }]

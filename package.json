@@ -1,32 +1,55 @@
 {
-  "name": "holly-quintet",
-  "description": "A web app to search discs' cover from iTunes, Amazon, Netease Music, etc.",
-  "author": "Arianrhod <theguidanceofawhitetower@gmail.com>",
-  "main": "index.js",
-  "scripts": {
-    "start": "node -r @std/esm server"
-  },
+  "name": "express",
+  "version": "0.0.0",
   "private": true,
-  "repository": "arianrhodsandlot/Holly-Quintet",
-  "license": "MIT",
-  "config": {
-    "port": 1025
+  "scripts": {
+    "start": "nodemon --experimental-modules server.mjs"
   },
   "dependencies": {
-    "@std/esm": "^0.18.0",
-    "boom": "^7.1.1",
-    "cheerio": "^1.0.0-rc.2",
-    "h2o2": "^7.0.1",
-    "hapi": "^17.2.0",
-    "hoek": "^5.0.2",
-    "inert": "^5.0.1",
-    "joi": "^13.0.2",
-    "lodash": "^4.17.4",
+    "@babel/polyfill": "^7.0.0-beta.47",
+    "@material/auto-init": "^0.35.0",
+    "@material/image-list": "^0.35.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.4.3",
+    "babelify": "^8.0.0",
+    "browserify-middleware": "^8.1.0",
+    "bulma": "^0.7.1",
+    "chowdown": "^1.2.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jquery": "^3.3.1",
+    "morgan": "~1.9.0",
     "nib": "^1.1.2",
-    "pug": "^2.0.0-rc.4",
-    "q": "^1.5.1",
-    "request": "^2.83.0",
-    "vision": "^5.2.0"
+    "node-sass-middleware": "^0.11.0",
+    "pug": "2.0.0-beta11",
+    "stylus": "0.54.5",
+    "turbolinks": "^5.1.1",
+    "x-ray": "^2.3.2"
   },
-  "devDependencies": {}
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "babel-preset-env",
+        {
+          "targets": {
+            "browsers": [
+              ">0.25%"
+            ]
+          }
+        }
+      ],
+      "minify"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
 }

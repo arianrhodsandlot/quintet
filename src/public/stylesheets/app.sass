@@ -1,0 +1,54 @@
+@import '../../../node_modules/@material/image-list/mdc-image-list'
+
+html, body
+  margin: 0
+  padding: 0
+
+.mdc-top-app-bar
+  z-index: 1
+
+.bg
+  width: 100%
+  height: 100%
+  position: fixed
+  top: 0
+  left: 0
+  z-index: -1
+  // background-image: url(https://3.bp.blogspot.com/-KbD3L4uuC4w/Wh6vtc1t_UI/AAAAAAACLhs/7clE7Kw5YhcND-3cWfKdNLr8hx2x7hjiwCEwYBhgL/s640/jazz%2B001dse.jpg)
+  background-image: url(https://is2-ssl.mzstatic.com/image/thumb/Music/4b/64/22/mzi.ajyaveel.png/268x0w.jpg)
+  background-attachment: fixed
+  background-size: cover
+  filter: blur(16px) opacity(0.6)
+  transform: scale(1.5)
+
+.mdc-text-field
+  margin: auto
+  display: block
+
+h1
+  font-family: 'IM Fell Double Pica', serif!important
+  font-weight: bold!important
+  a
+    color: white
+    text-decoration: none
+
+.mdc-text-field--outlined .mdc-text-field__input.query
+  width: 900px
+
+.columns
+  @include mdc-image-list-standard-columns(5)
+  width: calc(100% - 8px)
+  padding: 2px
+  margin: 20px auto 0 auto
+
+.chips
+  width: 1020px
+  margin: auto
+
+.form-container
+  transition: height .2s
+  height: 200px
+  .page-index &
+    height: calc(100vh - 64px)
+form
+  height: 100%
