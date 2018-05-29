@@ -1,26 +1,25 @@
 extends layout
 
 block header
-  header.mdc-top-app-bar.mdc-top-app-bar--fixed.mdc-elevation--z5
+  header.mdc-top-app-bar.mdc-top-app-bar--fixed.mdc-elevation--z6
     .mdc-top-app-bar__row
       section.mdc-top-app-bar__section.mdc-top-app-bar__section--align-start
-        h1.mdc-top-app-bar__title
-          a(href="/")
-            span.material-icons album
-            span Quintet
+        a.mdc-top-app-bar__title(href="/")
+          span.material-icons album
+          h1 Quintet
       section.mdc-top-app-bar__section.mdc-top-app-bar__section--align-end(role='toolbar')
         a.material-icons.mdc-top-app-bar__action-item(href='#', aria-label='Download', alt='Download') info
 
   .mdc-top-app-bar--fixed-adjust
 
-  .form-container.mdc-layout-grid
-    form.mdc-layout-grid__inner(action='/search' autocomplete='off')
+  .form-container.mdc-layout-grid(data-controller='form')
+    .mdc-layout-grid__inner
       .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle
-        .mdc-layout-grid
+        form.mdc-layout-grid(action='/search' autocomplete='off')
           .mdc-layout-grid__inner
             .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon(data-mdc-auto-init="MDCTextField")
               i.material-icons.mdc-text-field__icon label_important
-              input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query)
+              input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query data-target="app.query")
               label.mdc-floating-label(for='tf-outlined') 搜索专辑图片关键词
               .mdc-notched-outline
                 svg

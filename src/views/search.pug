@@ -3,15 +3,15 @@ extends index
 block content
   .mdc-elevation--z0
     .chips.mdc-chip-set.mdc-chip-set--filter(data-mdc-auto-init='MDCChipSet')
-      .mdc-chip
-        i.material-icons.mdc-chip__icon.mdc-chip__icon--leading check_box_outline_blank
+      .mdc-chip.mdc-chip--selected
+        i.material-icons.mdc-chip__icon.mdc-chip__icon--leading.mdc-chip__icon--leading-hidden check_box_outline_blank
         .mdc-chip__checkmark
           svg.mdc-chip__checkmark-svg(viewbox='-2 -3 30 30')
             path.mdc-chip__checkmark-path(fill='none', stroke='black', d='M1.73,12.91 8.1,19.28 22.79,4.59')
         .mdc-chip__text 全选
       for s in sites.map((s) => s.sites).reduce((a, b) => a.concat(b), [])
-        .mdc-chip
-          i.material-icons.mdc-chip__icon.mdc-chip__icon--leading check_box_outline_blank
+        .mdc-chip.mdc-chip--selected
+          i.material-icons.mdc-chip__icon.mdc-chip__icon--leading.mdc-chip__icon--leading-hidden check_box_outline_blank
           .mdc-chip__checkmark
             svg.mdc-chip__checkmark-svg(viewbox='-2 -3 30 30')
               path.mdc-chip__checkmark-path(fill='none', stroke='black', d='M1.73,12.91 8.1,19.28 22.79,4.59')
@@ -19,37 +19,23 @@ block content
 
     .mdc-layout-grid.columns
       .mdc-layout-grid__inner
-        .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle
-          ul.mdc-image-list.mdc-image-list--with-text-protection
-            for a in albums
-              li.mdc-image-list__item
-                .mdc-image-list__image-aspect-container
-                  img.mdc-image-list__image(src=a.ou)
-                .mdc-image-list__supporting
-                  span.mdc-image-list__label Text label
+        for a in albums.slice(0, 1)
+          +albulm(a).mdc-layout-grid__cell--span-4
+        .mdc-layout-grid__cell.mdc-layout-grid__cell--span-8
+          .mdc-layout-grid__inner
+            for a in albums.slice(1, 9)
+              +albulm(a).mdc-layout-grid__cell--span-3
+        .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12
+          .mdc-layout-grid__inner
+            for a in albums.slice(9, 21)
+              +albulm(a).mdc-layout-grid__cell--span-2
 
-  //- .columns.mdc-elevation--z24
-  //-   if albums.length
-  //-     .tile.is-ancestor.is-vertical.albums
-  //-       .tile
-  //-         +album(albums[0]).is-4
-  //-         .tile.is-vertical.is-8
-  //-           .tile
-  //-             for a in albums.slice(1, 5)
-  //-               +album(a).is-3
-  //-           .tile
-  //-             for a in albums.slice(5, 9)
-  //-               +album(a).is-3
-  //-       for i in [...Array(10).keys()]
-  //-         .tile
-  //-           .tile.is-12
-  //-             for a in albums.slice(6 * i + 9, 6 * i + 15)
-  //-               +album(a)
-
-mixin album(a)
-  if a
-    .tile.is-parent.album&attributes(attributes)
-      .tile.is-child
-        a(href=a.ru target='_blank')
-          figure.image.is-square
-            img(src=a.ou)
+mixin albulm(a)
+  .albulm-container.mdc-layout-grid__cell.mdc-elevation--z5&attributes(attributes)
+    .mdc-image-list__image-aspect-container
+      img.albulm.mdc-image-list__image(src=a.ou)
+    a.download-mask(href=a.ou)
+      i.material-icons get_app
+    a.albulm-meta.mdc-elevation--z5(href=a.ru target='_blank')
+      i.material-icons link
+      span= a.pt

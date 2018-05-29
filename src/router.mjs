@@ -1,11 +1,13 @@
 import express from 'express'
 import chowdown from 'chowdown'
+import Agent from 'socks5-https-client/lib/Agent'
 
 const router = express.Router()
 
 let albums
 router
   .get('/', function (req, res) {
+    res.locals.req = req
     res.locals.pageName = 'index'
     res.locals.query = ''
     res.render('index')
@@ -20,10 +22,11 @@ router
         gws_rd: 'cr', // get rid of our request being redirected by country
         q: `${query} site:${site || 'itunes.apple.com/jp/album'}`
       },
-      timeout: 3000,
+      // timeout: 5000,
       headers: {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36'
-      }
+      },
+      agentClass: Agent
     }
     try {
       if (albums) throw 0
@@ -32,6 +35,7 @@ router
     } catch (e) {
       console.error(e)
     }
+    res.locals.req = req
     res.locals.pageName = 'search'
     res.locals.query = query
     res.locals.site = site

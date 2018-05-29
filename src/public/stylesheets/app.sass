@@ -6,7 +6,23 @@ html, body
 
 .mdc-top-app-bar
   z-index: 1
-
+  .mdc-top-app-bar__title
+    color: white
+    line-height: 1.6
+    font-size: 26px
+    .material-icons,
+    h1
+      line-height: 1.6
+      font-size: 26px
+      vertical-align: middle
+      font-size: 26px
+      display: inline-block
+      font-weight: bold!important
+    .material-icons
+      font-size: 36px
+    h1
+      margin: 0 0 0 10px
+      font-family: 'IM Fell Double Pica', serif!important
 .bg
   width: 100%
   height: 100%
@@ -18,37 +34,95 @@ html, body
   background-image: url(https://is2-ssl.mzstatic.com/image/thumb/Music/4b/64/22/mzi.ajyaveel.png/268x0w.jpg)
   background-attachment: fixed
   background-size: cover
-  filter: blur(16px) opacity(0.6)
+  filter: blur(18px) opacity(0.3)
   transform: scale(1.5)
 
 .mdc-text-field
   margin: auto
   display: block
 
-h1
-  font-family: 'IM Fell Double Pica', serif!important
-  font-weight: bold!important
-  a
-    color: white
-    text-decoration: none
-
 .mdc-text-field--outlined .mdc-text-field__input.query
   width: 900px
 
 .columns
-  @include mdc-image-list-standard-columns(5)
-  width: calc(100% - 8px)
+  width: calc(100% - 48px)
   padding: 2px
-  margin: 20px auto 0 auto
+  margin: 0 auto 0 auto
 
 .chips
   width: 1020px
-  margin: auto
+  margin: 20px auto
 
 .form-container
-  transition: height .2s
-  height: 200px
+  padding: 0
+  height: 72px
+  margin: 20px auto 0 auto
+  transition: height .3s
+  > div
+    height: 100%
   .page-index &
-    height: calc(100vh - 64px)
-form
-  height: 100%
+    height: calc(100vh - 300px)
+    > div
+      height: 100%
+  form
+    padding: 0
+
+.albulm-container
+  position: relative
+  transition: box-shadow .3s, transform .3s
+  overflow: hidden
+  .download-mask
+    opacity: 0
+    position: absolute
+    transition: opacity .5s
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    background: rgba(0, 0, 0, .2)
+    cursor: pointer
+    user-select: none
+    text-decoration: none
+    .material-icons
+      color: rgba(255, 255, 255, .9)
+      font-size: 80px
+      transform: scale(1.5)
+      transition: transform .5s
+  .albulm-meta
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    transform: translate(0, 100%)
+    transition: transform .3s
+    padding: 10px 20px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    background: rgba(0, 0, 0, .8)
+    color: white
+    font-size: 14px
+    color: white
+    text-decoration: none
+    a
+      color: white
+      text-decoration: none
+    .material-icons
+      vertical-align: middle
+      margin: 0 10px 0 0
+
+  &:hover
+    box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12)
+    transform: scale(1.01)
+    img
+      filter: blur(3px)
+    .download-mask
+      opacity: 1
+      .material-icons
+        transform: scale(1)
+    .albulm-meta
+      transform: translate(0, 0)
+      bottom: 0
