@@ -30,8 +30,8 @@ html, body
   top: 0
   left: 0
   z-index: -1
-  // background-image: url(https://3.bp.blogspot.com/-KbD3L4uuC4w/Wh6vtc1t_UI/AAAAAAACLhs/7clE7Kw5YhcND-3cWfKdNLr8hx2x7hjiwCEwYBhgL/s640/jazz%2B001dse.jpg)
-  background-image: url(https://is2-ssl.mzstatic.com/image/thumb/Music/4b/64/22/mzi.ajyaveel.png/268x0w.jpg)
+  background-color: #fff
+  background-image: url(https://3.bp.blogspot.com/-KbD3L4uuC4w/Wh6vtc1t_UI/AAAAAAACLhs/7clE7Kw5YhcND-3cWfKdNLr8hx2x7hjiwCEwYBhgL/s640/jazz%2B001dse.jpg)
   background-attachment: fixed
   background-size: cover
   filter: blur(18px) opacity(0.3)
@@ -50,8 +50,8 @@ html, body
   margin: 0 auto 0 auto
 
 .chips
-  width: 1020px
-  margin: 20px auto
+  width: 790px
+  margin: 20px auto 0 auto
 
 .form-container
   padding: 0
@@ -71,6 +71,7 @@ html, body
   position: relative
   transition: box-shadow .3s, transform .3s
   overflow: hidden
+  border-radius: 4px
   .download-mask
     opacity: 0
     position: absolute
@@ -92,7 +93,8 @@ html, body
       transform: scale(1.5)
       transition: transform .5s
   .album-img
-    background: gray
+    background: rgba(80, 80, 80, .3)
+    object-fit: cover
   .album-meta
     position: absolute
     bottom: 0
@@ -135,8 +137,6 @@ html, body
     .album-meta,
     .download-mask
       display: none
-    .album-img
-      background: rgba(225, 225, 225, .6)
 
 .page-index .content
   display: none

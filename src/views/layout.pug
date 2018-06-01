@@ -1,7 +1,7 @@
 mixin album(a)
-  .album-container.mdc-layout-grid__cell.mdc-elevation--z5&attributes(attributes)
+  .album-container.mdc-layout-grid__cell.mdc-elevation--z3&attributes(attributes)
     .mdc-image-list__image-aspect-container
-      img.album-img.mdc-image-list__image(src=a.ou target='_blank')
+      img.album-img.mdc-image-list__image(src=a.ou)
     a.download-mask(href=a.ou target='_blank')
       i.material-icons get_app
     a.album-meta.mdc-elevation--z5(href=a.ru target='_blank')
@@ -19,10 +19,6 @@ mixin albums(albums)
             .mdc-layout-grid__inner
               for a in albums.slice(1, 9)
                 +album(a).mdc-layout-grid__cell--span-3
-          .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12
-            .mdc-layout-grid__inner
-              for a in albums.slice(9, 21)
-                +album(a).mdc-layout-grid__cell--span-2
 
 mixin album-placeholder()
   .album-container.album-placeholder.mdc-layout-grid__cell.mdc-elevation--z5&attributes(attributes)

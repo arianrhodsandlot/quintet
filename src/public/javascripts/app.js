@@ -11,6 +11,7 @@ function init () {
 }
 
 $(() => {
+  let request
   const $body = $('body')
   const $form = $('form')
   const $query = $form.find('.query')
@@ -18,8 +19,19 @@ $(() => {
   const $albums = $('.albums-result')
   const $loader = $('.album-placeholder')
 
+  $query.on('input', _.throttle(function () {
+    $form.submit()
+  }, 1000))
+
   $form.submit(async function (e) {
     e.preventDefault()
+
+    const query = $query.val().trim()
+
+    if (!query) {
+      page.replace('/')
+      return
+    }
 
     const parsed = querystring.parse($form.serialize())
     parsed.site = Cookies('site')
@@ -59,7 +71,11 @@ $(() => {
 
     const {query} = querystring.parse(ctx.querystring)
     $loader.show()
-    const res = await $.get(ctx.path)
+
+    if (request) request.abort()
+    request = $.get(ctx.path)
+
+    const res = await request
     $loader.hide()
     $albums.html($(res).html())
 
