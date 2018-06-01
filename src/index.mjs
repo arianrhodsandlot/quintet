@@ -4,6 +4,7 @@ import path from 'path'
 import logger from 'morgan'
 import sassMiddleware from 'node-sass-middleware'
 import browserify from 'browserify-middleware'
+import cookieParser from 'cookie-parser'
 import router from './router'
 import sites from './consts/sites'
 
@@ -19,6 +20,7 @@ app
   .set('view engine', 'pug')
   .set('views', viewsDir)
   .use(logger('combined'))
+  .use(cookieParser())
   .use(sassMiddleware({
     src: publicDir,
     dest: publicDir,
