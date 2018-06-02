@@ -2,7 +2,8 @@ import express from 'express'
 import chowdown from 'chowdown'
 import Agent from 'socks5-https-client/lib/Agent'
 import url from 'url'
-import {getCoverOriginSrc} from './util'
+import request from 'request'
+import {getCoverDownloadSrc} from './util'
 
 const router = express.Router()
 
@@ -55,9 +56,17 @@ router
     res.locals.site = site
     res.locals.albums = albums
     res.locals.title = 'Holly Quintet'
-    res.locals.getCoverOriginSrc = getCoverOriginSrc
+    res.locals.getCoverDownloadSrc = getCoverDownloadSrc
 
     res.render('search')
+  })
+  .get('/file', async function(req, res) {
+    request(req.query.url)
+      .on('response', function(remoteRes) {
+        delete remoteRes.headers['content-disposition']
+        res.attachment(req.query.filename)
+      })
+      .pipe(res)
   })
 
 export default router

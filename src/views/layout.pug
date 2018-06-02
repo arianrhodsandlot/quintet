@@ -2,7 +2,7 @@ mixin album(a)
   .album-container.mdc-layout-grid__cell.mdc-elevation--z3&attributes(attributes)
     .mdc-image-list__image-aspect-container
       img.album-img.mdc-image-list__image(src=a.ou)
-    a.download-mask(href=getCoverOriginSrc(a.ou) target='_blank')
+    a.download-mask(href=getCoverDownloadSrc(a.ou, query) download=`${query}.jpg` target='_blank')
       i.material-icons get_app
     a.album-meta.mdc-elevation--z5(href=a.ru target='_blank')
       i.material-icons link

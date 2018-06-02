@@ -129,6 +129,8 @@ html, body {
 .chips {
   width: 790px;
   margin: 20px auto 0 auto; }
+  .chips .mdc-chip {
+    background: rgba(36, 36, 36, 0.1); }
 
 .form-container {
   padding: 0;
@@ -160,18 +162,21 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
     user-select: none;
     text-decoration: none; }
     .album-container .download-mask .material-icons {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 80px;
-      transform: scale(1.5);
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 90px;
+      transform: scale(1.6);
       transition: transform .5s; }
+  .album-container.mdc-layout-grid__cell--span-4 .download-mask .material-icons {
+    font-size: 140px; }
   .album-container .album-img {
     background: rgba(80, 80, 80, 0.3);
-    object-fit: cover; }
+    object-fit: cover;
+    transition: transform .2s; }
   .album-container .album-meta {
     position: absolute;
     bottom: 0;
@@ -195,7 +200,9 @@ html, body {
       margin: 0 10px 0 0; }
   .album-container:hover {
     box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);
-    transform: scale(1.02); }
+    transform: scale(1.01); }
+    .album-container:hover .album-img {
+      transform: scale(1.02); }
     .album-container:hover .download-mask {
       opacity: 1; }
       .album-container:hover .download-mask .material-icons {
@@ -207,26 +214,27 @@ html, body {
     box-shadow: none;
     animation: breath 1s infinite; }
     .album-placeholder .album-container:hover {
+      box-shadow: none;
       transform: none; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(2) {
-    animation-delay: 1.7s; }
+    animation-delay: 0.4s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(3) {
-    animation-delay: 1.5s; }
-  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(4) {
-    animation-delay: 0.1s; }
-  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(5) {
     animation-delay: 0.7s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(4) {
+    animation-delay: 1.6s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(5) {
+    animation-delay: 1.5s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(6) {
-    animation-delay: 0.9s; }
+    animation-delay: 0.4s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(7) {
-    animation-delay: 0.9s; }
+    animation-delay: 1s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(8) {
-    animation-delay: 1.3s; }
+    animation-delay: 0.9s; }
 
 .page-index .content {
   display: none; }
 
-@keyframes placeHolderShimmer {
+@keyframes placeHolder {
   0% {
     background-position: -468px 0; }
   100% {
@@ -236,6 +244,6 @@ html, body {
   0% {
     transform: scale(1); }
   50% {
-    transform: scale(1.02); }
+    transform: scale(1.01); }
   100% {
     transform: scale(1); } }

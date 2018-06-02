@@ -57,6 +57,8 @@ html, body
 .chips
   width: 790px
   margin: 20px auto 0 auto
+  .mdc-chip
+    background: rgba(36, 36, 36, 0.1)
 
 .form-container
   padding: 0
@@ -88,18 +90,21 @@ html, body
     display: flex
     align-items: center
     justify-content: center
-    background: rgba(0, 0, 0, .2)
+    background: rgba(0, 0, 0, .1)
     cursor: pointer
     user-select: none
     text-decoration: none
     .material-icons
-      color: rgba(255, 255, 255, .9)
-      font-size: 80px
-      transform: scale(1.5)
+      color: rgba(255, 255, 255, .95)
+      font-size: 90px
+      transform: scale(1.6)
       transition: transform .5s
+  &.mdc-layout-grid__cell--span-4 .download-mask .material-icons
+    font-size: 140px
   .album-img
     background: rgba(80, 80, 80, .3)
     object-fit: cover
+    transition: transform .2s
   .album-meta
     position: absolute
     bottom: 0
@@ -124,11 +129,14 @@ html, body
 
   &:hover
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12)
-    transform: scale(1.02)
+    transform: scale(1.01)
+    .album-img
+      transform: scale(1.02)
     .download-mask
       opacity: 1
       .material-icons
         transform: scale(1)
+
 
 .album-placeholder
   display: none
@@ -136,6 +144,7 @@ html, body
     box-shadow: none
     animation: breath 1s infinite
     &:hover
+      box-shadow: none
       transform: none
   .mdc-layout-grid__cell--span-8 .album-container
     @for $i from 2 through 8
@@ -145,16 +154,10 @@ html, body
 .page-index .content
   display: none
 
-@keyframes placeHolderShimmer
-  0%
-    background-position: -468px 0
-  100%
-    background-position: 468px 0
-
 @keyframes breath
   0%
     transform: scale(1)
   50%
-    transform: scale(1.02)
+    transform: scale(1.01)
   100%
     transform: scale(1)

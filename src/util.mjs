@@ -22,7 +22,7 @@ function getCoverOriginSrcFromVgm (src) {
   return url.format(parsed)
 }
 
-export function getCoverOriginSrc (src) {
+function getCoverOriginSrc (src) {
   const coverHost = url.parse(src, true).hostname
 
   if (coverHost.endsWith('.mzstatic.com')) {
@@ -38,4 +38,15 @@ export function getCoverOriginSrc (src) {
   }
 
   return src
+}
+
+export function getCoverDownloadSrc (src, filename) {
+  const originSrc = getCoverOriginSrc(src)
+  return url.format({
+    pathname: '/file',
+    query: {
+      url: originSrc,
+      filename: `${filename}.jpg`
+    }
+  })
 }
