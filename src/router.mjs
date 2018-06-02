@@ -1,6 +1,7 @@
 import express from 'express'
 import chowdown from 'chowdown'
 import Agent from 'socks5-https-client/lib/Agent'
+import url from 'url'
 import {getCoverOriginSrc} from './util'
 
 const router = express.Router()
@@ -16,17 +17,27 @@ router
     res.render('index')
   })
   .get('/search', async function(req, res) {
-    const {query, site = req.cookies.site} = req.query
+    let {query, site = req.cookies.site} = req.query
+
+    const trimmedQuery = query.replace(/ +(?= )/g,'')
+    if (query !== trimmedQuery) {
+      const parsed = url.parse(req.path, true)
+      parsed.search = null
+      parsed.query.query = trimmedQuery
+      const redirectUrl = url.format(parsed)
+      res.redirect(redirectUrl)
+    }
+
     const requestOptions = {
       baseUrl: 'https://www.google.com',
       url: '/search',
       qs: {
         tbm: 'isch',
         gws_rd: 'cr', // get rid of our request being redirected by country
-        q: `${query} site:${site}`
+        q: `${trimmedQuery} site:${site}`
       },
       headers: {
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36'
+        'user-agent': req.get('user-agent')
       },
       agentClass: Agent
     }
@@ -40,7 +51,7 @@ router
     }
     res.locals.req = req
     res.locals.pageName = 'search'
-    res.locals.query = query
+    res.locals.query = trimmedQuery
     res.locals.site = site
     res.locals.albums = albums
     res.locals.title = 'Holly Quintet'

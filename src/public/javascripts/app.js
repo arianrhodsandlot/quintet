@@ -3,12 +3,8 @@ import _ from 'lodash'
 import querystring from 'querystring'
 import $ from 'jquery'
 import Cookies from 'cookies-js'
-
-window.$ = $
-
-function init () {
-  mdc.autoInit(document.body)
-}
+import imagesLoaded from 'imagesloaded'
+import util from 'util'
 
 $(() => {
   let request
@@ -55,31 +51,43 @@ $(() => {
     page.replace('/search?' + querystring.stringify(parsed))
   })
 
+  page(function (ctx, next) {
+    if (ctx.init) {
+      mdc.autoInit(document.body)
+      $query.select()
+    } else {
+      next()
+    }
+  })
+
   page('/', function (ctx) {
     $body.attr('class', 'page-index')
-    $albums.empty()
     $query.focus().val('')
 
-    init()
+    $albums.empty()
   })
 
   page('/search', async function (ctx) {
     $body.attr('class', 'page-search')
-    $albums.empty()
-
     const {query} = querystring.parse(ctx.querystring)
+    $query.focus().val(query)
 
-    $query.focus().val(query.trim())
-    $loader.show()
+    if ($albums.find('.album-container').length) {
+      $albums.addClass('loading')
+    } else {
+      $albums.empty()
+      $loader.show()
+    }
 
     if (request) request.abort()
     request = $.get(ctx.path)
 
     const res = await request
-    $loader.hide()
-    $albums.html($(res).html())
-
-    init()
+    const $res = $(res)
+    imagesLoaded($res.get(0), () => {
+      $loader.hide()
+      $albums.html($res.html()).removeClass('loading')
+    })
   })
 
   page()

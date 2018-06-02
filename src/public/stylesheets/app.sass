@@ -48,6 +48,11 @@ html, body
   width: calc(100% - 48px)
   padding: 2px
   margin: 0 auto 0 auto
+  transition: filter .1s, opacity .1s
+  &.loading
+    opacity: .4
+    filter: blur(2px)
+    pointer-events: none
 
 .chips
   width: 790px
@@ -119,17 +124,23 @@ html, body
 
   &:hover
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12)
-    transform: scale(1.01)
+    transform: scale(1.02)
     .download-mask
       opacity: 1
       .material-icons
         transform: scale(1)
 
 .album-placeholder
+  display: none
   .album-container
     box-shadow: none
+    animation: breath 1s infinite
     &:hover
       transform: none
+  .mdc-layout-grid__cell--span-8 .album-container
+    @for $i from 2 through 8
+      &:nth-child(#{$i})
+        animation-delay: (random(17)/10) + s
 
 .page-index .content
   display: none
@@ -139,3 +150,11 @@ html, body
     background-position: -468px 0
   100%
     background-position: 468px 0
+
+@keyframes breath
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(1.02)
+  100%
+    transform: scale(1)

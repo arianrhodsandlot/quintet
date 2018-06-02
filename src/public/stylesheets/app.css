@@ -119,7 +119,12 @@ html, body {
 .albums {
   width: calc(100% - 48px);
   padding: 2px;
-  margin: 0 auto 0 auto; }
+  margin: 0 auto 0 auto;
+  transition: filter .1s, opacity .1s; }
+  .albums.loading {
+    opacity: .4;
+    filter: blur(2px);
+    pointer-events: none; }
 
 .chips {
   width: 790px;
@@ -190,16 +195,33 @@ html, body {
       margin: 0 10px 0 0; }
   .album-container:hover {
     box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);
-    transform: scale(1.01); }
+    transform: scale(1.02); }
     .album-container:hover .download-mask {
       opacity: 1; }
       .album-container:hover .download-mask .material-icons {
         transform: scale(1); }
 
-.album-placeholder .album-container {
-  box-shadow: none; }
-  .album-placeholder .album-container:hover {
-    transform: none; }
+.album-placeholder {
+  display: none; }
+  .album-placeholder .album-container {
+    box-shadow: none;
+    animation: breath 1s infinite; }
+    .album-placeholder .album-container:hover {
+      transform: none; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(2) {
+    animation-delay: 1.7s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(3) {
+    animation-delay: 1.5s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(4) {
+    animation-delay: 0.1s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(5) {
+    animation-delay: 0.7s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(6) {
+    animation-delay: 0.9s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(7) {
+    animation-delay: 0.9s; }
+  .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(8) {
+    animation-delay: 1.3s; }
 
 .page-index .content {
   display: none; }
@@ -209,3 +231,11 @@ html, body {
     background-position: -468px 0; }
   100% {
     background-position: 468px 0; } }
+
+@keyframes breath {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.02); }
+  100% {
+    transform: scale(1); } }
