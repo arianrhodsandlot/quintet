@@ -2,7 +2,7 @@ mixin album(a)
   .album-container.mdc-layout-grid__cell.mdc-elevation--z3&attributes(attributes)
     .mdc-image-list__image-aspect-container
       img.album-img.mdc-image-list__image(src=a.ou)
-    a.download-mask(href=a.ou target='_blank')
+    a.download-mask(href=getCoverOriginSrc(a.ou) target='_blank')
       i.material-icons get_app
     a.album-meta.mdc-elevation--z5(href=a.ru target='_blank')
       i.material-icons link
@@ -59,7 +59,7 @@ unless req.xhr
                 .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon(data-mdc-auto-init="MDCTextField")
                   i.material-icons.mdc-text-field__icon label_important
                   input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query data-target="app.query")
-                  label.mdc-floating-label(for='tf-outlined') 搜索专辑图片关键词
+                  label.mdc-floating-label(for='tf-outlined') 搜索图片关键词
                   .mdc-notched-outline
                     svg
                       path.mdc-notched-outline__path

@@ -19,9 +19,9 @@ $(() => {
   const $albums = $('.albums-result')
   const $loader = $('.album-placeholder')
 
-  $query.on('input', _.throttle(function () {
+  $query.on('input', _.debounce(function () {
     $form.submit()
-  }, 1000))
+  }, 500))
 
   $form.submit(async function (e) {
     e.preventDefault()
@@ -67,9 +67,9 @@ $(() => {
     $body.attr('class', 'page-search')
     $albums.empty()
 
-    $query.focus()
-
     const {query} = querystring.parse(ctx.querystring)
+
+    $query.focus().val(query.trim())
     $loader.show()
 
     if (request) request.abort()

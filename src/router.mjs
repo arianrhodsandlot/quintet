@@ -1,6 +1,7 @@
 import express from 'express'
 import chowdown from 'chowdown'
 import Agent from 'socks5-https-client/lib/Agent'
+import {getCoverOriginSrc} from './util'
 
 const router = express.Router()
 
@@ -43,6 +44,7 @@ router
     res.locals.site = site
     res.locals.albums = albums
     res.locals.title = 'Holly Quintet'
+    res.locals.getCoverOriginSrc = getCoverOriginSrc
 
     res.render('search')
   })
