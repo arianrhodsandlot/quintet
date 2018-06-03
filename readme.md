@@ -2,17 +2,30 @@
 
 ## Website
 
-[hollyquintet.tomaketheendofbattle.com](http://hollyquintet.tomaketheendofbattle.com)
+[https://hollyquintet.tomaketheendofbattle.com](https://hollyquintet.tomaketheendofbattle.com)
 
-## About
+---
+
+## What it does
 
 A web app used for searching disks' covers from iTunes, Amazon, Netease Music, etc.
 
-All results are picked from [Google Images](https://images.google.com). In fact, it's just a [reverse proxy](http://en.wikipedia.org/wiki/Reverse_proxy) of the search results of "`your-key-words site:itunes.apple.com/us`" or `"your-key-words site:amazone.com`".
+All results are picked from [Google Images](https://www.google.com/imghp). In fact, it's just like a [reverse proxy](http://en.wikipedia.org/wiki/Reverse_proxy) of the search results of "`site:itunes.apple.com/us your-key-words`" or `"site:amazone.com your-key-words`".
 
-## Screenshot
+---
 
-![Screenshot](http://i.imgur.com/H4jNVHR.gif)
+## Development
+
+To start an ephemeral development server run:
+
+```sh
+npm i
+npm start
+```
+
+Then browse to http://localhost:3000
+
+---
 
 ## License
 
