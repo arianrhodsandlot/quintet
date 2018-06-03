@@ -5,6 +5,7 @@ const $query = $form.find('.query')
 const $chips = $('.chips')
 const $albums = $('.albums-result')
 const $loader = $('.album-placeholder')
+const $info = $('.info')
 
 const veryLateDate = new Date(253402300000000)
 
@@ -76,12 +77,21 @@ $albums.on('click', '.download-mask', function () {
 })
 
 let infoDialog
-$('.info').click(function () {
+$info.click(function () {
   if (!infoDialog) {
     infoDialog = $('.info-dialog').get(0).MDCDialog
   }
 
   infoDialog.show()
+})
+
+$body.keypress(function (e) {
+  if (e.target === $query.get(0)) return
+
+  if(e.which === 47) {
+    $query.focus()
+    e.preventDefault()
+  }
 })
 
 setTimeout(() => {
