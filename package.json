@@ -6,33 +6,35 @@
     "start": "nodemon --experimental-modules server.mjs"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.47",
+    "@babel/polyfill": "^7.0.0-beta.49",
     "@material/auto-init": "^0.35.0",
     "@material/image-list": "^0.35.0",
     "babel-core": "^6.26.3",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-minify": "^0.4.3",
     "babel-preset-stage-2": "^6.24.1",
     "babelify": "^8.0.0",
-    "browserify-middleware": "^8.1.0",
+    "browserify-middleware": "^8.1.1",
     "bulma": "^0.7.1",
     "chowdown": "^1.2.2",
     "cookie-parser": "^1.4.3",
     "cookies-js": "^1.2.3",
-    "debug": "~2.6.9",
+    "debug": "~3.1.0",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "http-proxy-middleware": "^0.18.0",
     "imagesloaded": "^4.1.4",
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
+    "material-components-web": "^0.35.2",
     "morgan": "~1.9.0",
     "nib": "^1.1.2",
     "node-sass-middleware": "^0.11.0",
     "npm": "^6.1.0",
     "page": "^1.8.6",
-    "pug": "2.0.0-beta11",
+    "pug": "2.0.3",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
     "socks5-https-client": "^1.2.1",
@@ -47,11 +49,8 @@
     ]
   },
   "babel": {
-    "plugins": [
-      "transform-class-properties"
-    ],
+    "plugins": ["transform-es2015-modules-commonjs"],
     "presets": [
-      "stage-2",
       [
         "env",
         {
@@ -59,7 +58,8 @@
             "browsers": [
               ">0.25%"
             ]
-          }
+          },
+          "modules": "commonjs"
         }
       ],
       "minify"

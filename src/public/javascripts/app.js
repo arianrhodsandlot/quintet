@@ -12,17 +12,23 @@ function updateBg (src) {
   $('.bg:not(:last)').remove()
 
   const $bg = $('.bg')
+  if ($bg.css('background-image').indexOf(src) > -1) return
+
   const $newBg = $('.bg').clone()
   Cookies('bg', src)
-  $newBg.css({'background-image': `url(${src})`})
+  $newBg.css({
+    'background-image': `url(${src})`,
+    opacity: 0
+  })
   $bg.before($newBg)
 
   setTimeout(() => {
-    $bg.css({opacity: 0})
+    $bg.css('opacity', 0)
+    $newBg.css('opacity', '')
     setTimeout(() => {
       $bg.remove()
     }, 3000)
-  }, 100)
+  }, 50)
 }
 
 $query.on('input', _.debounce(function () {
@@ -41,7 +47,7 @@ $form.submit(async function (e) {
 
   const parsed = Qs.parse($form.serialize())
   parsed.site = Cookies('site')
-  const url = `${$form.attr('action')}?${$form.serialize()}`
+  const url = `${$form.attr('action')}?${Qs.stringify(parsed)}`
   page(url)
 })
 
