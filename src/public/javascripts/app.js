@@ -96,7 +96,7 @@ page(function (ctx, next) {
 page('/', function (ctx) {
   $body.attr('class', 'page-index')
   $query.focus().val('')
-
+  document.title = 'Holly Quintet'
   $albums.empty()
 })
 
@@ -104,6 +104,8 @@ page('/search', async function (ctx) {
   $body.attr('class', 'page-search')
   const {query} = Qs.parse(ctx.querystring)
   $query.focus().val(query)
+
+  document.title = `${query} - Holly Quintet`
 
   if ($albums.find('.album-container').length) {
     $albums.addClass('loading')
@@ -113,12 +115,19 @@ page('/search', async function (ctx) {
   }
 
   request = $.get(ctx.path)
-
   const res = await request
+
   const $res = $(res)
-  imagesLoaded($res.get(0), () => {
+  const $newAlbums = $res.filter('.albums')
+  const $title = $res.filter('title')
+
+  document.title = $title.text()
+
+  imagesLoaded($newAlbums.get(0), () => {
+    if ($newAlbums.data('query') !== query) return
+
     $loader.hide()
-    $albums.html($res.html()).removeClass('loading')
+    $albums.html($newAlbums.html()).removeClass('loading')
     updateBg($res.find('.album-img').attr('src'))
   })
 })

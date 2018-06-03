@@ -9,7 +9,7 @@ mixin album(a)
       span= a.pt
 
 mixin albums(albums)
-  .albums.albums-result
+  .albums.albums-result(data-query=query)
     if albums && albums.length
       .mdc-layout-grid
         .mdc-layout-grid__inner

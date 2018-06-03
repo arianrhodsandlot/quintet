@@ -87,7 +87,7 @@ router
     res.locals.pageName = 'search'
     res.locals.query = trimmedQuery
     res.locals.albums = albums
-    res.locals.title = 'Holly Quintet'
+    res.locals.title = `${trimmedQuery} - Holly Quintet`
 
     res.render(req.xhr ? 'albums' : 'index')
   })
