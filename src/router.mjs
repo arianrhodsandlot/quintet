@@ -10,12 +10,14 @@ import {getCoverDownloadSrc} from './util'
 const router = express.Router()
 const defaultBg = '/images/default.jpg'
 
+const veryLateDate = new Date(253402300000000)
+
 router
   .use(function (req, res, next) {
     let site = req.cookies.site || sites[0].sites[0].site
 
     if (!req.cookies.site) {
-      res.cookie('site', site)
+      res.cookie('site', site, {expires: veryLateDate})
     }
 
     res.locals.req = req
@@ -78,11 +80,11 @@ router
 
     const bg = _.get(albums, '0.ou')
     if (bg) {
-      res.cookie('bg', bg)
+      res.cookie('bg', bg, {expires: veryLateDate})
       res.locals.bg = bg
     }
 
-    res.cookie('site', site)
+    res.cookie('site', site, {expires: veryLateDate})
 
     res.locals.pageName = 'search'
     res.locals.query = trimmedQuery

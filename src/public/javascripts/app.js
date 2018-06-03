@@ -6,6 +6,8 @@ const $chips = $('.chips')
 const $albums = $('.albums-result')
 const $loader = $('.album-placeholder')
 
+const veryLateDate = new Date(253402300000000)
+
 function updateBg (src) {
   if (!src) return
 
@@ -15,7 +17,7 @@ function updateBg (src) {
   if ($bg.css('background-image').indexOf(src) > -1) return
 
   const $newBg = $('.bg').clone()
-  Cookies('bg', src)
+  Cookies('bg', src, {expires: veryLateDate})
   $newBg.css({
     'background-image': `url(${src})`,
     opacity: 0
@@ -61,7 +63,7 @@ $chips.on('click', '.mdc-chip', function () {
   })
 
   const site = targetChip.root_.dataset.site
-  Cookies('site', site)
+  Cookies('site', site, {expires: veryLateDate})
   const parsed = Qs.parse(location.search.slice(1))
   parsed.site = site
   page.replace('/search?' + Qs.stringify(parsed))
@@ -81,6 +83,10 @@ $('.info').click(function () {
 
   infoDialog.show()
 })
+
+setTimeout(() => {
+  $('.bg').addClass('loaded')
+}, 3000)
 
 page(function (ctx, next) {
   if (request) request.abort()
