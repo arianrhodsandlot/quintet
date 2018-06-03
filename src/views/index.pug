@@ -1,1 +1,69 @@
-extends layout
+include mixins.pug
+
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport' content='initial-scale=1, width=device-width')
+    meta(http-equiv='Content-Type' content='text/html;charset=UTF-8')
+    meta(name='theme-color' content='#333')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=IM+Fell+Double+Pica:400i' rel='stylesheet')
+    link(rel='stylesheet' href='/stylesheets/app.css')
+
+  body(class=`page-${pageName}`)
+    header.mdc-top-app-bar.mdc-top-app-bar--fixed.mdc-elevation--z3
+      .mdc-top-app-bar__row
+        section.mdc-top-app-bar__section.mdc-top-app-bar__section--align-start
+          a.mdc-top-app-bar__title(href='/')
+            span.material-icons album
+            h1 Holly Quintet
+        section.mdc-top-app-bar__section.mdc-top-app-bar__section--align-end(role='toolbar')
+          button.info.material-icons.mdc-top-app-bar__action-item info
+
+    .mdc-top-app-bar--fixed-adjust
+
+    .form-container.mdc-layout-grid(data-controller='form')
+      .mdc-layout-grid__inner
+        .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle
+          form.mdc-layout-grid(action='/search' autocomplete='off')
+            .mdc-layout-grid__inner
+              .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon(data-mdc-auto-init='MDCTextField')
+                i.material-icons.mdc-text-field__icon label_important
+                input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query data-target='app.query')
+                label.mdc-floating-label(for='tf-outlined') 搜索图片关键词
+                .mdc-notched-outline
+                  svg
+                    path.mdc-notched-outline__path
+                .mdc-notched-outline__idle
+
+    .bg(style={'background-image': `url(${bg})`})
+
+    .content.mdc-elevation--z0
+      .chips.mdc-chip-set.mdc-chip-set--filter(data-mdc-auto-init='MDCChipSet')
+        for s in sites.map((s) => s.sites).reduce((a, b) => a.concat(b), [])
+          .mdc-chip(class={'mdc-chip--selected': s.site === site} data-site=s.site)
+            i.material-icons.mdc-chip__icon.mdc-chip__icon--leading(class={'mdc-chip__icon--leading-hidden': s.site === site}) radio_button_unchecked
+            .mdc-chip__checkmark
+              svg.mdc-chip__checkmark-svg(viewbox='-2 -3 30 30')
+                path.mdc-chip__checkmark-path(fill='none', stroke='black', d='M1.73,12.91 8.1,19.28 22.79,4.59')
+            .mdc-chip__text= s.name
+
+      .albums.album-placeholder
+        .mdc-layout-grid
+          .mdc-layout-grid__inner
+            +album-placeholder().mdc-layout-grid__cell--span-4
+            .mdc-layout-grid__cell.mdc-layout-grid__cell--span-8
+              .mdc-layout-grid__inner
+                - i = 1
+                  while i < 9
+                    - i += 1
+                    +album-placeholder().mdc-layout-grid__cell--span-3
+
+      include albums.pug
+
+    include info.pug
+
+    script(src='https://cdn.jsdelivr.net/combine/npm/lodash@4.17.10,npm/jquery@3.3.1,npm/cookies-js@1.2.3,npm/page@1.8.6,npm/material-components-web@0.35.2/dist/material-components-web.min.js,npm/@babel/polyfill@7.0.0-beta.49/dist/polyfill.min.js,npm/imagesloaded@4.1.4/imagesloaded.pkgd.min.js,npm/qs@6.5.2/dist/qs.min.js')
+    script(src='/javascripts/app.js')

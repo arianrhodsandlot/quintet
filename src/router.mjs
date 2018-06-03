@@ -89,7 +89,7 @@ router
     res.locals.albums = albums
     res.locals.title = 'Holly Quintet'
 
-    res.render('search')
+    res.render(req.xhr ? 'albums' : 'index')
   })
   .get('/file', async function(req, res) {
     request(req.query.url)

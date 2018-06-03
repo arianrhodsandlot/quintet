@@ -6237,17 +6237,17 @@ html, body {
       box-shadow: none;
       transform: none; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(2) {
-    animation-delay: 0.5s; }
+    animation-delay: 1s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(3) {
-    animation-delay: 0.2s; }
+    animation-delay: 0.4s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(4) {
-    animation-delay: 0.9s; }
+    animation-delay: 1.3s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(5) {
-    animation-delay: 0.3s; }
+    animation-delay: 1.3s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(6) {
-    animation-delay: 0.5s; }
+    animation-delay: 0.4s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(7) {
-    animation-delay: 0.2s; }
+    animation-delay: 1.4s; }
   .album-placeholder .mdc-layout-grid__cell--span-8 .album-container:nth-child(8) {
     animation-delay: 0.9s; }
 
@@ -6261,3 +6261,37 @@ html, body {
     transform: scale(1.01); }
   100% {
     transform: scale(1); } }
+
+.info-dialog .mdc-dialog__surface {
+  max-width: 700px; }
+
+.info-dialog .mdc-dialog__header__title .material-icons {
+  font-size: 24px;
+  vertical-align: sub;
+  margin-right: 4px; }
+
+.info-dialog .mdc-dialog__body {
+  text-align: justify;
+  padding-bottom: 0; }
+  .info-dialog .mdc-dialog__body .logo {
+    font-family: "IM Fell Double Pica", serif !important;
+    font-weight: bold;
+    font-size: 18px; }
+  .info-dialog .mdc-dialog__body .material-icons {
+    vertical-align: top;
+    margin-right: 2px; }
+  .info-dialog .mdc-dialog__body .word-group {
+    margin: 0 4px; }
+  .info-dialog .mdc-dialog__body a {
+    color: inherit;
+    margin: 0 4px; }
+  .info-dialog .mdc-dialog__body .meta {
+    padding-top: 10px;
+    font-size: 12px;
+    text-align: center; }
+    .info-dialog .mdc-dialog__body .meta a {
+      text-decoration: none; }
+    .info-dialog .mdc-dialog__body .meta .meta-item {
+      margin: 0 3px; }
+    .info-dialog .mdc-dialog__body .meta .meta-item img {
+      vertical-align: middle; }

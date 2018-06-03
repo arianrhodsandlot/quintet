@@ -73,6 +73,15 @@ $albums.on('click', '.download-mask', function () {
   updateBg(src)
 })
 
+let infoDialog
+$('.info').click(function () {
+  if (!infoDialog) {
+    infoDialog = $('.info-dialog').get(0).MDCDialog
+  }
+
+  infoDialog.show()
+})
+
 page(function (ctx, next) {
   if (request) request.abort()
 
