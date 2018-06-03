@@ -10,7 +10,7 @@ mixin album(a)
 
 mixin albums(albums)
   .albums.albums-result
-    if albums
+    if albums && albums.length
       .mdc-layout-grid
         .mdc-layout-grid__inner
           for a in albums.slice(0, 1)
@@ -19,6 +19,8 @@ mixin albums(albums)
             .mdc-layout-grid__inner
               for a in albums.slice(1, 9)
                 +album(a).mdc-layout-grid__cell--span-3
+    else
+      .albums-empty 未搜到与“#{query}”相关的图片。
 
 mixin album-placeholder()
   .album-container.album-placeholder.mdc-layout-grid__cell.mdc-elevation--z5&attributes(attributes)
