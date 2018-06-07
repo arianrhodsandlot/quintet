@@ -18,7 +18,7 @@
     "express": "~4.16.0",
     "http-proxy-middleware": "^0.18.0",
     "lodash": "^4.17.10",
-    "material-components-web": "^0.35.2",
+    "material-components-web": "^0.36.0",
     "morgan": "~1.9.0",
     "nib": "^1.1.2",
     "node-sass-middleware": "^0.11.0",
