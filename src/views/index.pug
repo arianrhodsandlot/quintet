@@ -65,5 +65,16 @@ html
 
     include info.pug
 
+
+    if process.env.NODE_ENV === 'production'
+      script.
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga')
+
+        ga('create', 'UA-62753388-1', 'auto')
+        ga('send', 'pageview')
+
     script(src='https://cdn.jsdelivr.net/combine/npm/lodash@4.17.10,npm/jquery@3.3.1,npm/cookies-js@1.2.3,npm/page@1.8.6,npm/material-components-web@0.35.2/dist/material-components-web.min.js,npm/@babel/polyfill@7.0.0-beta.49/dist/polyfill.min.js,npm/imagesloaded@4.1.4/imagesloaded.pkgd.min.js,npm/qs@6.5.2/dist/qs.min.js')
     script(src='/javascripts/app.js')

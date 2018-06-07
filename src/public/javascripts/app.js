@@ -99,6 +99,8 @@ setTimeout(() => {
 }, 3000)
 
 page(function (ctx, next) {
+  if (window.ga) ga('send', 'pageview')
+
   if (request) request.abort()
 
   if (ctx.init) {
