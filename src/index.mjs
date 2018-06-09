@@ -8,17 +8,13 @@ import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import compression from 'compression'
 import router from './router'
-import sites from './consts/sites'
 
-var app = express()
-
-app.locals.sites = sites
-
-const workingDir = path.parse(url.parse(import.meta.url).pathname).dir
+const filePath = url.parse(import.meta.url).pathname // eslint-disable-line
+const workingDir = path.parse(filePath).dir
 const publicDir = path.join(workingDir, 'public')
 const viewsDir = path.join(workingDir, 'views')
 
-app
+export default express()
   .set('view engine', 'pug')
   .set('views', viewsDir)
   .use(helmet())
@@ -34,5 +30,3 @@ app
   .use(browserify(publicDir))
   .use(express.static(publicDir))
   .use('/', router)
-
-export default app

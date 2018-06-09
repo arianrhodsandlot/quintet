@@ -1,5 +1,5 @@
-import url from "url"
-import path from "path"
+import url from 'url'
+import path from 'path'
 
 function getCertainSizeSrcFromItunes (src, width = 10000, height = width) {
   let parsed = url.parse(src, false)

@@ -1,4 +1,5 @@
 let request
+const {Qs, page, ga, imagesLoaded, _, mdc, Cookies} = window
 const $body = $('body')
 const $form = $('form')
 const $query = $form.find('.query')
@@ -88,7 +89,7 @@ $info.click(function () {
 $body.keypress(function (e) {
   if (e.target === $query.get(0)) return
 
-  if(e.which === 47) {
+  if (e.which === 47) {
     $query.focus()
     e.preventDefault()
   }

@@ -33,7 +33,7 @@ router
 
     res.render('index')
   })
-  .get('/search', async function(req, res) {
+  .get('/search', async function (req, res) {
     let {query, site} = req.query
 
     const parsed = url.parse(req.path, true)
@@ -75,7 +75,7 @@ router
       albums = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
       albums = albums.map(JSON.parse)
     } catch (e) {
-      console.error(e)
+      console.error(e) // eslint-disable-line
     }
 
     const bg = _.get(albums, '0.ou')
@@ -93,9 +93,9 @@ router
 
     res.render(req.xhr ? 'albums' : 'index')
   })
-  .get('/file', async function(req, res) {
+  .get('/file', async function (req, res) {
     request(req.query.url)
-      .on('response', function(remoteRes) {
+      .on('response', function (remoteRes) {
         delete remoteRes.headers['content-disposition']
         res.attachment(req.query.filename)
       })

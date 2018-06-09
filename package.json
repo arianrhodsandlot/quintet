@@ -51,7 +51,26 @@
       "minify"
     ]
   },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "eslint:recommended",
+      "standard"
+    ],
+    "env": {
+      "browser": true,
+      "jquery": true,
+      "node": true
+    }
+  },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
     "nodemon": "^1.17.5",
     "socks5-https-client": "^1.2.1"
   },
