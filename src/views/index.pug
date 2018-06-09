@@ -42,7 +42,7 @@ html
 
     .content.mdc-elevation--z0
       .chips.mdc-chip-set.mdc-chip-set--filter(data-mdc-auto-init='MDCChipSet')
-        for s in sites.map((s) => s.sites).reduce((a, b) => a.concat(b), [])
+        for s in sites
           .mdc-chip(class={'mdc-chip--selected': s.site === site} data-site=s.site)
             i.material-icons.mdc-chip__icon.mdc-chip__icon--leading(class={'mdc-chip__icon--leading-hidden': s.site === site}) radio_button_unchecked
             .mdc-chip__checkmark

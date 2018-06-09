@@ -14,14 +14,11 @@ const veryLateDate = new Date(253402300000000)
 
 router
   .use(function (req, res, next) {
-    let site = req.cookies.site || sites[0].sites[0].site
-
-    if (!req.cookies.site) {
-      res.cookie('site', site, {expires: veryLateDate})
-    }
-
-    res.locals.req = req
+    let site = req.cookies.site || sites[0].site
+    res.cookie('site', site, {expires: veryLateDate})
     res.locals.site = site
+    res.locals.sites = sites
+    res.locals.req = req
     res.locals.bg = req.cookies.bg || defaultBg
     res.locals.getCoverDownloadSrc = getCoverDownloadSrc
     next()
@@ -34,19 +31,29 @@ router
     res.render('index')
   })
   .get('/search', async function (req, res) {
-    let {query, site} = req.query
+    let {query = '', site = ''} = req.query
+
+    if (!query) {
+      res.redirect('/')
+      return
+    }
 
     const parsed = url.parse(req.path, true)
     const trimmedQuery = query.trim()
+
     if (query !== trimmedQuery) {
       parsed.search = null
       parsed.query.query = trimmedQuery
       const redirectUrl = url.format(parsed)
       res.redirect(redirectUrl)
       return
-    } else if (!site) {
+    }
+
+    const isValidSite = _(sites).map('site').includes(site)
+    if (!isValidSite) {
       parsed.search = null
-      parsed.query.site = sites[0].sites[0].site
+      parsed.query.query = trimmedQuery
+      parsed.query.site = sites[0].site
       const redirectUrl = url.format(parsed)
       res.redirect(redirectUrl)
       return
@@ -85,7 +92,7 @@ router
     }
 
     res.cookie('site', site, {expires: veryLateDate})
-
+    res.locals.site = site
     res.locals.pageName = 'search'
     res.locals.query = trimmedQuery
     res.locals.albums = albums
