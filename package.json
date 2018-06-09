@@ -1,6 +1,6 @@
 {
-  "name": "express",
-  "version": "0.0.0",
+  "name": "holly-quintet",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "start": "nodemon --experimental-modules server.mjs"
@@ -13,9 +13,10 @@
     "babelify": "^8.0.0",
     "browserify-middleware": "^8.1.1",
     "chowdown": "^1.2.2",
+    "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
-    "debug": "~3.1.0",
     "express": "~4.16.0",
+    "helmet": "^3.12.1",
     "http-proxy-middleware": "^0.18.0",
     "lodash": "^4.17.10",
     "material-components-web": "^0.36.0",
@@ -53,5 +54,11 @@
   "devDependencies": {
     "nodemon": "^1.17.5",
     "socks5-https-client": "^1.2.1"
+  },
+  "config": {
+    "port": 1025
+  },
+  "engines": {
+    "node": ">=10.4.0"
   }
 }

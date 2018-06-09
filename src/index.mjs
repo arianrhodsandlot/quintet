@@ -5,6 +5,8 @@ import logger from 'morgan'
 import sassMiddleware from 'node-sass-middleware'
 import browserify from 'browserify-middleware'
 import cookieParser from 'cookie-parser'
+import helmet from 'helmet'
+import compression from 'compression'
 import router from './router'
 import sites from './consts/sites'
 
@@ -19,6 +21,8 @@ const viewsDir = path.join(workingDir, 'views')
 app
   .set('view engine', 'pug')
   .set('views', viewsDir)
+  .use(helmet())
+  .use(compression())
   .use(logger('combined'))
   .use(cookieParser())
   .use(sassMiddleware({
