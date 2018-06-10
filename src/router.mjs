@@ -30,11 +30,11 @@ router
 
     res.render('index')
   })
-  .get('/search', async function (req, res) {
+  .get('/search', async function (req, res, next) {
     let {query = '', site = ''} = req.query
 
     if (!query) {
-      res.redirect('/')
+      next()
       return
     }
 
@@ -100,13 +100,21 @@ router
 
     res.render(req.xhr ? 'albums' : 'index')
   })
-  .get('/file', async function (req, res) {
+  .get('/file', async function (req, res, next) {
+    if (!req.query.url) {
+      next()
+      return
+    }
+
     request(req.query.url)
       .on('response', function (remoteRes) {
         delete remoteRes.headers['content-disposition']
         res.attachment(req.query.filename)
       })
       .pipe(res)
+  })
+  .get('*', function (req, res) {
+    res.redirect('/')
   })
 
 export default router
