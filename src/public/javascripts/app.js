@@ -13,12 +13,10 @@ const veryLateDate = new Date(253402300000000)
 function updateBg (src) {
   if (!src) return
 
-  $('.bg:not(:last)').remove()
-
   const $bg = $('.bg')
   if ($bg.css('background-image').indexOf(src) > -1) return
 
-  const $newBg = $('.bg').clone()
+  const $newBg = $('.bg').first().clone()
   Cookies('bg', src, {expires: veryLateDate})
   $newBg.css({
     'background-image': `url(${src})`,
@@ -31,6 +29,7 @@ function updateBg (src) {
     $newBg.css('opacity', '')
     setTimeout(() => {
       $bg.remove()
+      $('.bg:not(:last)').remove()
     }, 3000)
   }, 50)
 }

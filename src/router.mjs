@@ -1,9 +1,8 @@
 import _ from 'lodash'
 import express from 'express'
-import chowdown from 'chowdown'
-import Agent from 'socks5-https-client/lib/Agent'
 import url from 'url'
 import request from 'request'
+import Searcher from './searcher'
 import sites from './consts/sites'
 import {getCoverDownloadSrc} from './util'
 
@@ -59,31 +58,7 @@ router
       return
     }
 
-    const requestOptions = {
-      baseUrl: 'https://www.google.com',
-      url: '/search',
-      qs: {
-        hl: 'zh-CN',
-        tbm: 'isch',
-        gws_rd: 'cr', // get rid of our request being redirected by country
-        q: `site:${site} ${trimmedQuery}`
-      },
-      timeout: 3000,
-      headers: {
-        'user-agent': req.get('user-agent')
-      }
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      requestOptions.agentClass = Agent
-    }
-
-    let albums
-    try {
-      albums = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
-      albums = albums.map(JSON.parse)
-    } catch (e) {
-      console.error(e) // eslint-disable-line
-    }
+    const albums = await Searcher.search(site, trimmedQuery)
 
     const bg = _.get(albums, '0.ou')
     if (bg) {
