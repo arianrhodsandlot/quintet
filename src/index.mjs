@@ -15,11 +15,11 @@ const publicDir = path.join(workingDir, 'public')
 const viewsDir = path.join(workingDir, 'views')
 
 export default express()
+  .set('trust proxy', 'loopback')
   .set('view engine', 'pug')
   .set('views', viewsDir)
   .use(helmet())
   .use(compression())
-  .use(logger('combined'))
   .use(cookieParser())
   .use(sassMiddleware({
     src: publicDir,
@@ -29,4 +29,5 @@ export default express()
   }))
   .use(browserify(publicDir))
   .use(express.static(publicDir))
+  .use(logger('combined'))
   .use('/', router)

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "pm2-dev --node-args='--experimental-modules' server.mjs",
-    "deploy": "NODE_ENV=production pm2 startOrRestart --node-args='--experimental-modules' server.mjs"
+    "deploy": "pm2 startOrRestart apps.json"
   },
   "dependencies": {
     "babel-core": "^6.26.3",

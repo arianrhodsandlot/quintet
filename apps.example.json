@@ -1,0 +1,12 @@
+{
+  "apps": [{
+    "name": "holly-quintet",
+    "script": "server.mjs",
+    "cwd": ".",
+    "interpreter_args": "--experimental-modules",
+    "env": {
+      "NODE_ENV": "production",
+      "HOLLY_QUINTET_PORT": 1025
+    }
+  }]
+}
