@@ -8,7 +8,7 @@
 
 ## What it does
 
-A web app used for searching disks' covers from iTunes, Amazon, Netease Music, etc.
+Holly Quintet is a web app used for searching disks' covers from a series of music websites.
 
 All results are picked from [Google Images](https://www.google.com/imghp). In fact, it's just like a [reverse proxy](http://en.wikipedia.org/wiki/Reverse_proxy) of the search results of "`site:itunes.apple.com/us your-key-words`" or `"site:amazone.com your-key-words`".
 
@@ -23,7 +23,9 @@ npm i
 npm start
 ```
 
-Then browse to http://localhost:3000
+Then browse to http://localhost:1025 .
+
+By the way, a socks5 server with port 1080 should keep running in background since Google is not always available in some region.
 
 ---
 
