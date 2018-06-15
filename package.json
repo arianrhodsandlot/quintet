@@ -16,7 +16,7 @@
     "chowdown": "^1.2.2",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
-    "express": "~4.16.0",
+    "express": "~4.16.3",
     "helmet": "^3.12.1",
     "http-proxy-middleware": "^0.18.0",
     "lodash": "^4.17.10",
