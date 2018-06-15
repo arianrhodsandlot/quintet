@@ -3,7 +3,8 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --experimental-modules server.mjs"
+    "start": "pm2-dev --node-args='--experimental-modules' server.mjs",
+    "deploy": "NODE_ENV=production pm2 startOrRestart --node-args='--experimental-modules' server.mjs"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
@@ -24,6 +25,7 @@
     "morgan": "~1.9.0",
     "nib": "^1.1.2",
     "node-sass-middleware": "^0.11.0",
+    "pm2": "^2.10.4",
     "pug": "2.0.3",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5"
@@ -72,7 +74,6 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "nodemon": "^1.17.5",
     "socks5-https-client": "^1.2.1"
   },
   "config": {
