@@ -14,7 +14,6 @@ function updateBg (src) {
   if (!src) return
 
   const $bg = $('.bg')
-  if ($bg.css('background-image').indexOf(src) > -1) return
 
   const $newBg = $('.bg').first().clone()
   Cookies('bg', src, {expires: veryLateDate})
@@ -22,15 +21,15 @@ function updateBg (src) {
     'background-image': `url(${src})`,
     opacity: 0
   })
-  $bg.before($newBg)
+  $bg.first().before($newBg)
 
+  $bg.addClass('garbage')
   setTimeout(() => {
     $bg.css('opacity', 0)
     $newBg.css('opacity', '')
     setTimeout(() => {
-      $bg.remove()
-      $('.bg:not(:last)').remove()
-    }, 3000)
+      $('.garbage').remove()
+    }, 1500)
   }, 50)
 }
 
@@ -142,7 +141,7 @@ page('/search', async function (ctx) {
   document.title = $title.text()
 
   imagesLoaded($newAlbums.get(0), () => {
-    if ($newAlbums.data('query') !== query) return
+    if ($newAlbums.data('query') !== query.trim()) return
 
     $loader.hide()
     $albums.html($newAlbums.html()).removeClass('loading')

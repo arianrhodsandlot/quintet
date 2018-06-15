@@ -4,7 +4,7 @@ import url from 'url'
 import request from 'request'
 import Searcher from './searcher'
 import sites from './consts/sites'
-import {getCoverDownloadSrc} from './util'
+import {getCoverOriginSrc, getCoverDownloadSrc} from './util'
 
 const router = express.Router()
 const defaultBg = '/images/default.jpg'
@@ -19,6 +19,7 @@ router
     res.locals.sites = sites
     res.locals.req = req
     res.locals.bg = req.cookies.bg || defaultBg
+    res.locals.getCoverOriginSrc = getCoverOriginSrc
     res.locals.getCoverDownloadSrc = getCoverDownloadSrc
     next()
   })

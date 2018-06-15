@@ -38,7 +38,7 @@ html, body
   filter: blur(10px)
   transform: scale(1.2)
   &.loaded
-    transition: opacity 3s
+    transition: opacity 1.5s
 
 .mdc-text-field
   margin: auto
@@ -116,21 +116,32 @@ html, body
     left: 0
     right: 0
     transition: transform .3s
-    padding: 6px
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    background: rgba(0, 0, 0, .8)
+    background: rgba(0, 0, 0, .6)
     color: white
     font-size: 12px
     color: white
     text-decoration: none
+    display: flex
     a
       color: white
       text-decoration: none
+      display: block
+      padding: 6px
+      transition: background-color .4s
+      &:hover
+        background-color: rgba(0, 0, 0, .5)
+    .link
+      flex: 1
+      min-width: 0
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      .material-icons
+        margin: 0 10px 0 0
+    .zoom
+      text-align: center
     .material-icons
       vertical-align: middle
-      margin: 0 10px 0 0
 
   &:hover
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12)

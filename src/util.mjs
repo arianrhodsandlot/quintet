@@ -22,7 +22,7 @@ function getCoverOriginSrcFromVgm (src) {
   return url.format(parsed)
 }
 
-function getCoverOriginSrc (src) {
+export function getCoverOriginSrc (src) {
   const coverHost = url.parse(src, true).hostname
 
   if (coverHost.endsWith('.mzstatic.com')) {
