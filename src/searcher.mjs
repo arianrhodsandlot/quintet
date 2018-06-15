@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default class Searcher {
   static getCacheKey (site, query) {
-    return JSON.stringify(site, query)
+    return JSON.stringify({site, query})
   }
 
   static async searchRemote (site, query) {
@@ -46,12 +46,8 @@ export default class Searcher {
   static async search (site, query) {
     const cacheKey = Searcher.getCacheKey(site, query)
     let albums = cache.get(cacheKey)
-    if (albums) {
-      console.log('cache 命中！')
-    }
     if (!albums) {
       albums = await Searcher.searchRemote(site, query)
-      console.log('cache 没有命中')
     }
     return albums
   }
