@@ -50,3 +50,25 @@ export function getCoverDownloadSrc (src, filename) {
     }
   })
 }
+
+export function getJsdelivrCombinedLink (packages) {
+  let pathname = packages.map((package) => {
+    let packagePath = url.resolve('npm/', `${package.name}@${package.version || 'latest'}`)
+    if (package.path) {
+      packagePath += '/'
+      packagePath = url.resolve(packagePath, package.path)
+    }
+    return packagePath
+  }).join()
+
+  pathname = url.resolve('/combine/', pathname)
+
+  let link = {
+    protocol: 'https:',
+    hostname: 'cdn.jsdelivr.net',
+    pathname
+  }
+  link = url.format(link)
+
+  return link
+}

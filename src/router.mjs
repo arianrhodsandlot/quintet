@@ -4,7 +4,7 @@ import url from 'url'
 import request from 'request'
 import Searcher from './searcher'
 import sites from './consts/sites'
-import {getCoverOriginSrc, getCoverDownloadSrc} from './util'
+import {getCoverOriginSrc, getCoverDownloadSrc, getJsdelivrCombinedLink} from './util'
 
 const router = express.Router()
 const defaultBg = '/images/default.jpg'
@@ -21,6 +21,7 @@ router
     res.locals.bg = req.cookies.bg || defaultBg
     res.locals.getCoverOriginSrc = getCoverOriginSrc
     res.locals.getCoverDownloadSrc = getCoverDownloadSrc
+    res.locals.getCombinedLink = getCombinedLink()
     next()
   })
   .get('/', function (req, res) {
@@ -92,5 +93,38 @@ router
   .get('*', function (req, res) {
     res.redirect('/')
   })
+
+function getCombinedLink () {
+  return getJsdelivrCombinedLink([{
+    name: '@babel/polyfill',
+    version: '7.0.0-beta.49',
+    path: 'dist/polyfill.min.js'
+  }, {
+    name: 'cookies-js',
+    version: '1.2.3'
+  }, {
+    name: 'imagesloaded',
+    version: '4.1.4',
+    path: 'imagesloaded.pkgd.min.js'
+  }, {
+    name: 'jquery',
+    version: '3.3.1'
+  }, {
+    name: 'lodash',
+    version: '4.17.10'
+  }, {
+    name: 'material-components-web',
+    version: '0.35.2',
+    path: 'dist/material-components-web.min.js'
+  }, {
+    name: 'page',
+    version: '1.8.6'
+  }, {
+    name: 'qs',
+    version: '6.5.2',
+    path: 'dist/qs.min.js'
+  }])
+
+}
 
 export default router
