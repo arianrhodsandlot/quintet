@@ -52,11 +52,11 @@ export function getCoverDownloadSrc (src, filename) {
 }
 
 export function getJsdelivrCombinedLink (packages) {
-  let pathname = packages.map((package) => {
-    let packagePath = url.resolve('npm/', `${package.name}@${package.version || 'latest'}`)
-    if (package.path) {
+  let pathname = packages.map((p) => {
+    let packagePath = url.resolve('npm/', `${p.name}@${p.version || 'latest'}`)
+    if (p.path) {
       packagePath += '/'
-      packagePath = url.resolve(packagePath, package.path)
+      packagePath = url.resolve(packagePath, p.path)
     }
     return packagePath
   }).join()

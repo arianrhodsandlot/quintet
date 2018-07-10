@@ -21,7 +21,7 @@ router
     res.locals.bg = req.cookies.bg || defaultBg
     res.locals.getCoverOriginSrc = getCoverOriginSrc
     res.locals.getCoverDownloadSrc = getCoverDownloadSrc
-    res.locals.getCombinedLink = getCombinedLink()
+    res.locals.combinedJsLink = getCombinedJsLink()
     next()
   })
   .get('/', function (req, res) {
@@ -94,7 +94,7 @@ router
     res.redirect('/')
   })
 
-function getCombinedLink () {
+function getCombinedJsLink () {
   return getJsdelivrCombinedLink([{
     name: '@babel/polyfill',
     version: '7.0.0-beta.49',
