@@ -6,8 +6,8 @@ module.exports = {
     script: 'server.js',
     env: {
       NODE_ENV: 'production',
-      "NODE_OPTIONS": "-r esm",
-      "HOLLY_QUINTET_PORT": 1025
+      NODE_OPTIONS: '-r esm',
+      HOLLY_QUINTET_PORT: 1025
     },
     exec_mode: 'cluster',
     instances: 0
