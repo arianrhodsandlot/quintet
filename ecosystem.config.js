@@ -4,9 +4,9 @@ module.exports = {
   apps: [{
     name: 'holly-quintet',
     script: 'server.js',
+    interpreter_args: '-r esm',
     env: {
       NODE_ENV: 'production',
-      NODE_OPTIONS: '-r esm',
       HOLLY_QUINTET_PORT: 1025
     },
     exec_mode: 'cluster',
