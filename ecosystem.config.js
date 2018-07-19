@@ -16,10 +16,10 @@ module.exports = {
   deploy : {
     production : {
       host : process.env.HOLLY_QUINTET_HOST,
-      ref  : 'origin/master',
+      ref  : 'origin/dev',
       repo : packageJson.repository.url,
       path : process.env.HOLLY_QUINTET_HOST_DEPLOY_PATH,
-      'post-deploy' : 'npm i && npx pm2 startOrGracefulReload ecosystem.config.js'
+      'post-deploy' : 'touch test'
     }
   }
 };
