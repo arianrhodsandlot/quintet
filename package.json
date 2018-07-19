@@ -2,9 +2,12 @@
   "name": "holly-quintet",
   "version": "3.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arianrhodsandlot/Holly-Quintet.git"
+  },
   "scripts": {
-    "start": "node --experimental-modules server.mjs",
-    "deploy": "pm2 startOrRestart apps.json"
+    "start": "node -r esm server.mjs"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
