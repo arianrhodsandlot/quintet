@@ -2,7 +2,7 @@ import LRU from 'lru-cache'
 import chowdown from 'chowdown'
 import Agent from 'socks5-https-client/lib/Agent'
 
-const cache = LRU({max: 500})
+const cache = new LRU({max: 500})
 const baseRequestOptions = {
   baseUrl: 'https://www.google.com',
   url: '/search',

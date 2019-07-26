@@ -1,10 +1,9 @@
 aside.info-dialog.mdc-dialog(data-mdc-auto-init='MDCDialog')
-  .mdc-dialog__surface
-    header.mdc-dialog__header
-      h2.mdc-dialog__header__title
-        span.material-icons info
-        span 关于
-    section.mdc-dialog__body
+  .mdc-dialog__container: .mdc-dialog__surface
+    header.mdc-dialog__header: h2.mdc-dialog__title
+      span.material-icons info
+      span 关于
+    section.mdc-dialog__content
       p
         span.word-group
           span.logo Holly Quintet
@@ -87,6 +86,7 @@ aside.info-dialog.mdc-dialog(data-mdc-auto-init='MDCDialog')
         a.meta-item(href='https://github.com/arianrhodsandlot/Holly-Quintet' title='GitHub - arianrhodsandlot/Holly-Quintet: A web app to search discs\' cover from iTunes, Amazon, Netease Music, etc.' target='_blank')
           img(alt='GitHub' width=76 height=20 data-src='https://img.shields.io/github/stars/arianrhodsandlot/Holly-Quintet.svg?style=social&label=Star')
 
-    footer.mdc-dialog__footer
-      button.mdc-button.mdc-dialog__footer__button.mdc-dialog__footer__button--accept(type='button') 关闭
-  .mdc-dialog__backdrop
+    footer.mdc-dialog__actions
+      button.mdc-button.mdc-dialog__button(type='button', data-mdc-dialog-action='yes') 关闭
+
+  .mdc-dialog__scrim

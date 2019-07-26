@@ -59,7 +59,8 @@ $chips.on('click', '.mdc-chip', function () {
   const targetChip = chips[index]
 
   chips.forEach((chip) => {
-    chip.foundation.setSelected(chip === targetChip)
+    window.chip = chip
+    chip.foundation_.setSelected(chip === targetChip)
   })
 
   const site = targetChip.root_.dataset.site
@@ -86,7 +87,7 @@ $info.click(function () {
     infoDialog = $infoDialog.get(0).MDCDialog
   }
 
-  infoDialog.show()
+  infoDialog.open()
 })
 
 $body.keypress(function (e) {

@@ -14,7 +14,7 @@ const workingDir = path.parse(filePath).dir
 const viewsDir = path.join(workingDir, 'views')
 
 export default express()
-  .set('trust proxy', 'loopback')
+  .enable('trust proxy')
   .set('view engine', 'pug')
   .set('views', viewsDir)
   .use(helmet())

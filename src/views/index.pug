@@ -10,7 +10,7 @@ html
     meta(name='theme-color' content='#333')
     link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
     link(href='https://fonts.googleapis.com/css?family=IM+Fell+Double+Pica:400i' rel='stylesheet')
-    link(rel='stylesheet' href='https://unpkg.com/material-components-web@0.37.0/dist/material-components-web.min.css')
+    link(rel='stylesheet' href='https://unpkg.com/material-components-web@3.1.0/dist/material-components-web.min.css')
     link(rel='stylesheet' href='/stylesheets/app.css')
     link(rel='preload' href='https://img.shields.io/github/stars/arianrhodsandlot/Holly-Quintet.svg?style=social&label=Star' as='image')
 
@@ -21,8 +21,8 @@ html
           a.mdc-top-app-bar__title(href='/')
             span.material-icons album
             h1 Holly Quintet
-        section.mdc-top-app-bar__section.mdc-top-app-bar__section--align-end(role='toolbar')
-          button.info.material-icons.mdc-top-app-bar__action-item info
+        section.mdc-top-app-bar__section.mdc-top-app-bar__section--align-end
+          button.info.mdc-icon-button.material-icons.mdc-top-app-bar__action-item--unbounded info
 
     .mdc-top-app-bar--fixed-adjust
 
@@ -34,11 +34,11 @@ html
               .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon(data-mdc-auto-init='MDCTextField')
                 i.material-icons.mdc-text-field__icon label_important
                 input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query data-target='app.query')
-                label.mdc-floating-label(for='tf-outlined') 搜索图片关键词
                 .mdc-notched-outline
-                  svg
-                    path.mdc-notched-outline__path
-                .mdc-notched-outline__idle
+                  .mdc-notched-outline__leading
+                  .mdc-notched-outline__notch
+                    label.mdc-floating-label(for='text-field-hero-input') 搜索图片关键词
+                  .mdc-notched-outline__trailing
 
     .bg(style={'background-image': `url(${bg})`})
 

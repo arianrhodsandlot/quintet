@@ -114,7 +114,7 @@ function getCombinedJsLink () {
     version: '4.17.10'
   }, {
     name: 'material-components-web',
-    version: '0.35.2',
+    version: '3.1.0',
     path: 'dist/material-components-web.min.js'
   }, {
     name: 'page',
