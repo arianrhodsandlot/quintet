@@ -146,7 +146,7 @@ page('/search', async function (ctx) {
 
   document.title = $title.text()
 
-  imagesLoaded($newAlbums.get(0), () => {
+  imagesLoaded($newAlbums.find('.album-img').first(), () => {
     if ($newAlbums.data('query') !== query.trim()) return
 
     $loader.hide()
