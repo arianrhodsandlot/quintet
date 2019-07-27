@@ -2,6 +2,7 @@ import _ from 'lodash'
 import express from 'express'
 import url from 'url'
 import request from 'request'
+import logger from 'morgan'
 import Searcher from './searcher'
 import sites from './consts/sites'
 import {getCoverOriginSrc, getCoverDownloadSrc, getJsdelivrCombinedLink} from './util'
@@ -12,6 +13,8 @@ const defaultBg = '/images/default.jpg'
 const veryLateDate = new Date(253402300000000)
 
 router
+  .use(defaultBg, express.static(path.join(workingDir, 'assets/images/default.jpg')))
+  .use(logger('combined'))
   .use(function (req, res, next) {
     let site = req.cookies.site || sites[0].site
     res.cookie('site', site, {expires: veryLateDate})
@@ -96,10 +99,6 @@ router
 
 function getCombinedJsLink () {
   return getJsdelivrCombinedLink([{
-    name: '@babel/polyfill',
-    version: '7.0.0-beta.49',
-    path: 'dist/polyfill.min.js'
-  }, {
     name: 'cookies-js',
     version: '1.2.3'
   }, {
@@ -124,7 +123,6 @@ function getCombinedJsLink () {
     version: '6.5.2',
     path: 'dist/qs.min.js'
   }])
-
 }
 
 export default router
