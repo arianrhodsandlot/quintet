@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import express from 'express'
 import url from 'url'
+import path from 'path'
 import request from 'request'
 import logger from 'morgan'
 import Searcher from './searcher'
@@ -11,6 +12,9 @@ const router = express.Router()
 const defaultBg = '/images/default.jpg'
 
 const veryLateDate = new Date(253402300000000)
+
+const filePath = url.parse(import.meta.url).pathname!
+const workingDir = path.parse(filePath).dir
 
 router
   .use(defaultBg, express.static(path.join(workingDir, 'assets/images/default.jpg')))
@@ -46,7 +50,7 @@ router
     const trimmedQuery = query.trim()
 
     if (query !== trimmedQuery) {
-      parsed.search = null
+      delete parsed.search
       parsed.query.query = trimmedQuery
       const redirectUrl = url.format(parsed)
       res.redirect(redirectUrl)
@@ -55,7 +59,7 @@ router
 
     const isValidSite = _(sites).map('site').includes(site)
     if (!isValidSite) {
-      parsed.search = null
+      delete parsed.search
       parsed.query.query = trimmedQuery
       parsed.query.site = sites[0].site
       const redirectUrl = url.format(parsed)

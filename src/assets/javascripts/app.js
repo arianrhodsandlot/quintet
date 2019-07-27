@@ -1,5 +1,5 @@
 let request
-const {Qs, page, ga, imagesLoaded, _, mdc, Cookies} = window
+const { Qs, page, ga, imagesLoaded, _, mdc, Cookies } = window
 const $body = $('body')
 const $form = $('form')
 const $query = $form.find('.query')
@@ -16,7 +16,7 @@ function updateBg (src) {
   const $bg = $('.bg')
 
   const $newBg = $('.bg').first().clone()
-  Cookies('bg', src, {expires: veryLateDate})
+  Cookies('bg', src, { expires: veryLateDate })
   $newBg.css({
     'background-image': `url(${src})`,
     opacity: 0
@@ -55,7 +55,7 @@ $form.submit(async function (e) {
 
 $chips.on('click', '.mdc-chip', function () {
   const index = $(this).index()
-  const {chips} = this.parentElement.MDCChipSet
+  const { chips } = this.parentElement.MDCChipSet
   const targetChip = chips[index]
 
   chips.forEach((chip) => {
@@ -64,7 +64,7 @@ $chips.on('click', '.mdc-chip', function () {
   })
 
   const site = targetChip.root_.dataset.site
-  Cookies('site', site, {expires: veryLateDate})
+  Cookies('site', site, { expires: veryLateDate })
   const parsed = Qs.parse(location.search.slice(1))
   parsed.site = site
   page.replace('/search?' + Qs.stringify(parsed))
@@ -79,7 +79,7 @@ $albums.on('click', '.download-mask', function () {
 let infoDialog
 $info.click(function () {
   if (!infoDialog) {
-    let $infoDialog = $('.info-dialog')
+    const $infoDialog = $('.info-dialog')
     $infoDialog.find('img[data-src]').each(function () {
       const $img = $(this)
       $img.attr('src', $img.data('src'))
@@ -125,7 +125,7 @@ page('/', function (ctx) {
 
 page('/search', async function (ctx) {
   $body.attr('class', 'page-search')
-  const {query} = Qs.parse(ctx.querystring)
+  const { query } = Qs.parse(ctx.querystring)
   $query.focus().val(query)
 
   document.title = `${query} - Holly Quintet`

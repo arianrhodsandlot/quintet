@@ -1,11 +1,11 @@
 import LRU from 'lru-cache'
-import chowdown from 'chowdown'
-import Agent from 'socks5-https-client/lib/Agent'
+import request from 'request'
+// import chowdown from 'chowdown'
+// import Agent from 'socks5-https-client/lib/Agent'
 
 const cache = new LRU({max: 500})
-const baseRequestOptions = {
-  baseUrl: 'https://www.google.com',
-  url: '/search',
+const baseRequestOptions: request.CoreOptions  = {
+  baseUrl: 'https://www.google.com/search',
   qs: {
     hl: 'zh-CN',
     tbm: 'isch',
@@ -17,15 +17,15 @@ const baseRequestOptions = {
   }
 }
 if (process.env.NODE_ENV !== 'production') {
-  baseRequestOptions.agentClass = Agent
+  // baseRequestOptions.agentClass = Agent
 }
 
 export default class Searcher {
-  static getCacheKey (site, query) {
+  static getCacheKey (site: string, query: string) {
     return JSON.stringify({site, query})
   }
 
-  static async searchRemote (site, query) {
+  static async searchRemote (site: string, query: string) {
     const requestOptions = {
       ...baseRequestOptions,
       qs: {
@@ -34,16 +34,17 @@ export default class Searcher {
       }
     }
 
-    let albums = await chowdown(requestOptions)
-      .collection('.rg_el .rg_meta', chowdown.query.string())
-    albums = albums.map(JSON.parse)
+    let albums: string[] = []
+    // await chowdown(requestOptions)
+      // .collection('.rg_el .rg_meta', chowdown.query.string())
+    albums = albums.map((a) => JSON.parse(a))
 
     const cacheKey = Searcher.getCacheKey(site, query)
     cache.set(cacheKey, albums)
     return albums
   }
 
-  static async search (site, query) {
+  static async search (site: string, query: string) {
     const cacheKey = Searcher.getCacheKey(site, query)
     let albums = cache.get(cacheKey)
     if (!albums) {

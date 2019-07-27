@@ -8,7 +8,7 @@ import favicon from 'serve-favicon'
 import router from './router'
 import bundler from './bundler'
 
-const filePath = url.parse(import.meta.url).pathname // eslint-disable-line
+const filePath = url.parse(import.meta.url).pathname!
 const workingDir = path.parse(filePath).dir
 const viewsDir = path.join(workingDir, 'views')
 
