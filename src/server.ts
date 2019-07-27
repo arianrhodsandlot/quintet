@@ -1,9 +1,10 @@
 import http from 'http'
+import _ from 'lodash'
 import getPort from 'get-port'
 import bundler from './bundler'
 import app from './index'
 
-bundler.on('bundled', async () => {
+async function launchServer () {
   const server = http.createServer(app)
 
   const port = await getPort({
@@ -16,4 +17,6 @@ bundler.on('bundled', async () => {
       const bind =  typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
       console.log(`Listening on ${bind}`)
     })
-})
+}
+
+bundler.on('bundled', _.once(launchServer))

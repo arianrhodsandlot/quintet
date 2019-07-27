@@ -4,8 +4,9 @@ import chowdown from 'chowdown'
 import Agent from 'socks5-https-client/lib/Agent'
 
 const cache = new LRU({max: 500})
-const baseRequestOptions: request.CoreOptions  = {
-  baseUrl: 'https://www.google.com/search',
+const baseRequestOptions: request.Options  = {
+  baseUrl: 'https://www.google.com',
+  uri: '/search',
   qs: {
     hl: 'zh-CN',
     tbm: 'isch',
@@ -26,7 +27,7 @@ export default class Searcher {
   }
 
   static async searchRemote (site: string, query: string) {
-    const requestOptions = {
+    const requestOptions: request.Options = {
       ...baseRequestOptions,
       qs: {
         ...baseRequestOptions.qs,
@@ -34,8 +35,7 @@ export default class Searcher {
       }
     }
 
-    let albums: string[] = []
-    await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
+    let albums: string[] = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
     albums = albums.map((a) => JSON.parse(a))
 
     const cacheKey = Searcher.getCacheKey(site, query)
