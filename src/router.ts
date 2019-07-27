@@ -16,6 +16,9 @@ const veryLateDate = new Date(253402300000000)
 const filePath = url.parse(import.meta.url).pathname!
 const workingDir = path.parse(filePath).dir
 
+const cssLink = getCssLink()
+const jsLink = getJsLink()
+
 router
   .use(defaultBg, express.static(path.join(workingDir, 'assets/images/default.jpg')))
   .use(logger('combined'))
@@ -28,7 +31,8 @@ router
     res.locals.bg = req.cookies.bg || defaultBg
     res.locals.getCoverOriginSrc = getCoverOriginSrc
     res.locals.getCoverDownloadSrc = getCoverDownloadSrc
-    res.locals.combinedJsLink = getCombinedJsLink()
+    res.locals.cssLink = cssLink
+    res.locals.jsLink = jsLink
     next()
   })
   .get('/', function (req, res) {
@@ -101,7 +105,15 @@ router
     res.redirect('/')
   })
 
-function getCombinedJsLink () {
+function getCssLink () {
+  return getJsdelivrCombinedLink([{
+    name: 'material-components-web',
+    version: '3.1.0',
+    path: 'dist/material-components-web.min.css'
+  }])
+}
+
+function getJsLink () {
   return getJsdelivrCombinedLink([{
     name: 'cookies-js',
     version: '1.2.3'

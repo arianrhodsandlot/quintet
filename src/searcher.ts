@@ -1,7 +1,7 @@
 import LRU from 'lru-cache'
 import request from 'request'
-// import chowdown from 'chowdown'
-// import Agent from 'socks5-https-client/lib/Agent'
+import chowdown from 'chowdown'
+import Agent from 'socks5-https-client/lib/Agent'
 
 const cache = new LRU({max: 500})
 const baseRequestOptions: request.CoreOptions  = {
@@ -17,7 +17,7 @@ const baseRequestOptions: request.CoreOptions  = {
   }
 }
 if (process.env.NODE_ENV !== 'production') {
-  // baseRequestOptions.agentClass = Agent
+  baseRequestOptions.agentClass = Agent
 }
 
 export default class Searcher {
@@ -35,8 +35,7 @@ export default class Searcher {
     }
 
     let albums: string[] = []
-    // await chowdown(requestOptions)
-      // .collection('.rg_el .rg_meta', chowdown.query.string())
+    await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
     albums = albums.map((a) => JSON.parse(a))
 
     const cacheKey = Searcher.getCacheKey(site, query)
