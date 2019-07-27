@@ -3,10 +3,10 @@ import getPort from 'get-port'
 import bundler from './bundler'
 import app from './index'
 
-bundler.on('bundled', () => {
+bundler.on('bundled', async () => {
   const server = http.createServer(app)
 
-  const port = getPort({
+  const port = await getPort({
     port: parseInt(process.argv[2] || process.env.HOLLY_QUINTET_PORT || process.env.npm_package_config_port!, 10)
   })
 

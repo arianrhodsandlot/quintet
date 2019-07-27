@@ -25,23 +25,25 @@ router
   .use(function (req, res, next) {
     let site = req.cookies.site || sites[0].site
     res.cookie('site', site, {expires: veryLateDate})
-    res.locals.site = site
-    res.locals.sites = sites
-    res.locals.req = req
-    res.locals.bg = req.cookies.bg || defaultBg
-    res.locals.getCoverOriginSrc = getCoverOriginSrc
-    res.locals.getCoverDownloadSrc = getCoverDownloadSrc
-    res.locals.cssLink = cssLink
-    res.locals.jsLink = jsLink
+
+    const bg = req.cookies.bg || defaultBg
+
+    Object.assign(res.locals, {
+      site, sites, req, bg, getCoverOriginSrc, getCoverDownloadSrc, cssLink, jsLink
+    })
     next()
   })
+
   .get('/', function (req, res) {
-    res.locals.pageName = 'index'
-    res.locals.query = ''
-    res.locals.title = 'Holly Quintet'
+    Object.assign(res.locals, {
+      pageName: 'index',
+      query: '',
+      title: 'Holly Quintet'
+    })
 
     res.render('index')
   })
+
   .get('/search', async function (req, res, next) {
     let {query = '', site = ''} = req.query
 
@@ -71,23 +73,25 @@ router
       return
     }
 
-    const albums = await Searcher.search(site, trimmedQuery)
+    res.cookie('site', site, {expires: veryLateDate})
 
+    const albums = await Searcher.search(site, trimmedQuery)
     const bg = _.get(albums, '0.ou')
     if (bg) {
       res.cookie('bg', bg, {expires: veryLateDate})
       res.locals.bg = bg
     }
-
-    res.cookie('site', site, {expires: veryLateDate})
-    res.locals.site = site
-    res.locals.pageName = 'search'
-    res.locals.query = trimmedQuery
-    res.locals.albums = albums
-    res.locals.title = `${trimmedQuery} - Holly Quintet`
+    Object.assign(res.locals, {
+      site: site,
+      pageName: 'search',
+      query: trimmedQuery,
+      albums: albums,
+      title: `${trimmedQuery} - Holly Quintet`
+    })
 
     res.render(req.xhr ? 'albums' : 'index')
   })
+
   .get('/file', async function (req, res, next) {
     if (!req.query.url) {
       next()
@@ -101,6 +105,7 @@ router
       })
       .pipe(res)
   })
+
   .get('*', function (req, res) {
     res.redirect('/')
   })
