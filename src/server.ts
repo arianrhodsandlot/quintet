@@ -4,11 +4,11 @@ import getPort from 'get-port'
 import bundler from './bundler'
 import app from './index'
 
-async function launchServer () {
-  const server = http.createServer(app)
+const server = http.createServer(app)
 
+async function launchServer () {
   const port = await getPort({
-    port: parseInt(process.argv[2] || process.env.HOLLY_QUINTET_PORT || process.env.npm_package_config_port!, 10)
+    port: parseInt(process.env.HOLLY_QUINTET_PORT || process.env.npm_package_config_port!, 10)
   })
 
   server.listen(port)
@@ -20,3 +20,5 @@ async function launchServer () {
 }
 
 bundler.on('bundled', _.once(launchServer))
+
+export default server
