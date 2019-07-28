@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "allowJs": true,
-    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
-    "strict": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": ["esnext"],
     "paths": {
       "chowdown": ["types/chowdown.d.ts"],
       "socks5-https-client/lib/Agent": ["types/socks5-https-client.d.ts"]
-    }
+    },
+    "sourceMap": true,
+    "strict": true,
+    "target": "esnext"
   },
   "include": [
     "**/*.ts"

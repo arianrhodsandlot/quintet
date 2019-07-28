@@ -35,8 +35,8 @@ export default class Searcher {
       }
     }
 
-    let albums: string[] = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
-    albums = albums.map((a) => JSON.parse(a))
+    let html: string[] = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
+    const albums: {ou: string; pt: string; ru: string}[] = html.map((a) => JSON.parse(a))
 
     const cacheKey = Searcher.getCacheKey(site, query)
     cache.set(cacheKey, albums)
@@ -45,7 +45,7 @@ export default class Searcher {
 
   static async search (site: string, query: string) {
     const cacheKey = Searcher.getCacheKey(site, query)
-    let albums = cache.get(cacheKey)
+    let albums = cache.get(cacheKey) as {ou: string; pt: string; ru: string}[]
     if (!albums) {
       albums = await Searcher.searchRemote(site, query)
     }
