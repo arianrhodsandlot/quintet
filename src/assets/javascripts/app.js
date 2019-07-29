@@ -80,12 +80,12 @@ $albums.on('click', '.download-mask', (e) => {
 let infoDialog
 $info.click(() => {
   if (!infoDialog) {
-    const $infoDialog = $('.info-dialog')
-    $infoDialog.find('img[data-src]').each((el) => {
+    const $dialog = $('.info-dialog')
+    $dialog.find('img[data-src]').each((i, el) => {
       const $img = $(el)
       $img.attr('src', $img.data('src'))
     })
-    infoDialog = $infoDialog.get(0).MDCDialog
+    infoDialog = $dialog.get(0).MDCDialog
   }
 
   infoDialog.open()
