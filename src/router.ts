@@ -1,18 +1,19 @@
-import _ from 'lodash'
-import express from 'express'
 import url from 'url'
 import path from 'path'
+import _ from 'lodash'
+import express from 'express'
 import request from 'request'
 import logger from 'morgan'
 import Searcher from './searcher'
 import sites from './consts/sites'
-import {getCoverOriginSrc, getCoverDownloadSrc, getJsdelivrCombinedLink} from './util'
+import { getCoverOriginSrc, getCoverDownloadSrc, getJsdelivrCombinedLink } from './util'
 
 const router = express.Router()
 const defaultBg = '/images/default.jpg'
 
 const veryLateDate = new Date(253402300000000)
 
+// eslint-disable-next-line node/no-deprecated-api
 const filePath = url.parse(import.meta.url).pathname!
 const workingDir = path.parse(filePath).dir
 
@@ -22,9 +23,9 @@ const jsLink = getJsLink()
 router
   .use(defaultBg, express.static(path.join(workingDir, 'assets/images/default.jpg')))
   .use(logger('combined'))
-  .use(function (req, res, next) {
-    let site = req.cookies.site || sites[0].site
-    res.cookie('site', site, {expires: veryLateDate})
+  .use((req, res, next) => {
+    const site = req.cookies.site || sites[0].site
+    res.cookie('site', site, { expires: veryLateDate })
 
     const bg = req.cookies.bg || defaultBg
 
@@ -34,7 +35,7 @@ router
     next()
   })
 
-  .get('/', function (req, res) {
+  .get('/', (req, res) => {
     Object.assign(res.locals, {
       pageName: 'index',
       query: '',
@@ -44,14 +45,15 @@ router
     res.render('index')
   })
 
-  .get('/search', async function (req, res, next) {
-    let {query = '', site = ''} = req.query
+  .get('/search', async (req, res, next) => {
+    const { query = '', site = '' } = req.query
 
     if (!query) {
       next()
       return
     }
 
+    // eslint-disable-next-line node/no-deprecated-api
     const parsed = url.parse(req.path, true)
     const trimmedQuery = query.trim()
 
@@ -63,7 +65,8 @@ router
       return
     }
 
-    const isValidSite = _(sites).map('site').includes(site)
+    const isValidSite = _(sites).map('site')
+      .includes(site)
     if (!isValidSite) {
       delete parsed.search
       parsed.query.query = trimmedQuery
@@ -73,40 +76,40 @@ router
       return
     }
 
-    res.cookie('site', site, {expires: veryLateDate})
+    res.cookie('site', site, { expires: veryLateDate })
 
     const albums = await Searcher.search(site, trimmedQuery)
     const bg = _.get(albums, '0.ou')
     if (bg) {
-      res.cookie('bg', bg, {expires: veryLateDate})
+      res.cookie('bg', bg, { expires: veryLateDate })
       res.locals.bg = bg
     }
     Object.assign(res.locals, {
-      site: site,
+      site,
       pageName: 'search',
       query: trimmedQuery,
-      albums: albums,
+      albums,
       title: `${trimmedQuery} - Holly Quintet`
     })
 
     res.render(req.xhr ? 'albums' : 'index')
   })
 
-  .get('/file', async function (req, res, next) {
+  .get('/file', (req, res, next) => {
     if (!req.query.url) {
       next()
       return
     }
 
     request(req.query.url)
-      .on('response', function (remoteRes) {
+      .on('response', (remoteRes) => {
         delete remoteRes.headers['content-disposition']
         res.attachment(req.query.filename)
       })
       .pipe(res)
   })
 
-  .get('*', function (req, res) {
+  .get('*', (req, res) => {
     res.redirect('/')
   })
 

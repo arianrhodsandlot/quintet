@@ -2,6 +2,7 @@
   "name": "holly-quintet",
   "version": "3.0.0",
   "private": true,
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/arianrhodsandlot/Holly-Quintet.git"
@@ -9,7 +10,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production NODE_OPTIONS=\"-r esm\" ts-node src/server",
     "dev": "cross-env NODE_OPTIONS=\"-r esm\" ts-node src/server",
-    "test": "cross-env NODE_OPTIONS=\"-r esm\" ava"
+    "test": "eslint src --ext=ts,js && cross-env NODE_OPTIONS=\"-r esm\" ava"
   },
   "dependencies": {
     "chowdown": "^1.2.3",
@@ -47,13 +48,20 @@
     "@types/serve-favicon": "^2.2.30",
     "ava": "^2.2.0",
     "cross-env": "^5.2.0",
+    "eslint-config-argreion": "gist:86724154ca49ee8b3f9aebae3fe44e0a",
     "puppeteer": "^1.19.0",
     "socks5-https-client": "^1.2.1"
   },
   "config": {
     "port": 1025
   },
+  "engines": {
+    "node": ">=8.3.0"
+  },
   "browserslist": "last 2 years",
+  "eslintConfig": {
+    "extends": "argreion"
+  },
   "ava": {
     "compileEnhancements": false,
     "extensions": [

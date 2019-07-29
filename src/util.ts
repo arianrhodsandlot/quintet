@@ -1,23 +1,24 @@
+/* eslint-disable node/no-deprecated-api */
 import url from 'url'
 import path from 'path'
 
 function getCertainSizeSrcFromItunes (src: string, width = 10000, height = width) {
-  let parsed = url.parse(src, false)
-  let parsedPath = path.parse(parsed.pathname || '')
-  parsedPath.name = parsedPath.name.replace(/\d+x\d+/, `${width}x${height}`)
+  const parsed = url.parse(src, false)
+  const parsedPath = path.parse(parsed.pathname || '')
+  parsedPath.name = parsedPath.name.replace(/\d+x\d+/u, `${width}x${height}`)
   parsedPath.base = `${parsedPath.name}${parsedPath.ext}`
   parsed.pathname = path.format(parsedPath)
   return url.format(parsed)
 }
 
 function getCoverOriginSrcFrom163 (src: string) {
-  let parsed = url.parse(src, false)
+  const parsed = url.parse(src, false)
   delete parsed.search
   return url.format(parsed)
 }
 
 function getCoverOriginSrcFromVgm (src: string) {
-  let parsed = url.parse(src, false)
+  const parsed = url.parse(src, false)
   parsed.host = 'media.vgm.io'
   return url.format(parsed)
 }
@@ -63,7 +64,7 @@ export function getJsdelivrCombinedLink (packages: {name?: string; version?: str
 
   pathname = url.resolve('/combine/', pathname)
 
-  let link = {
+  const link = {
     protocol: 'https:',
     hostname: 'cdn.jsdelivr.net',
     pathname

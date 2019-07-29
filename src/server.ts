@@ -14,7 +14,7 @@ async function launchServer () {
   server.listen(port)
     .on('listening', () => {
       const addr = server.address()!
-      const bind =  typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
+      const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
       console.log(`Listening on ${bind}`)
     })
 }

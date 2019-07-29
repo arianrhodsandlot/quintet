@@ -1,16 +1,18 @@
 import LRU from 'lru-cache'
 import request from 'request'
 import chowdown from 'chowdown'
+// eslint-disable-next-line node/no-unpublished-import
 import Agent from 'socks5-https-client/lib/Agent'
 
-const cache = new LRU({max: 500})
-const baseRequestOptions: request.Options  = {
+const cache = new LRU({ max: 500 })
+const baseRequestOptions: request.Options = {
   baseUrl: 'https://www.google.com',
   uri: '/search',
   qs: {
     hl: 'zh-CN',
     tbm: 'isch',
-    gws_rd: 'cr' // get rid of our request being redirected by country
+    // get rid of our request being redirected by country
+    gws_rd: 'cr'
   },
   timeout: 3000,
   headers: {
@@ -23,7 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default class Searcher {
   static getCacheKey (site: string, query: string) {
-    return JSON.stringify({site, query})
+    return JSON.stringify({ site, query })
   }
 
   static async searchRemote (site: string, query: string) {
@@ -35,7 +37,7 @@ export default class Searcher {
       }
     }
 
-    let html: string[] = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
+    const html: string[] = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
     const albums: {ou: string; pt: string; ru: string}[] = html.map((a) => JSON.parse(a))
 
     const cacheKey = Searcher.getCacheKey(site, query)
