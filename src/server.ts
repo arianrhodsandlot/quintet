@@ -2,7 +2,7 @@ import http from 'http'
 import _ from 'lodash'
 import getPort from 'get-port'
 import bundler from './bundler'
-import app from './index'
+import app from '.'
 
 const server = http.createServer(app)
 

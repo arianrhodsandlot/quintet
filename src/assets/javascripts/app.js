@@ -131,7 +131,7 @@ page('/search', async (ctx) => {
 
   document.title = `${query} - Holly Quintet`
 
-  if ($albums.find('.album-container').length) {
+  if ($albums.find('.album-container').length > 0) {
     $albums.addClass('loading')
   } else {
     $albums.empty()

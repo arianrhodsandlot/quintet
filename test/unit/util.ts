@@ -1,10 +1,9 @@
 import test from 'ava'
-import * as util from '../src/util'
+import * as util from '../../src/util'
 
 test('getCoverDownloadSrc', (t) => {
   t.is(util.getCoverDownloadSrc('aaa', 'bbb'), '/file?url=aaa&filename=bbb.jpg')
   t.is(util.getCoverDownloadSrc('https://is5-ssl.mzstatic.com/image/thumb/Music128/v4/fd/2f/d0/fd2fd05b-6fa2-9b98-063f-c76709323a83/093624909347.jpg/10000x10000w.jpg', 'a'), '/file?url=https%3A%2F%2Fis5-ssl.mzstatic.com%2Fimage%2Fthumb%2FMusic128%2Fv4%2Ffd%2F2f%2Fd0%2Ffd2fd05b-6fa2-9b98-063f-c76709323a83%2F093624909347.jpg%2F10000x10000w.jpg&filename=a.jpg')
-
 })
 
 test('getCoverOriginSrc', (t) => {

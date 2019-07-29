@@ -2275,6 +2275,11 @@ browserslist@^4.0.0, browserslist@^4.1.0, browserslist@^4.3.4:
     electron-to-chromium "^1.3.191"
     node-releases "^1.1.25"
 
+buf-compare@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/buf-compare/download/buf-compare-1.0.1.tgz#fef28da8b8113a0a0db4430b0b6467b69730b34a"
+  integrity sha1-/vKNqLgROgoNtEMLC2Rntpcws0o=
+
 buffer-equal@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal/-/buffer-equal-0.0.1.tgz#91bc74b11ea405bc916bc6aa908faafa5b4aac4b"
@@ -2576,6 +2581,13 @@ clean-css@^4.1.11:
   integrity sha512-4ZxI6dy4lrY6FHzfiy1aEOXgu4LIsW2MhwG0VBKdcoGoH/XLFgaHSdLTGr4O8Be6A8r3MOphEiI8Gc1n0ecf3g==
   dependencies:
     source-map "~0.6.0"
+
+clean-regexp@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/clean-regexp/download/clean-regexp-1.0.0.tgz#8df7c7aae51fd36874e8f8d05b9180bc11a3fed7"
+  integrity sha1-jffHquUf02h06PjQW5GAvBGj/tc=
+  dependencies:
+    escape-string-regexp "^1.0.5"
 
 clean-stack@^2.1.0:
   version "2.1.0"
@@ -2916,6 +2928,14 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
+
+core-assert@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.npm.taobao.org/core-assert/download/core-assert-0.2.1.tgz#f85e2cf9bfed28f773cc8b3fa5c5b69bdc02fe3f"
+  integrity sha1-+F4s+b/tKPdzzIs/pcW2m9wC/j8=
+  dependencies:
+    buf-compare "^1.0.0"
+    is-error "^2.2.0"
 
 core-js@^2.0.0, core-js@^2.4.0:
   version "2.6.9"
@@ -3314,6 +3334,13 @@ deep-is@~0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
 
+deep-strict-equal@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/deep-strict-equal/download/deep-strict-equal-0.2.0.tgz#4a078147a8ab57f6a0d4f5547243cd22f44eb4e4"
+  integrity sha1-SgeBR6irV/ag1PVUckPNIvROtOQ=
+  dependencies:
+    core-assert "^0.2.0"
+
 deepmerge@^2.0.1:
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/deepmerge/download/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
@@ -3629,6 +3656,13 @@ end-of-stream@^1.1.0:
   dependencies:
     once "^1.4.0"
 
+enhance-visitors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/enhance-visitors/download/enhance-visitors-1.0.0.tgz#aa945d05da465672a1ebd38fee2ed3da8518e95a"
+  integrity sha1-qpRdBdpGVnKh69OP7i7T2oUY6Vo=
+  dependencies:
+    lodash "^4.13.1"
+
 entities@^1.1.1, entities@~1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
@@ -3723,9 +3757,17 @@ escodegen@~1.9.0:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-ast-utils@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/eslint-ast-utils/download/eslint-ast-utils-1.1.0.tgz#3d58ba557801cfb1c941d68131ee9f8c34bd1586"
+  integrity sha1-PVi6VXgBz7HJQdaBMe6fjDS9FYY=
+  dependencies:
+    lodash.get "^4.4.2"
+    lodash.zip "^4.2.0"
+
 "eslint-config-argreion@gist:86724154ca49ee8b3f9aebae3fe44e0a":
   version "1.0.1"
-  resolved "https://gist.github.com/86724154ca49ee8b3f9aebae3fe44e0a.git#d57cfbaca90e0e8e0423ba06cf0b6a2cc319455c"
+  resolved "https://gist.github.com/86724154ca49ee8b3f9aebae3fe44e0a.git#7ae33ee37d23a8780f519795f25b0b13854f3fdd"
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.13.0"
     "@typescript-eslint/parser" "^1.13.0"
@@ -3733,12 +3775,14 @@ escodegen@~1.9.0:
     eslint-config-standard "^13.0.1"
     eslint-config-standard-react "^8.0.0"
     eslint-import-resolver-typescript "^1.1.1"
+    eslint-plugin-ava "^7.1.0"
     eslint-plugin-import "^2.18.2"
     eslint-plugin-node "^9.1.0"
     eslint-plugin-promise "^4.2.1"
     eslint-plugin-react "^7.14.3"
     eslint-plugin-react-hooks "^1.6.1"
     eslint-plugin-standard "^4.0.0"
+    eslint-plugin-unicorn "^10.0.0"
     typescript "^3.5.3"
 
 eslint-config-standard-jsx@^7.0.0:
@@ -3782,6 +3826,19 @@ eslint-module-utils@^2.4.0:
   dependencies:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
+
+eslint-plugin-ava@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-ava/download/eslint-plugin-ava-7.1.0.tgz#ad2965c8a2b41e1d5e1c9477330ac9faa357b171"
+  integrity sha1-rSllyKK0Hh1eHJR3MwrJ+qNXsXE=
+  dependencies:
+    deep-strict-equal "^0.2.0"
+    enhance-visitors "^1.0.0"
+    espree "^5.0.0"
+    espurify "^2.0.0"
+    import-modules "^1.1.0"
+    pkg-dir "^4.2.0"
+    resolve-from "^5.0.0"
 
 eslint-plugin-es@^1.4.0:
   version "1.4.0"
@@ -3849,6 +3906,24 @@ eslint-plugin-standard@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/eslint-plugin-standard/download/eslint-plugin-standard-4.0.0.tgz#f845b45109c99cd90e77796940a344546c8f6b5c"
   integrity sha1-+EW0UQnJnNkOd3lpQKNEVGyPa1w=
+
+eslint-plugin-unicorn@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-unicorn/download/eslint-plugin-unicorn-10.0.0.tgz#f3815a759f76dd490dbb5a560e3805e0556aff17"
+  integrity sha1-84FadZ923UkNu1pWDjgF4FVq/xc=
+  dependencies:
+    clean-regexp "^1.0.0"
+    eslint-ast-utils "^1.1.0"
+    import-modules "^1.1.0"
+    lodash.camelcase "^4.3.0"
+    lodash.defaultsdeep "^4.6.0"
+    lodash.kebabcase "^4.1.1"
+    lodash.snakecase "^4.1.1"
+    lodash.topairs "^4.3.0"
+    lodash.upperfirst "^4.3.1"
+    regexpp "^2.0.1"
+    reserved-words "^0.1.2"
+    safe-regex "^2.0.2"
 
 eslint-scope@^4.0.0:
   version "4.0.3"
@@ -3936,6 +4011,15 @@ espower-location-detector@^1.0.0:
     source-map "^0.5.0"
     xtend "^4.0.0"
 
+espree@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/espree/download/espree-5.0.1.tgz#5d6526fa4fc7f0788a5cf75b15f30323e2f81f7a"
+  integrity sha1-XWUm+k/H8HiKXPdbFfMDI+L4H3o=
+  dependencies:
+    acorn "^6.0.7"
+    acorn-jsx "^5.0.0"
+    eslint-visitor-keys "^1.0.0"
+
 espree@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npm.taobao.org/espree/download/espree-6.0.0.tgz#716fc1f5a245ef5b9a7fdb1d7b0d3f02322e75f6"
@@ -3961,6 +4045,11 @@ espurify@^1.6.0:
   integrity sha512-ZDko6eY/o+D/gHCWyHTU85mKDgYcS4FJj7S+YD6WIInm7GQ6AnOjmcL4+buFV/JOztVLELi/7MmuGU5NHta0Mg==
   dependencies:
     core-js "^2.0.0"
+
+espurify@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/espurify/download/espurify-2.0.1.tgz#c25b3bb613863daa142edcca052370a1a459f41d"
+  integrity sha1-wls7thOGPaoULtzKBSNwoaRZ9B0=
 
 esquery@^1.0.1:
   version "1.0.1"
@@ -4917,6 +5006,11 @@ import-local@^3.0.1:
     pkg-dir "^4.2.0"
     resolve-cwd "^3.0.0"
 
+import-modules@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/import-modules/download/import-modules-1.1.0.tgz#748db79c5cc42bb9701efab424f894e72600e9dc"
+  integrity sha1-dI23nFzEK7lwHvq0JPiU5yYA6dw=
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -5138,7 +5232,7 @@ is-directory@^0.3.1:
   resolved "https://registry.yarnpkg.com/is-directory/-/is-directory-0.3.1.tgz#61339b6f2475fc772fd9c9d83f5c8575dc154ae1"
   integrity sha1-YTObbyR1/Hcv2cnYP1yFddwVSuE=
 
-is-error@^2.2.2:
+is-error@^2.2.0, is-error@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/is-error/-/is-error-2.2.2.tgz#c10ade187b3c93510c5470a5567833ee25649843"
   integrity sha512-IOQqts/aHWbiisY5DuPJQ0gcbvaLFCa7fBa9xoLfxBZvQ+ZI/Zh9xoI7Gk+G64N0FdK4AbibytHht2tWgpJWLg==
@@ -5660,6 +5754,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.camelcase@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.npm.taobao.org/lodash.camelcase/download/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
+  integrity sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
+
 lodash.clone@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
@@ -5669,6 +5768,11 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+
+lodash.defaultsdeep@^4.6.0:
+  version "4.6.1"
+  resolved "https://registry.npm.taobao.org/lodash.defaultsdeep/download/lodash.defaultsdeep-4.6.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash.defaultsdeep%2Fdownload%2Flodash.defaultsdeep-4.6.1.tgz#512e9bd721d272d94e3d3a63653fa17516741ca6"
+  integrity sha1-US6b1yHSctlOPTpjZT+hdRZ0HKY=
 
 lodash.find@^4.6.0:
   version "4.6.0"
@@ -5680,10 +5784,20 @@ lodash.flattendeep@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
   integrity sha1-+wMJF/hqMTTlvJvsDWngAT3f7bI=
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.npm.taobao.org/lodash.get/download/lodash.get-4.4.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash.get%2Fdownload%2Flodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
 lodash.islength@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.islength/-/lodash.islength-4.0.1.tgz#4e9868d452575d750affd358c979543dc20ed577"
   integrity sha1-Tpho1FJXXXUK/9NYyXlUPcIO1Xc=
+
+lodash.kebabcase@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npm.taobao.org/lodash.kebabcase/download/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
+  integrity sha1-hImxyw0p/4gZXM7KRI/21swpXDY=
 
 lodash.max@^4.0.1:
   version "4.0.1"
@@ -5710,10 +5824,20 @@ lodash.repeat@^4.1.0:
   resolved "https://registry.yarnpkg.com/lodash.repeat/-/lodash.repeat-4.1.0.tgz#fc7de8131d8c8ac07e4b49f74ffe829d1f2bec44"
   integrity sha1-/H3oEx2MisB+S0n3T/6CnR8r7EQ=
 
+lodash.snakecase@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npm.taobao.org/lodash.snakecase/download/lodash.snakecase-4.1.1.tgz#39d714a35357147837aefd64b5dcbb16becd8f8d"
+  integrity sha1-OdcUo1NXFHg3rv1ktdy7Fr7Nj40=
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+
+lodash.topairs@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.npm.taobao.org/lodash.topairs/download/lodash.topairs-4.3.0.tgz#3b6deaa37d60fb116713c46c5f17ea190ec48d64"
+  integrity sha1-O23qo31g+xFnE8RsXxfqGQ7EjWQ=
 
 lodash.unescape@4.0.1:
   version "4.0.1"
@@ -5725,7 +5849,17 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4:
+lodash.upperfirst@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.npm.taobao.org/lodash.upperfirst/download/lodash.upperfirst-4.3.1.tgz#1365edf431480481ef0d1c68957a5ed99d49f7ce"
+  integrity sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=
+
+lodash.zip@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.npm.taobao.org/lodash.zip/download/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
+  integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
+
+lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -7729,7 +7863,7 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
 
-regexp-tree@^0.1.6:
+regexp-tree@^0.1.6, regexp-tree@~0.1.1:
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/regexp-tree/-/regexp-tree-0.1.11.tgz#c9c7f00fcf722e0a56c7390983a7a63dd6c272f3"
   integrity sha512-7/l/DgapVVDzZobwMCCgMlqiqyLFJ0cduo/j+3BcDJIB+yJdsYCfKuI3l/04NV+H/rfNRdPIDbXNZHM9XvQatg==
@@ -7878,6 +8012,11 @@ require-precompiled@^0.1.0:
   resolved "https://registry.yarnpkg.com/require-precompiled/-/require-precompiled-0.1.0.tgz#5a1b52eb70ebed43eb982e974c85ab59571e56fa"
   integrity sha1-WhtS63Dr7UPrmC6XTIWrWVceVvo=
 
+reserved-words@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npm.taobao.org/reserved-words/download/reserved-words-0.1.2.tgz#00a0940f98cd501aeaaac316411d9adc52b31ab1"
+  integrity sha1-AKCUD5jNUBrqqsMWQR2a3FKzGrE=
+
 resolve-cwd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-3.0.0.tgz#0f0075f1bb2544766cf73ba6a6e2adfebcb13f2d"
@@ -8017,6 +8156,13 @@ safe-regex@^1.1.0:
   integrity sha1-QKNmnzsHfR6UPURinhV91IAjvy4=
   dependencies:
     ret "~0.1.10"
+
+safe-regex@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npm.taobao.org/safe-regex/download/safe-regex-2.0.2.tgz#3601b28d3aefe4b963d42f6c2cdb241265cbd63c"
+  integrity sha1-NgGyjTrv5Llj1C9sLNskEmXL1jw=
+  dependencies:
+    regexp-tree "~0.1.1"
 
 "safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
   version "2.1.2"

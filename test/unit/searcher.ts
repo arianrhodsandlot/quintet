@@ -1,5 +1,5 @@
 import test from 'ava'
-import searcher from '../src/searcher'
+import searcher from '../../src/searcher'
 
 test('getCacheKey', (t) => {
   t.is(searcher.getCacheKey('aaa', 'bbb'), '{"site":"aaa","query":"bbb"}')

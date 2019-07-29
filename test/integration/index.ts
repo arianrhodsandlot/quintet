@@ -1,7 +1,7 @@
 import { AddressInfo } from 'net'
 import test, { ExecutionContext } from 'ava'
 import puppeteer from 'puppeteer'
-import server from '../src/server'
+import server from '../../src/server'
 
 test.serial.before(async (t) => {
   await new Promise((resolve) => {
@@ -15,9 +15,9 @@ test.serial.before(async (t) => {
       '--no-sandbox',
       '--disable-setuid-sandbox'
     ]
-  })
+  });
 
-  ;(t as ExecutionContext<{browser: puppeteer.Browser}>).context.browser = browser
+  (t as ExecutionContext<{browser: puppeteer.Browser}>).context.browser = browser
 })
 
 test.serial('search', async (t) => {

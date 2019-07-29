@@ -8,6 +8,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
+      "@/*": ["src/*"],
       "chowdown": ["types/chowdown.d.ts"],
       "socks5-https-client/lib/Agent": ["types/socks5-https-client.d.ts"]
     },

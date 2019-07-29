@@ -8,9 +8,10 @@
     "url": "https://github.com/arianrhodsandlot/Holly-Quintet.git"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production NODE_OPTIONS=\"-r esm\" ts-node src/server",
     "dev": "cross-env NODE_OPTIONS=\"-r esm\" ts-node src/server",
-    "test": "eslint src --ext=ts,js && cross-env NODE_OPTIONS=\"-r esm\" ava"
+    "lint": "eslint --ignore-path=.gitignore --ext=js,ts .",
+    "start": "cross-env NODE_ENV=production NODE_OPTIONS=\"-r esm\" ts-node src/server",
+    "test": "yarn lint && cross-env NODE_OPTIONS=\"-r esm\" ava"
   },
   "dependencies": {
     "chowdown": "^1.2.3",
@@ -56,7 +57,7 @@
     "port": 1025
   },
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=10.0.0"
   },
   "browserslist": "last 2 years",
   "eslintConfig": {
