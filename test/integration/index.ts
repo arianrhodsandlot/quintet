@@ -1,16 +1,17 @@
 import { AddressInfo } from 'net'
+import { exec } from 'child_process'
+import { promisify } from 'util'
+import http from 'http'
 import test, { ExecutionContext } from 'ava'
 import puppeteer from 'puppeteer'
 import sites from '../../src/consts/sites'
-import server from '../../src/server'
+import app from '../../src'
+
+const server = http.createServer(app)
+  .listen(process.env.npm_package_config_port!)
 
 test.serial.before(async (t) => {
-  // const x = await promisify(exec)('yarn build')
-  await new Promise((resolve) => {
-    server.on('listening', () => {
-      resolve()
-    })
-  })
+  await promisify(exec)('yarn build')
   const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   (t as ExecutionContext<{browser: puppeteer.Browser}>).context.browser = browser
 })
@@ -50,7 +51,7 @@ test.serial('memorize last selected site', async (t) => {
   await page.waitForSelector('.album-placeholder')
   t.is(await page.evaluate('$(".mdc-chip--selected").index()'), 7)
 
-  page.goto(`http://localhost:${port}/search?query=a`)
+  await page.goto(`http://localhost:${port}/search?query=a`)
   await page.waitForSelector('.album-placeholder')
   t.is(await page.evaluate('$(".mdc-chip--selected").index()'), 7)
   t.is(page.url(), `http://localhost:${port}/search?query=a&site=${encodeURIComponent(sites[7].site)}`)
