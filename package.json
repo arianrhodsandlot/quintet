@@ -8,6 +8,8 @@
     "url": "https://github.com/arianrhodsandlot/Holly-Quintet.git"
   },
   "scripts": {
+    "build": "cross-env NODE_ENV=production parcel build \"src/assets/entries/*\"",
+    "deploy": "yarn build && yarn start",
     "dev": "cross-env NODE_OPTIONS=\"-r esm\" ts-node src/server",
     "lint": "eslint --ignore-path=.gitignore --ext=js,ts .",
     "start": "cross-env NODE_ENV=production NODE_OPTIONS=\"-r esm\" ts-node src/server",

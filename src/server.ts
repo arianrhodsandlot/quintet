@@ -1,7 +1,6 @@
 import http from 'http'
 import _ from 'lodash'
 import getPort from 'get-port'
-import bundler from './bundler'
 import app from '.'
 
 const server = http.createServer(app)
@@ -19,6 +18,6 @@ async function launchServer () {
     })
 }
 
-bundler.on('bundled', _.once(launchServer))
+launchServer()
 
 export default server

@@ -5,12 +5,16 @@ import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 import compression from 'compression'
 import favicon from 'serve-favicon'
+import Bundler from 'parcel-bundler'
 import router from './router'
-import bundler from './bundler'
 
 const dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 const viewsDir = path.join(dirname, 'views')
+
+const staticMiddleware = process.env.NODE_ENV === 'production'
+  ? express.static('dist')
+  : (new Bundler('src/assets/entries/*')).middleware()
 
 export default express()
   .enable('trust proxy')
@@ -20,5 +24,5 @@ export default express()
   .use(compression())
   .use(cookieParser())
   .use(favicon(path.join(dirname, 'assets/images/favicon.ico')))
-  .use(bundler.middleware())
+  .use(staticMiddleware)
   .use('/', router)
