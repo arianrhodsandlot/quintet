@@ -1,5 +1,7 @@
 # Holly Quintet
 
+[![CircleCI](https://img.shields.io/circleci/build/github/arianrhodsandlot/Holly-Quintet)](https://circleci.com/gh/arianrhodsandlot/Holly-Quintet)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/arianrhodsandlot/Holly-Quintet.svg)](https://codeclimate.com/github/arianrhodsandlot/Holly-Quintet)
 [![David](https://img.shields.io/david/arianrhodsandlot/Holly-Quintet.svg)](https://github.com/arianrhodsandlot/Holly-Quintet/blob/master/package-lock.json)
 
 ## Website
