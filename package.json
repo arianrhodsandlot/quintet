@@ -13,7 +13,7 @@
     "dev": "cross-env NODE_OPTIONS=\"-r esm\" ts-node src/server",
     "lint": "eslint --ignore-path=.gitignore --ext=js,ts .",
     "start": "cross-env NODE_ENV=production NODE_OPTIONS=\"-r esm\" ts-node src/server",
-    "test": "yarn lint && cross-env NODE_OPTIONS=\"-r esm\" ava"
+    "test": "yarn lint && cross-env NODE_ENV=production NODE_OPTIONS=\"-r esm\" ava"
   },
   "dependencies": {
     "chowdown": "^1.2.3",
