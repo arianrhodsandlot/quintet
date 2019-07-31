@@ -9,6 +9,7 @@ html
     meta(http-equiv='Content-Type' content='text/html;charset=UTF-8')
     meta(name='theme-color' content='#333')
     link(rel='stylesheet' href=cssLink)
+    include ../../dist/opensearch.html
     include ../../dist/stylesheets.html
     link(rel='preload' href='https://img.shields.io/github/stars/arianrhodsandlot/Holly-Quintet.svg?style=social&label=Star' as='image')
 
@@ -31,7 +32,7 @@ html
             .mdc-layout-grid__inner
               .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12.mdc-layout-grid__cell--align-middle.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon(data-mdc-auto-init='MDCTextField')
                 i.material-icons.mdc-text-field__icon label_important
-                input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query data-target='app.query')
+                input.query#tf-outlined.mdc-text-field__input(type='text' name='query' autofocus value=query)
                 .mdc-notched-outline
                   .mdc-notched-outline__leading
                   .mdc-notched-outline__notch
