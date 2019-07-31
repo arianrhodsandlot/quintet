@@ -1,5 +1,4 @@
 import http from 'http'
-import _ from 'lodash'
 import getPort from 'get-port'
 import app from '.'
 

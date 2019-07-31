@@ -1,30 +1,25 @@
 import { AddressInfo } from 'net'
 import test, { ExecutionContext } from 'ava'
 import puppeteer from 'puppeteer'
+import sites from '../../src/consts/sites'
 import server from '../../src/server'
 
 test.serial.before(async (t) => {
+  // const x = await promisify(exec)('yarn build')
   await new Promise((resolve) => {
     server.on('listening', () => {
       resolve()
     })
   })
-
-  const browser = await puppeteer.launch({
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox'
-    ]
-  });
-
+  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   (t as ExecutionContext<{browser: puppeteer.Browser}>).context.browser = browser
 })
 
 test.serial('search', async (t) => {
   const { browser } = (t as ExecutionContext<{browser: puppeteer.Browser}>).context
+  const { port } = server.address() as AddressInfo
 
   const page = await browser.newPage()
-  const { port } = server.address() as AddressInfo
   await page.goto(`http://localhost:${port}`, { waitUntil: 'networkidle2' })
   await page.type('input', 'a')
   await page.waitForSelector('.album-placeholder')
@@ -47,13 +42,18 @@ test.serial('search', async (t) => {
 
 test.serial('memorize last selected site', async (t) => {
   const { browser } = (t as ExecutionContext<{browser: puppeteer.Browser}>).context
+  const { port } = server.address() as AddressInfo
 
   const page = await browser.newPage()
-  const { port } = server.address() as AddressInfo
   await page.goto(`http://localhost:${port}`, { waitUntil: 'networkidle2' })
   await page.type('input', 'a')
   await page.waitForSelector('.album-placeholder')
   t.is(await page.evaluate('$(".mdc-chip--selected").index()'), 7)
+
+  page.goto(`http://localhost:${port}/search?query=a`)
+  await page.waitForSelector('.album-placeholder')
+  t.is(await page.evaluate('$(".mdc-chip--selected").index()'), 7)
+  t.is(page.url(), `http://localhost:${port}/search?query=a&site=${encodeURIComponent(sites[7].site)}`)
 
   await page.close()
 })

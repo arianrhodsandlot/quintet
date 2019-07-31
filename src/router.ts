@@ -20,11 +20,16 @@ const workingDir = path.parse(filePath).dir
 const cssLink = getCssLink()
 const jsLink = getJsLink()
 
+function isValidSite (site: string) {
+  return _(sites).map('site')
+    .includes(site)
+}
+
 router
   .use(defaultBg, express.static(path.join(workingDir, 'assets/images/default.jpg')))
   .use(logger('combined'))
   .use((req, res, next) => {
-    const site = req.cookies.site || sites[0].site
+    const site = isValidSite(req.cookies.site) ? req.cookies.site : sites[0].site
     res.cookie('site', site, { expires: veryLateDate })
 
     const bg = req.cookies.bg || defaultBg
@@ -65,12 +70,10 @@ router
       return
     }
 
-    const isValidSite = _(sites).map('site')
-      .includes(site)
-    if (!isValidSite) {
+    if (!isValidSite(site)) {
       delete parsed.search
       parsed.query.query = trimmedQuery
-      parsed.query.site = sites[0].site
+      parsed.query.site = res.locals.site
       const redirectUrl = url.format(parsed)
       res.redirect(redirectUrl)
       return
