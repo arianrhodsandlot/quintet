@@ -6,8 +6,8 @@ test('getCacheKey', (t) => {
 })
 
 test('searchRemote', async (t) => {
-  t.deepEqual(await searcher.searchRemote('xxx', 'ddd'), [])
-  for (const a of await searcher.search('itunes.apple.com/jp/album', 'a')) {
+  const albums = await searcher.search('itunes.apple.com/jp/album', 'a')
+  for (const a of albums) {
     t.truthy(a.ou)
     t.truthy(a.pt)
     t.truthy(a.ru)
@@ -15,8 +15,6 @@ test('searchRemote', async (t) => {
 })
 
 test('search', async (t) => {
-  t.deepEqual(await searcher.search('xxx', 'ddd'), [])
-
   const albums = await searcher.search('amazon.com', 'b')
 
   const start = Date.now()

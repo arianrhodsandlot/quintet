@@ -16,7 +16,7 @@ const baseRequestOptions: request.Options = {
   },
   timeout: 3000,
   headers: {
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.62 Safari/537.36'
+    'user-agent': 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Mobile Safari/537.36'
   }
 }
 if (process.env.NODE_ENV !== 'production') {
@@ -37,8 +37,12 @@ export default class Searcher {
       }
     }
 
-    const html: string[] = await chowdown(requestOptions).collection('.rg_el .rg_meta', chowdown.query.string())
-    const albums: {ou: string; pt: string; ru: string}[] = html.map((a) => JSON.parse(a))
+    const albums = await chowdown(requestOptions)
+      .collection('.islrtb', {
+        ou: '/data-ou',
+        pt: '/data-pt',
+        ru: '/data-ru',
+      })
 
     const cacheKey = Searcher.getCacheKey(site, query)
     cache.set(cacheKey, albums)
