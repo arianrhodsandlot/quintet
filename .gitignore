@@ -1,5 +1,5 @@
 .cache
 .next
-dist
+.vercel
 next-env.d.ts
 node_modules

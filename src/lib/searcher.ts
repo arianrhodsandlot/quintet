@@ -1,4 +1,5 @@
-import { load } from 'cheerio'
+import { selectAll } from 'css-select'
+import { parseDocument } from 'htmlparser2'
 import { LRUCache } from 'lru-cache'
 
 const cache = new LRUCache({ max: 500 })
@@ -28,18 +29,13 @@ async function searchRemote(site: string, query: string) {
   })
   const html = await response.text()
 
-  const $ = load(html)
-  const result = $('.islrtb')
-    .slice(0, 9)
-    .map(function () {
-      const data = $(this).data() as Record<string, string>
-      return {
-        src: data.ou,
-        refer: data.ru,
-        title: data.pt,
-      }
-    })
-    .toArray()
+  const dom = parseDocument(html)
+  const nodes = selectAll('.islrtb', dom).slice(0, 9)
+  const result = nodes.map((node: any) => ({
+    src: node.attribs['data-ou'],
+    refer: node.attribs['data-ru'],
+    title: node.attribs['data-pt'],
+  }))
 
   const cacheKey = getCacheKey(site, query)
   cache.set(cacheKey, result)
@@ -53,5 +49,5 @@ export async function search(site: string, query: string) {
   if (!result) {
     result = await searchRemote(site, query)
   }
-  return result
+  return await searchRemote(site, query)
 }

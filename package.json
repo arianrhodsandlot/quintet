@@ -9,9 +9,10 @@
   "dependencies": {
     "@material-design-icons/font": "0.14.6",
     "autoprefixer": "10.4.14",
-    "cheerio": "1.0.0-rc.12",
+    "css-select": "^5.1.0",
     "eslint": "8.39.0",
-    "eslint-config-next": "13.3.1",
+    "htmlparser2": "^8.0.2",
+    "jsdom": "^21.1.1",
     "ky": "0.33.3",
     "lru-cache": "9.1.1",
     "material-components-web": "14.0.0",
@@ -24,13 +25,16 @@
   },
   "devDependencies": {
     "@arianrhodsandlot/eslint-config": "0.6.1",
-    "@cloudflare/next-on-pages": "^0.10.0",
+    "@cloudflare/next-on-pages": "0.10.0",
+    "@types/jsdom": "^21.1.1",
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "postcss": "8.4.23",
     "sass": "1.62.1",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vercel": "^28.20.0",
+    "wrangler": "^2.17.0"
   }
 }
