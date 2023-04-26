@@ -1,8 +1,8 @@
-/* eslint-disable node/no-deprecated-api */
-import url from 'url'
+/* eslint-disable unicorn/prefer-node-protocol n/no-deprecated-api */
 import path from 'path'
+import url from 'url'
 
-function getCertainSizeSrcFromItunes (src: string, width = 10000, height = width) {
+function getCertainSizeSrcFromItunes(src: string, width = 10_000, height = width) {
   const parsed = url.parse(src, false)
   const parsedPath = path.parse(parsed.pathname || '')
   parsedPath.name = parsedPath.name.replace(/\d+x\d+/u, `${width}x${height}`)
@@ -11,19 +11,20 @@ function getCertainSizeSrcFromItunes (src: string, width = 10000, height = width
   return url.format(parsed)
 }
 
-function getCoverOriginSrcFrom163 (src: string) {
+function getCoverOriginSrcFrom163(src: string) {
   const parsed = url.parse(src, false)
+  // @ts-expect-error
   delete parsed.search
   return url.format(parsed)
 }
 
-function getCoverOriginSrcFromVgm (src: string) {
+function getCoverOriginSrcFromVgm(src: string) {
   const parsed = url.parse(src, false)
   parsed.host = 'media.vgm.io'
   return url.format(parsed)
 }
 
-export function getCoverOriginSrc (src: string) {
+export function getCoverOriginSrc(src: string) {
   const coverHost = url.parse(src, true).hostname || ''
 
   if (coverHost.endsWith('.mzstatic.com')) {
@@ -41,33 +42,13 @@ export function getCoverOriginSrc (src: string) {
   return src
 }
 
-export function getCoverDownloadSrc (src: string, filename: string) {
+export function getCoverDownloadSrc(src: string, filename: string) {
   const originSrc = getCoverOriginSrc(src)
   return url.format({
     pathname: '/file',
     query: {
       url: originSrc,
-      filename: `${filename}.jpg`
-    }
+      filename: `${filename}.jpg`,
+    },
   })
-}
-
-export function getJsdelivrCombinedLink (packages: {name?: string; version?: string; path?: string}[]) {
-  let pathname = packages.map((p) => {
-    let packagePath = url.resolve('npm/', `${p.name}@${p.version || 'latest'}`)
-    if (p.path) {
-      packagePath += '/'
-      packagePath = url.resolve(packagePath, p.path)
-    }
-    return packagePath
-  }).join()
-
-  pathname = url.resolve('/combine/', pathname)
-
-  const link = {
-    protocol: 'https:',
-    hostname: 'cdn.jsdelivr.net',
-    pathname
-  }
-  return url.format(link)
 }

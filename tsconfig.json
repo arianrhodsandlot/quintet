@@ -1,22 +1,39 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
-    "checkJs": false,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "lib": ["esnext"],
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/*": ["src/*"],
-      "chowdown": ["types/chowdown.d.ts"],
-      "socks5-https-client/lib/Agent": ["types/socks5-https-client.d.ts"]
-    },
-    "sourceMap": true,
-    "strict": true,
-    "target": "esnext"
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
-    "**/*.ts"
+    "src/**/*",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

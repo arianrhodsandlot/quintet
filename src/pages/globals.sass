@@ -1,0 +1,29 @@
+@use '@material-design-icons/font'
+@use '@rmwc/icon/icon'
+// @use 'material-components-web'
+@use 'ress'
+
+@import url('https://unpkg.com/material-components-web@14.0.0/dist/material-components-web.min.css')
+
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+:root
+  --mdc-theme-primary: #333
+
+// workaround for https://github.com/material-components/material-components-web/issues/2718
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label
+  color: #333
+
+a
+  text-decoration: none
+  color: inherit
+
+@keyframes breath
+  from
+    transform: scale(1)
+  50%
+    transform: scale(1.01)
+  to
+    transform: scale(1)
