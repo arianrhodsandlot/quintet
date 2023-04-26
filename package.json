@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@arianrhodsandlot/eslint-config": "0.6.1",
+    "@cloudflare/next-on-pages": "^0.10.0",
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
