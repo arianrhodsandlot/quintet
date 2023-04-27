@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: any) {
   return (
     <>
       <Head>
-        <link rel='shortcut icon' href='/favicon.ico' />
+        <link rel='shortcut icon' href='/favicon.png' />
       </Head>
       <TopBar />
       <SearchInput />
