@@ -19,6 +19,16 @@ export default function App({ Component, pageProps }: any) {
       <SearchInput />
       {isHome || <SearchOptions />}
       <Component {...pageProps} />
+      <a
+        className='github-fork-ribbon right-top color-[#333] origin-top-right scale-75 before:bg-white before:content-[""]'
+        href='https://github.com/arianrhodsandlot/quintet'
+        data-ribbon='Star me on GitHub'
+        title='Star me on GitHub'
+        target='_blank'
+        rel='noreferrer'
+      >
+        Star me on GitHub
+      </a>
     </>
   )
 }

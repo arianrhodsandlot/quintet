@@ -79,6 +79,7 @@ export function SearchInput() {
         className='w-[56rem]'
         icon='label_important'
         id='query'
+        name='album-query'
         onCompositionStart={() => {
           setCompositionStart(true)
         }}
