@@ -22,7 +22,7 @@ export function SearchOptions() {
   }
 
   return (
-    <ChipSet choice className='mx-auto mt-5 flex w-[50rem] flex-wrap justify-center'>
+    <ChipSet choice className='mx-auto mt-5 flex w-[58rem] flex-wrap justify-center'>
       {sites.map((site) => (
         <Chip
           icon={isSelected(site.site) ? 'done' : 'radio_button_unchecked'}
