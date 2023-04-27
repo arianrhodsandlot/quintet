@@ -25,6 +25,7 @@ export function SearchOptions() {
     <ChipSet choice className='mx-auto mt-5 flex w-[58rem] flex-wrap justify-center'>
       {sites.map((site) => (
         <Chip
+          className='text-xs'
           icon={isSelected(site.site) ? 'done' : 'radio_button_unchecked'}
           label={site.name}
           id={site.site}

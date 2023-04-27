@@ -78,7 +78,7 @@ export function SearchInput() {
         defaultValue={router.query?.query ? `${router.query.query}` : ''}
         className='w-[56rem]'
         icon='label_important'
-        label='Input your keyword'
+        id='query'
         onCompositionStart={() => {
           setCompositionStart(true)
         }}

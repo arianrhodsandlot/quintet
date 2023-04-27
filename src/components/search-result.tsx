@@ -1,10 +1,14 @@
 import { useRouter } from 'next/router'
-import { Grid, GridCell, GridRow, classNames } from 'rmwc'
+import { Grid, GridCell, GridRow, Icon, classNames } from 'rmwc'
 import { useSearch } from '../lib/request'
 import { AlbumCover } from './album-cover'
 import { SearchResultLoader } from './search-result-loader'
 
-const ErrorMessage = <div className='pt-20 text-center'>-</div>
+const ErrorMessage = (
+  <div className='pt-20 text-center'>
+    <Icon icon='disc_full' className='select-none text-8xl text-[#cfcfcf]' />
+  </div>
+)
 
 export function SearchResult() {
   const router = useRouter()
