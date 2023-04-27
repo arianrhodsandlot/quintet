@@ -11,6 +11,7 @@
     "autoprefixer": "10.4.14",
     "css-select": "^5.1.0",
     "eslint": "8.39.0",
+    "github-fork-ribbon-css": "^0.2.3",
     "htmlparser2": "^8.0.2",
     "jsdom": "^21.1.1",
     "ky": "0.33.3",
