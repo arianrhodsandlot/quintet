@@ -10,7 +10,7 @@ export function SearchInput() {
   const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
   const textFieldRef = useRef<MDCTextFieldFoundation>(null)
-  const [isCompositionStart, setCompositionStart] = useState(false)
+  const [isCompositionStart, setIsCompositionStart] = useState(false)
 
   const isHome = router.pathname === '/'
 
@@ -29,7 +29,7 @@ export function SearchInput() {
   }
 
   function onCompositionEnd(event: CompositionEvent<HTMLInputElement>) {
-    setCompositionStart(false)
+    setIsCompositionStart(false)
     const query = event.currentTarget.value.trim()
     search(query)
   }
@@ -72,19 +72,19 @@ export function SearchInput() {
       })}
     >
       <TextField
-        inputRef={inputRef}
-        foundationRef={textFieldRef}
-        outlined
-        defaultValue={router.query?.query ? `${router.query.query}` : ''}
         className='w-[56rem]'
+        defaultValue={router.query?.query ? `${router.query.query}` : ''}
+        foundationRef={textFieldRef}
         icon='label_important'
         id='query'
+        inputRef={inputRef}
         name='album-query'
-        onCompositionStart={() => {
-          setCompositionStart(true)
-        }}
-        onCompositionEnd={onCompositionEnd}
         onChange={onChange}
+        onCompositionEnd={onCompositionEnd}
+        onCompositionStart={() => {
+          setIsCompositionStart(true)
+        }}
+        outlined
       />
     </div>
   )

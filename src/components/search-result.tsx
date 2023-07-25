@@ -6,7 +6,7 @@ import { SearchResultLoader } from './search-result-loader'
 
 const ErrorMessage = (
   <div className='pt-20 text-center'>
-    <Icon icon='disc_full' className='select-none text-8xl text-[#cfcfcf]' />
+    <Icon className='select-none text-8xl text-[#cfcfcf]' icon='disc_full' />
   </div>
 )
 
@@ -40,7 +40,7 @@ export function SearchResult() {
       <GridCell span={8}>
         <GridRow>
           {rest.map((album) => (
-            <GridCell span={3} key={album.src}>
+            <GridCell key={album.src} span={3}>
               <AlbumCover album={album} />
             </GridCell>
           ))}

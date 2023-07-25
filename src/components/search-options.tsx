@@ -27,9 +27,9 @@ export function SearchOptions() {
         <Chip
           className='text-xs'
           icon={isSelected(site.site) ? 'done' : 'radio_button_unchecked'}
-          label={site.name}
           id={site.site}
           key={site.site}
+          label={site.name}
           onInteraction={onInteraction}
         />
       ))}

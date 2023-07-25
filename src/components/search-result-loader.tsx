@@ -3,7 +3,7 @@ import { SearchResultLoaderItem } from './search-result-loader-item'
 
 const searchResultLoaderItem = <SearchResultLoaderItem />
 const tailItems = Array.from({ length: 8 }).map((_, index) => (
-  <GridCell span={3} key={index}>
+  <GridCell key={index} span={3}>
     {searchResultLoaderItem}
   </GridCell>
 ))

@@ -1,7 +1,9 @@
-/* eslint-disable unicorn/prefer-node-protocol n/no-deprecated-api */
+/* eslint-disable unicorn/prefer-node-protocol */
 import path from 'path'
 import url from 'url'
+/* eslint-enable */
 
+/* eslint-disable n/no-deprecated-api */
 function getCertainSizeSrcFromItunes(src: string, width = 10_000, height = width) {
   const parsed = url.parse(src, false)
   const parsedPath = path.parse(parsed.pathname || '')
@@ -13,7 +15,7 @@ function getCertainSizeSrcFromItunes(src: string, width = 10_000, height = width
 
 function getCoverOriginSrcFrom163(src: string) {
   const parsed = url.parse(src, false)
-  // @ts-expect-error
+  // @ts-expect-error remove a key from the url record
   delete parsed.search
   return url.format(parsed)
 }
@@ -52,3 +54,4 @@ export function getCoverDownloadSrc(src: string, filename: string) {
     },
   })
 }
+/* eslint-enable */

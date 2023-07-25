@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: any) {
   return (
     <>
       <Head>
-        <link rel='shortcut icon' href='/favicon.png' />
+        <link href='/favicon.png' rel='shortcut icon' />
       </Head>
       <TopBar />
       <SearchInput />
@@ -21,11 +21,11 @@ export default function App({ Component, pageProps }: any) {
       <Component {...pageProps} />
       <a
         className='github-fork-ribbon right-top color-[#333] origin-top-right scale-75 before:bg-white before:content-[""] after:text-[#333]  after:content-[attr(data-ribbon)]'
-        href='https://github.com/arianrhodsandlot/quintet'
         data-ribbon='Star me on GitHub'
-        title='Star me on GitHub'
-        target='_blank'
+        href='https://github.com/arianrhodsandlot/quintet'
         rel='noreferrer'
+        target='_blank'
+        title='Star me on GitHub'
       >
         Star me on GitHub
       </a>

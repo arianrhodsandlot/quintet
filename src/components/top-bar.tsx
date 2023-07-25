@@ -16,13 +16,13 @@ const imFellDoublePixa = IM_Fell_Double_Pica({ subsets: ['latin'], style: 'itali
 export function TopBar() {
   return (
     <>
-      <Elevation z={3} wrap>
+      <Elevation wrap z={3}>
         <TopAppBar>
           <TopAppBarRow>
             <TopAppBarSection alignStart>
               <TopAppBarTitle>
-                <Link href='/' className={classNames(imFellDoublePixa.className, 'flex items-center text-inherit')}>
-                  <Icon icon='album' className='mr-2 text-4xl' />
+                <Link className={classNames(imFellDoublePixa.className, 'flex items-center text-inherit')} href='/'>
+                  <Icon className='mr-2 text-4xl' icon='album' />
                   <h1 className='text-3xl'>Quintet</h1>
                 </Link>
               </TopAppBarTitle>
