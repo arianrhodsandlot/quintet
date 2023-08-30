@@ -1,3 +1,3 @@
-const { createConfig } = require('@arianrhodsandlot/eslint-config')
+const { config } = require('@arianrhodsandlot/eslint-config')
 
-module.exports = createConfig({})
+module.exports = config
