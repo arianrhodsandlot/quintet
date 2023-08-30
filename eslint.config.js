@@ -1,5 +1,3 @@
 const { createConfig } = require('@arianrhodsandlot/eslint-config')
 
-module.exports = createConfig({
-  typeChecking: false,
-})
+module.exports = createConfig({})

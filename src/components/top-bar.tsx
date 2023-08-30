@@ -1,4 +1,4 @@
-import { IM_Fell_Double_Pica } from 'next/font/google'
+import { IM_Fell_Double_Pica as IMFellDoublePica } from 'next/font/google'
 import Link from 'next/link'
 import {
   Elevation,
@@ -11,7 +11,7 @@ import {
   classNames,
 } from 'rmwc'
 
-const imFellDoublePixa = IM_Fell_Double_Pica({ subsets: ['latin'], style: 'italic', weight: '400' })
+const imFellDoublePixa = IMFellDoublePica({ subsets: ['latin'], style: 'italic', weight: '400' })
 
 export function TopBar() {
   return (
